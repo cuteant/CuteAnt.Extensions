@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-#if !NET40
-using System.Runtime.CompilerServices;
-#endif
-#if DESKTOPCLR
+#if NET40
 using CuteAnt.Extensions.Logging;
 #else
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
 #endif
 

@@ -93,7 +93,7 @@ namespace System.Collections.Concurrent
       }
 
       var addedValue = valueFactory(key);
-      if (!Object.Equals(value, default(TValue)))
+      if (!Object.Equals(addedValue, default(TValue)))
       {
         if (dictionary.TryAdd(key, addedValue))
         {
