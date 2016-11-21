@@ -1,0 +1,76 @@
+﻿{
+  "version": "2.0.0-rc3-161011",
+  "description": "CuteAnt",
+  "authors": [ "SeaBiscuit" ],
+  "packOptions": {
+    "summary": "CuteAnt",
+    "tags": [ "CuteAnt" ],
+    "owners": [ "SeaBiscuit" ],
+    "releaseNotes": "",
+    "iconUrl": "http://go.microsoft.com/fwlink/?LinkID=288859",
+    "projectUrl": "http://git.oschina.net/cuteant",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "http://git.oschina.net/cuteant"
+    }
+  },
+
+  "buildOptions": {
+    "platform": "anycpu",
+    "keyFile": "../../tools/StrongKey.snk",
+    "warningsAsErrors": false,
+    "allowUnsafe": true,
+    "xmlDoc": true,
+    "define": [ "NET_3_5_GREATER" ],
+    "nowarn": [ "CS1591" ],
+    "compile": {
+      "include": [
+        "**/*.cs",
+        "../../common/*.cs"
+      ],
+      "includeFiles": [],
+      "exclude": [],
+      "excludeFiles": []
+    },
+    "embed": {
+      "include": [
+        "**/*.resx"
+      ],
+      "includeFiles": [],
+      "exclude": [],
+      "excludeFiles": []
+    }
+  },
+
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "DEBUG", "TRACE" ]
+      }
+    },
+    "Release": {
+      "buildOptions": {
+        "define": [ "TRACE" ],
+        "optimize": true
+      }
+    }
+  },
+  "preprocess": [],
+  "preprocessExclude": [],
+
+  "dependencies": {
+  },
+
+  "frameworks": {
+    "net40": {
+      "buildOptions": {
+        "define": [ "DESKTOPCLR" ]
+      },
+      "dependencies": {
+        "CuteAnt.Extensions.Primitives": "2.0.0-rc3-*"
+      }
+    }
+  }
+}

@@ -15,8 +15,6 @@ namespace CuteAnt.Extensions.Logging
   {
     private readonly ILogger _logger;
 
-    public string Name { get { return _logger.Name; } }
-
     /// <summary>
     /// Creates a new <see cref="Logger{T}"/>.
     /// </summary>

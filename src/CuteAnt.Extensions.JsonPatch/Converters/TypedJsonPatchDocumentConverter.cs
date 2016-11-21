@@ -27,7 +27,8 @@ namespace CuteAnt.Extensions.JsonPatch.Converters
           return null;
         }
 
-        var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];
+        var genericTypeArguments = objectType.IsGenericType && !objectType.IsGenericTypeDefinition ? objectType.GetGenericArguments() : Type.EmptyTypes;
+        var genericType = genericTypeArguments[0];
 
         // load jObject
         var jObject = JArray.Load(reader);

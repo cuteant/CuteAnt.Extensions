@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using CuteAnt.Extensions.JsonPatch.Adapters;
 using CuteAnt.Extensions.JsonPatch.Converters;
-using CuteAnt.Extensions.JsonPatch.Helpers;
+using CuteAnt.Extensions.JsonPatch.Internal;
 using CuteAnt.Extensions.JsonPatch.Operations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -13,7 +13,7 @@ using Newtonsoft.Json.Serialization;
 namespace CuteAnt.Extensions.JsonPatch
 {
     // Implementation details: the purpose of this type of patch document is to allow creation of such
-    // documents for cases where there's no class/DTO to work on. Typical use case: backend not built in 
+    // documents for cases where there's no class/DTO to work on. Typical use case: backend not built in
     // .NET or architecture doesn't contain a shared DTO layer.
     [JsonConverter(typeof(JsonPatchDocumentConverter))]
     public class JsonPatchDocument : IJsonPatchDocument
@@ -145,7 +145,7 @@ namespace CuteAnt.Extensions.JsonPatch
         }
 
         /// <summary>
-        /// Apply this JsonPatchDocument 
+        /// Apply this JsonPatchDocument
         /// </summary>
         /// <param name="objectToApplyTo">Object to apply the JsonPatchDocument to</param>
         public void ApplyTo(object objectToApplyTo)
@@ -159,7 +159,7 @@ namespace CuteAnt.Extensions.JsonPatch
         }
 
         /// <summary>
-        /// Apply this JsonPatchDocument 
+        /// Apply this JsonPatchDocument
         /// </summary>
         /// <param name="objectToApplyTo">Object to apply the JsonPatchDocument to</param>
         /// <param name="logErrorAction">Action to log errors</param>
@@ -174,7 +174,7 @@ namespace CuteAnt.Extensions.JsonPatch
         }
 
         /// <summary>
-        /// Apply this JsonPatchDocument  
+        /// Apply this JsonPatchDocument
         /// </summary>
         /// <param name="objectToApplyTo">Object to apply the JsonPatchDocument to</param>
         /// <param name="adapter">IObjectAdapter instance to use when applying</param>

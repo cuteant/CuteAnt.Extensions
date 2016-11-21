@@ -9,8 +9,6 @@ namespace CuteAnt.Extensions.Logging
   /// <remarks>Aggregates most logging patterns to a single method.</remarks>
   public interface ILogger
   {
-    string Name { get; }
-
     /// <summary>Writes a log entry.</summary>
     /// <param name="logLevel">Entry will be written on this level.</param>
     /// <param name="eventId">Id of the event.</param>

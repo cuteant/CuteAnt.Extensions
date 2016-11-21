@@ -1,48 +1,64 @@
 {
-  "version": "2.0.0-rc3-160701",
-  "description": "CuteAnt.Extensions.Primitives Class Library",
+  "version": "2.0.0-rc3-161011",
+  "description": "CuteAnt",
   "authors": [ "SeaBiscuit" ],
-  "tags": [ "CuteAnt", "CuteAnt.Extensions.Primitives" ],
-  "projectUrl": "http://www.cuteant.net",
-  "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
-  "requireLicenseAcceptance": true,
+  "packOptions": {
+    "summary": "CuteAnt",
+    "tags": [ "CuteAnt" ],
+    "owners": [ "SeaBiscuit" ],
+    "releaseNotes": "",
+    "iconUrl": "http://go.microsoft.com/fwlink/?LinkID=288859",
+    "projectUrl": "http://git.oschina.net/cuteant",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "http://git.oschina.net/cuteant"
+    }
+  },
 
-  "repository": {
-    "type": "git",
-    "url": "http://git.oschina.net/cuteant/"
+  "buildOptions": {
+    "platform": "anycpu",
+    "keyFile": "../../tools/StrongKey.snk",
+    "warningsAsErrors": false,
+    "allowUnsafe": true,
+    "xmlDoc": true,
+    "define": [ "NET_3_5_GREATER" ],
+    "nowarn": [ "CS1591" ],
+    "compile": {
+      "include": [
+        "**/*.cs",
+        "../../common/*.cs"
+      ],
+      "includeFiles": [],
+      "exclude": [],
+      "excludeFiles": []
+    },
+    "embed": {
+      "include": [
+        "**/*.resx"
+      ],
+      "includeFiles": [],
+      "exclude": [],
+      "excludeFiles": []
+    }
   },
 
   "configurations": {
     "Debug": {
-      "compilationOptions": {
-        "define": [ "DEBUG", "TRACE", "NET_3_5_GREATER" ],
-        "keyFile": "../../tools/StrongKey.snk",
-        "warningsAsErrors": true,
-        "allowUnsafe": true,
-        "nowarn": [ "CS1591" ]
+      "buildOptions": {
+        "define": [ "DEBUG", "TRACE" ]
       }
     },
     "Release": {
-      "compilationOptions": {
-        "define": [ "TRACE", "NET_3_5_GREATER" ],
-        "optimize": true,
-        "keyFile": "../../tools/StrongKey.snk",
-        "warningsAsErrors": true,
-        "allowUnsafe": true,
-        "nowarn": [ "CS1591" ],
-        "xmlDoc": true
+      "buildOptions": {
+        "define": [ "TRACE" ],
+        "optimize": true
       }
     }
   },
-  "compile": [
-    "**/*.cs",
-    "../../Common/*.cs"
-  ],
-  "compileExclude": [ ],
-  "exclude": [ ],
-  "preprocess": [ ],
-  "preprocessExclude": [ ],
-  "resource": [ "**/*.resx" ],
+  "preprocess": [],
+  "preprocessExclude": [],
 
   "dependencies": {
     "CuteAnt.Extensions.HashCodeCombiner.Sources": {
@@ -53,7 +69,7 @@
 
   "frameworks": {
     "net40": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "DESKTOPCLR", "NONATIVETASKS", "PRENET45" ]
       }
     }

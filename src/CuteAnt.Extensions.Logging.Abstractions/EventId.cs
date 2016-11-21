@@ -3,27 +3,51 @@
 
 namespace CuteAnt.Extensions.Logging
 {
-  public struct EventId
-  {
-    private int _id;
-    private string _name;
-
-    // ## 苦竹 添加 ##
-    public static readonly EventId Zero = new EventId(0);
-
-    public EventId(int id, string name = null)
+    public struct EventId
     {
-      _id = id;
-      _name = name;
+        private int _id;
+        private string _name;
+
+        // ## 苦竹 添加 ##
+        public static readonly EventId Zero = new EventId(0);
+
+        public EventId(int id, string name = null)
+        {
+            _id = id;
+            _name = name;
+        }
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+        }
+
+        public static implicit operator EventId(int i)
+        {
+            return new EventId(i);
+        }
+
+        public override string ToString()
+        {
+            if (_name != null)
+            {
+                return _name;
+            }
+            else
+            {
+                return _id.ToString();
+            }
+        }
     }
-
-    public int Id { get { return _id; } }
-
-    public string Name { get { return _name; } }
-
-    public static implicit operator EventId(int i)
-    {
-      return new EventId(i);
-    }
-  }
 }

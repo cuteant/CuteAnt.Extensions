@@ -129,7 +129,7 @@ namespace CuteAnt.Extensions.Primitives
         public bool Equals(StringSegment other, StringComparison comparisonType)
         {
             int textLength = other.Length;
-            if (!HasValue || Length != textLength)
+            if (Length != textLength)
             {
                 return false;
             }
@@ -170,13 +170,21 @@ namespace CuteAnt.Extensions.Primitives
         }
 
         /// <inheritdoc />
+        /// <remarks>
+        /// This GetHashCode is expensive since it allocates on every call.
+        /// However this is required to ensure we retain any behavior (such as hash code randomization) that
+        /// string.GetHashCode has.
+        /// </remarks>
         public override int GetHashCode()
         {
-            var hash = HashCodeCombiner.Start();
-            hash.Add(Value);
-            hash.Add(Offset);
-            hash.Add(Length);
-            return hash;
+            if (!HasValue)
+            {
+                return 0;
+            }
+            else
+            {
+                return Value.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -214,7 +222,7 @@ namespace CuteAnt.Extensions.Primitives
                 throw new ArgumentNullException(nameof(text));
             }
 
-            int textLength = text.Length;
+            var textLength = text.Length;
             if (!HasValue || Length < textLength)
             {
                 return false;
@@ -236,7 +244,7 @@ namespace CuteAnt.Extensions.Primitives
                 throw new ArgumentNullException(nameof(text));
             }
 
-            int textLength = text.Length;
+            var textLength = text.Length;
             if (!HasValue || Length < textLength)
             {
                 return false;

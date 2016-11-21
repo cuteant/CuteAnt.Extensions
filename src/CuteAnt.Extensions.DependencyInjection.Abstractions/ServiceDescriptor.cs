@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace CuteAnt.Extensions.DependencyInjection
 {
@@ -91,7 +92,7 @@ namespace CuteAnt.Extensions.DependencyInjection
       }
       else if (ImplementationFactory != null)
       {
-        var typeArguments = ImplementationFactory.GetType().GenericTypeArgumentsEx(); // ## ¿àÖñ ÐÞ¸Ä ## GenericTypeArguments;
+        var typeArguments = ImplementationFactory.GetType().GetTypeGenericArguments(); // ## 苦竹 修改 ## GenericTypeArguments;
 
         Debug.Assert(typeArguments.Length == 2);
 

@@ -13,8 +13,6 @@ namespace CuteAnt.Extensions.Logging.Filter.Internal
     private IFilterLoggerSettings _settings;
     private Func<LogLevel, bool> _filter;
 
-    public string Name { get { return _categoryName; } }
-
     public FilterLogger(ILogger innerLogger, string categoryName, IFilterLoggerSettings settings)
     {
       _innerLogger = innerLogger;
