@@ -50,7 +50,7 @@ namespace CuteAnt.Text.Encodings.Web
   {
     private AllowedCharactersBitmap _allowedCharacters;
 
-    internal readonly static DefaultJavaScriptEncoder Singleton = new DefaultJavaScriptEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
+    internal static readonly DefaultJavaScriptEncoder Singleton = new DefaultJavaScriptEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
 
     public DefaultJavaScriptEncoder(TextEncoderSettings filter)
     {
@@ -153,7 +153,7 @@ namespace CuteAnt.Text.Encodings.Web
       return TryCopyCharacters(toCopy, buffer, bufferLength, out numberOfCharactersWritten);
     }
 
-    private unsafe static bool TryWriteEncodedScalarAsNumericEntity(int unicodeScalar, char* buffer, int length, out int numberOfCharactersWritten)
+    private static unsafe bool TryWriteEncodedScalarAsNumericEntity(int unicodeScalar, char* buffer, int length, out int numberOfCharactersWritten)
     {
       Debug.Assert(buffer != null && length >= 0);
 
@@ -184,7 +184,7 @@ namespace CuteAnt.Text.Encodings.Web
     }
 
     // Writes an encoded scalar value (in the BMP) as a JavaScript-escaped character.
-    private unsafe static bool TryWriteEncodedSingleCharacter(int unicodeScalar, char* buffer, int length, out int numberOfCharactersWritten)
+    private static unsafe bool TryWriteEncodedSingleCharacter(int unicodeScalar, char* buffer, int length, out int numberOfCharactersWritten)
     {
       Debug.Assert(buffer != null && length >= 0);
       Debug.Assert(!UnicodeHelpers.IsSupplementaryCodePoint(unicodeScalar), "The incoming value should've been in the BMP.");

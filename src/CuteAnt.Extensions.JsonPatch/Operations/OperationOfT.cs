@@ -3,6 +3,7 @@
 
 using System;
 using CuteAnt.Extensions.JsonPatch.Adapters;
+using CuteAnt.Extensions.JsonPatch.Exceptions;
 
 namespace CuteAnt.Extensions.JsonPatch.Operations
 {
@@ -73,7 +74,7 @@ namespace CuteAnt.Extensions.JsonPatch.Operations
                     adapter.Copy(this, objectToApplyTo);
                     break;
                 case OperationType.Test:
-                    throw new NotSupportedException(Resources.TestOperationNotSupported);
+                    throw new JsonPatchException(new JsonPatchError(objectToApplyTo, this, Resources.TestOperationNotSupported));
                 default:
                     break;
             }

@@ -5,7 +5,7 @@ namespace CuteAnt
   internal class AssemblyInfo
   {
     /// <summary>Copyright (c) 2000-2016 CuteAnt Development Team</summary>
-    public const String AssemblyCopyright = "Copyright (c) 2000-2016 CuteAnt Development Team";
+    public const String AssemblyCopyright = "Copyright (c) 2000-2017 CuteAnt Development Team";
 
     /// <summary>CuteAnt Development Team</summary>
     public const String AssemblyCompany = "CuteAnt Development Team(cuteant@outlook.com)";

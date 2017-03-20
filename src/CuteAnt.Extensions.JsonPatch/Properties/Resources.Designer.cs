@@ -8,7 +8,7 @@ namespace CuteAnt.Extensions.JsonPatch
     internal static class Resources
     {
         private static readonly ResourceManager _resourceManager
-            = new ResourceManager("CuteAnt.Extensions.JsonPatch.Resources", typeof(Resources).Assembly);
+            = new ResourceManager("CuteAnt.Extensions.JsonPatch.Resources", typeof(Resources).GetTypeInfo().Assembly);
 
         /// <summary>
         /// The type of the property at path '{0}' could not be determined.
@@ -120,6 +120,22 @@ namespace CuteAnt.Extensions.JsonPatch
         internal static string FormatInvalidJsonPatchDocument(object p0)
         {
             return string.Format(CultureInfo.CurrentCulture, GetString("InvalidJsonPatchDocument"), p0);
+        }
+
+        /// <summary>
+        /// Invalid JsonPatch operation '{0}'.
+        /// </summary>
+        internal static string InvalidJsonPatchOperation
+        {
+            get { return GetString("InvalidJsonPatchOperation"); }
+        }
+
+        /// <summary>
+        /// Invalid JsonPatch operation '{0}'.
+        /// </summary>
+        internal static string FormatInvalidJsonPatchOperation(object p0)
+        {
+            return string.Format(CultureInfo.CurrentCulture, GetString("InvalidJsonPatchOperation"), p0);
         }
 
         /// <summary>

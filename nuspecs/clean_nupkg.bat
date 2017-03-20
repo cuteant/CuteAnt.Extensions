@@ -1,1 +1,0 @@
-del *.nupkg /s /q

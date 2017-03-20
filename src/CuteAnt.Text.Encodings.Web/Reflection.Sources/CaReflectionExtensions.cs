@@ -401,105 +401,6 @@ namespace System.Reflection
 
     #endregion
 
-    #region - IsNumericType -
-
-    public static bool IsNumericType(this Type type)
-    {
-      if (type == null) return false;
-
-      //if (type.IsEnum()) //TypeCode can be TypeCode.Int32
-      //{
-      //  //return JsConfig.TreatEnumAsInteger || type.IsEnumFlags();
-      //  return type.IsEnumFlags();
-      //}
-
-      switch (Type.GetTypeCode(type))
-      {
-        case TypeCode.Byte:
-        case TypeCode.Decimal:
-        case TypeCode.Double:
-        case TypeCode.Int16:
-        case TypeCode.Int32:
-        case TypeCode.Int64:
-        case TypeCode.SByte:
-        case TypeCode.Single:
-        case TypeCode.UInt16:
-        case TypeCode.UInt32:
-        case TypeCode.UInt64:
-          return true;
-
-        case TypeCode.Object:
-          if (type.IsNullableType())
-          {
-            return IsNumericType(Nullable.GetUnderlyingType(type));
-          }
-          //if (type.IsEnum())
-          //{
-          //  //return JsConfig.TreatEnumAsInteger || type.IsEnumFlags();
-          //  return type.IsEnumFlags();
-          //}
-          return false;
-      }
-      return false;
-    }
-
-    #endregion
-
-    #region - IsIntegerType -
-
-    public static bool IsIntegerType(this Type type)
-    {
-      if (type == null) return false;
-
-      switch (Type.GetTypeCode(type))
-      {
-        case TypeCode.Byte:
-        case TypeCode.Int16:
-        case TypeCode.Int32:
-        case TypeCode.Int64:
-        case TypeCode.SByte:
-        case TypeCode.UInt16:
-        case TypeCode.UInt32:
-        case TypeCode.UInt64:
-          return true;
-
-        case TypeCode.Object:
-          if (type.IsNullableType())
-          {
-            return IsNumericType(Nullable.GetUnderlyingType(type));
-          }
-          return false;
-      }
-      return false;
-    }
-
-    #endregion
-
-    #region - IsRealNumberType -
-
-    public static bool IsRealNumberType(this Type type)
-    {
-      if (type == null) return false;
-
-      switch (Type.GetTypeCode(type))
-      {
-        case TypeCode.Decimal:
-        case TypeCode.Double:
-        case TypeCode.Single:
-          return true;
-
-        case TypeCode.Object:
-          if (type.IsNullableType())
-          {
-            return IsNumericType(Nullable.GetUnderlyingType(type));
-          }
-          return false;
-      }
-      return false;
-    }
-
-    #endregion
-
     #region - GetTypeWithGenericInterfaceOf -
 
     public static Type GetTypeWithGenericInterfaceOf(this Type type, Type genericInterfaceType)
@@ -1493,7 +1394,19 @@ namespace System.Reflection
     public static MethodInfo GetMethodInfo(this Type type, string methodName, Type[] types = null)
     {
 #if (NETFX_CORE || PCL || NETSTANDARD)
-      return type.GetRuntimeMethods().FirstOrDefault(p => p.Name.Equals(methodName));
+      if (types == null)
+        return type.GetRuntimeMethods().FirstOrDefault(p => p.Name.Equals(methodName));
+
+      foreach (var mi in type.GetRuntimeMethods().Where(p => p.Name.Equals(methodName)))
+      {
+        var methodParams = mi.GetParameters().Select(p => p.ParameterType);
+        if (methodParams.SequenceEqual(types))
+        {
+          return mi;
+        }
+      }
+
+      return null;
 #else
       return types == null
           ? type.GetMethod(methodName)
@@ -1573,22 +1486,6 @@ namespace System.Reflection
       return type.IsEnum;
 #endif
     }
-
-    #endregion
-
-    #region -- IsEnumFlags --
-
-//#if !NET40
-//    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//#endif
-//    public static bool IsEnumFlags(this Type type)
-//    {
-//#if (NETFX_CORE || PCL || NETSTANDARD)
-//      return type.GetTypeInfo().IsEnum && type.FirstAttribute<FlagsAttribute>() != null;
-//#else
-//      return type.IsEnum && type.FirstAttribute<FlagsAttribute>() != null;
-//#endif
-//    }
 
     #endregion
 

@@ -49,7 +49,7 @@ namespace CuteAnt.Text.Encodings.Web
   internal sealed class DefaultHtmlEncoder : HtmlEncoder
   {
     private AllowedCharactersBitmap _allowedCharacters;
-    internal readonly static DefaultHtmlEncoder Singleton = new DefaultHtmlEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
+    internal static readonly DefaultHtmlEncoder Singleton = new DefaultHtmlEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
 
     public DefaultHtmlEncoder(TextEncoderSettings filter)
     {
@@ -122,7 +122,7 @@ namespace CuteAnt.Text.Encodings.Web
       else { return TryWriteEncodedScalarAsNumericEntity(unicodeScalar, buffer, bufferLength, out numberOfCharactersWritten); }
     }
 
-    private unsafe static bool TryWriteEncodedScalarAsNumericEntity(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
+    private static unsafe bool TryWriteEncodedScalarAsNumericEntity(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
     {
       Debug.Assert(buffer != null && bufferLength >= 0);
 

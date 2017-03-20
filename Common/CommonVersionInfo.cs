@@ -4,3 +4,4 @@ using System.Reflection;
 
 [assembly: AssemblyVersion(CuteAnt.AssemblyInfo.StaticVersion)]
 [assembly: AssemblyFileVersion(CuteAnt.AssemblyInfo.FileVersion)]
+[assembly: AssemblyInformationalVersion("2.0.0-rtm-170201")]

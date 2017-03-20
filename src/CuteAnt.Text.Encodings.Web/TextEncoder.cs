@@ -110,7 +110,7 @@ namespace CuteAnt.Text.Encodings.Web
           else
           {
             char[] wholebuffer = new char[bufferSize];
-            fixed (char* buffer = wholebuffer)
+            fixed (char* buffer = &wholebuffer[0])
             {
               int totalWritten = EncodeIntoBuffer(buffer, bufferSize, valuePointer, value.Length, firstCharacterToEncode);
               result = new string(wholebuffer, 0, totalWritten);
@@ -378,7 +378,7 @@ namespace CuteAnt.Text.Encodings.Web
       }
     }
 
-    internal unsafe static bool TryCopyCharacters(char[] source, char* destination, int destinationLength, out int numberOfCharactersWritten)
+    internal static unsafe bool TryCopyCharacters(char[] source, char* destination, int destinationLength, out int numberOfCharactersWritten)
     {
       Debug.Assert(source != null && destination != null && destinationLength >= 0);
 
@@ -400,7 +400,7 @@ namespace CuteAnt.Text.Encodings.Web
 #if !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-    internal unsafe static bool TryWriteScalarAsChar(int unicodeScalar, char* destination, int destinationLength, out int numberOfCharactersWritten)
+    internal static unsafe bool TryWriteScalarAsChar(int unicodeScalar, char* destination, int destinationLength, out int numberOfCharactersWritten)
     {
       Debug.Assert(destination != null && destinationLength >= 0);
 
