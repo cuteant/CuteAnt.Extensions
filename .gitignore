@@ -285,3 +285,4 @@ TODO.txt
 *.GhostDoc.xml
 nuget.exe
 /nuspecs
+/NuGet.Config
