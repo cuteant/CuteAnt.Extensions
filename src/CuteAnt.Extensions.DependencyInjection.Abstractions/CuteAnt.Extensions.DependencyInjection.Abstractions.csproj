@@ -34,7 +34,7 @@
   <PropertyGroup Label="NuGet">
     <IsPackable>true</IsPackable>
     <PackageId>CuteAnt.Extensions.DependencyInjection.Abstractions</PackageId>
-    <Title>CuteAnt.Extensions.DependencyInjection</Title>
+    <Title>CuteAnt.Extensions.DependencyInjection.Abstractions</Title>
     <Description>Abstractions for dependency injection.
 Commonly used types:
 Microsoft.Extensions.DependencyInjection.IServiceCollection</Description>
