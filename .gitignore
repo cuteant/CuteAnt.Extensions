@@ -284,3 +284,4 @@ $RECYCLE.BIN/
 TODO.txt
 *.GhostDoc.xml
 nuget.exe
+/nuspecs
