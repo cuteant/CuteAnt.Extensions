@@ -2,11 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-#if NET40
-[assembly: AssemblyTitle("CuteAnt.Text.Encodings.Web for .NetFx4.0")]
-#elif NET451 || DNX451
-[assembly: AssemblyTitle("CuteAnt.Text.Encodings.Web for .NetFx4.5")]
-#endif
+[assembly: AssemblyTitle("CuteAnt.Text.Encodings.Web")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 [assembly: AssemblyDescription("CuteAnt.Text.Encodings.Web Library (Flavor=Debug)")]

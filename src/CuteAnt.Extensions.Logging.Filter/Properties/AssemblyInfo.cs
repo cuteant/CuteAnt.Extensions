@@ -2,11 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-#if NET40
-[assembly: AssemblyTitle("CuteAnt.Extensions.Logging.Filter for .NetFx4.0")]
-#elif NET451 || DNX451
-[assembly: AssemblyTitle("CuteAnt.Extensions.Logging.Filter for .NetFx4.5")]
-#endif
+[assembly: AssemblyTitle("CuteAnt.Extensions.Logging.Filter")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 [assembly: AssemblyDescription("CuteAnt.Extensions.Logging.Filter Library (Flavor=Debug)")]
