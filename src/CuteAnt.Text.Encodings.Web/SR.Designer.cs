@@ -10,16 +10,16 @@
 
 namespace CuteAnt.Text.Encodings.Web {
     using System;
-    using System.Reflection;
     
     
     /// <summary>
-    ///    强类型资源类，用于查找本地化字符串，等等。
+    ///   一个强类型的资源类，用于查找本地化的字符串等。
     /// </summary>
-    // 此类已由 StronglyTypedResourceBuilder 自动生成
-    // 通过 ResGen 或 Visual Studio 之类的工具提供的类。
-    // 若要添加或删除成员，请编辑 .ResX 文件，然后重新运行 ResGen
-    // (使用 /str 选项)，或重新生成 VS 项目。
+    // 此类是由 StronglyTypedResourceBuilder
+    // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
+    // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
+    // (以 /str 作为命令选项)，或重新生成 VS 项目。
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class SR {
@@ -28,17 +28,18 @@ namespace CuteAnt.Text.Encodings.Web {
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal SR() {
         }
         
         /// <summary>
-        ///    返回此类使用的缓存 ResourceManager 实例。
+        ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CuteAnt.Text.Encodings.Web.SR", typeof(SR).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CuteAnt.Text.Encodings.Web.SR", typeof(SR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -46,8 +47,8 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    重写所有项的当前线程的 CurrentUICulture 属性
-        ///    使用此强类型资源类进行资源查找。
+        ///   使用此强类型资源类，为所有资源查找
+        ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -60,7 +61,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 Object is not a array with the same initialization state as the array to compare it to. 类似的本地化字符串。
+        ///   查找类似 Object is not a array with the same initialization state as the array to compare it to. 的本地化字符串。
         /// </summary>
         internal static string ArrayInitializedStateNotEqual {
             get {
@@ -69,7 +70,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 Object is not a array with the same number of elements as the array to compare it to. 类似的本地化字符串。
+        ///   查找类似 Object is not a array with the same number of elements as the array to compare it to. 的本地化字符串。
         /// </summary>
         internal static string ArrayLengthsNotEqual {
             get {
@@ -78,7 +79,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 Cannot find the old value 类似的本地化字符串。
+        ///   查找类似 Cannot find the old value 的本地化字符串。
         /// </summary>
         internal static string CannotFindOldValue {
             get {
@@ -87,7 +88,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 Capacity was less than the current Count of elements. 类似的本地化字符串。
+        ///   查找类似 Capacity was less than the current Count of elements. 的本地化字符串。
         /// </summary>
         internal static string CapacityMustBeGreaterThanOrEqualToCount {
             get {
@@ -96,7 +97,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 MoveToImmutable can only be performed when Count equals Capacity. 类似的本地化字符串。
+        ///   查找类似 MoveToImmutable can only be performed when Count equals Capacity. 的本地化字符串。
         /// </summary>
         internal static string CapacityMustEqualCountOnMove {
             get {
@@ -105,7 +106,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 Collection was modified; enumeration operation may not execute. 类似的本地化字符串。
+        ///   查找类似 Collection was modified; enumeration operation may not execute. 的本地化字符串。
         /// </summary>
         internal static string CollectionModifiedDuringEnumeration {
             get {
@@ -114,7 +115,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 An element with the same key but a different value already exists. Key: {0} 类似的本地化字符串。
+        ///   查找类似 An element with the same key but a different value already exists. Key: {0} 的本地化字符串。
         /// </summary>
         internal static string DuplicateKey {
             get {
@@ -123,7 +124,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 This operation does not apply to an empty instance. 类似的本地化字符串。
+        ///   查找类似 This operation does not apply to an empty instance. 的本地化字符串。
         /// </summary>
         internal static string InvalidEmptyOperation {
             get {
@@ -132,7 +133,7 @@ namespace CuteAnt.Text.Encodings.Web {
         }
         
         /// <summary>
-        ///    查找与 This operation cannot be performed on a default instance of ImmutableArray&lt;T&gt;.  Consider initializing the array, or checking the ImmutableArray&lt;T&gt;.IsDefault property. 类似的本地化字符串。
+        ///   查找类似 This operation cannot be performed on a default instance of ImmutableArray&lt;T&gt;.  Consider initializing the array, or checking the ImmutableArray&lt;T&gt;.IsDefault property. 的本地化字符串。
         /// </summary>
         internal static string InvalidOperationOnDefaultArray {
             get {
