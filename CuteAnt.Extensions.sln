@@ -52,6 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{227EF23F-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CuteAnt.Text.RegularExpressions.Tests", "test\CuteAnt.Text.RegularExpressions.Tests\CuteAnt.Text.RegularExpressions.Tests.csproj", "{0CADD040-A2B7-478E-B186-6842FA8F22FA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Security.Claims", "src\System.Security.Claims\System.Security.Claims.csproj", "{3710AA51-A2D2-4510-AC12-70DD047F331B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ClosedGenericMatcher.Sources\CuteAnt.Extensions.ClosedGenericMatcher.Sources.projitems*{3f0f0ded-3903-4de9-a8ca-a2eb97e78e7f}*SharedItemsImports = 13
@@ -100,6 +102,10 @@ Global
 		{0CADD040-A2B7-478E-B186-6842FA8F22FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CADD040-A2B7-478E-B186-6842FA8F22FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CADD040-A2B7-478E-B186-6842FA8F22FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3710AA51-A2D2-4510-AC12-70DD047F331B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3710AA51-A2D2-4510-AC12-70DD047F331B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3710AA51-A2D2-4510-AC12-70DD047F331B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3710AA51-A2D2-4510-AC12-70DD047F331B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,5 +127,6 @@ Global
 		{9DB4FFA1-33C1-4927-A634-643E8017D36D} = {314D5AFE-2A7B-4CFF-8476-4929AC47EDEA}
 		{DD24FC41-B4E0-486F-8F93-6BE1976F7F5B} = {45A30107-E174-4EBF-BC57-D43BD3AB29ED}
 		{0CADD040-A2B7-478E-B186-6842FA8F22FA} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
+		{3710AA51-A2D2-4510-AC12-70DD047F331B} = {45A30107-E174-4EBF-BC57-D43BD3AB29ED}
 	EndGlobalSection
 EndGlobal
