@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyCompany(CuteAnt.AssemblyInfo.AssemblyCompany)]
-[assembly: AssemblyCopyright(CuteAnt.AssemblyInfo.AssemblyCopyright)]
-[assembly: AssemblyProduct("CuteAnt ASP.NET Class Library")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCopyright("Copyright © Microsoft, dotnetframework")]
+[assembly: AssemblyProduct("AspNetCore")]
 [assembly: AssemblyTrademark(CuteAnt.AssemblyInfo.AssemblyEmail)]
 [assembly: AssemblyCulture("")]
 #if !PORTABLE

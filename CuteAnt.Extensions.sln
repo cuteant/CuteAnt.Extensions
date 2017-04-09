@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FD46156B-EDAA-4F1D-A9DE-4F023DA86EB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9ED131A5-070E-44FB-BC7B-67C8EC47CB39}"
 	ProjectSection(SolutionItems) = preProject
 		Common\AssemblyVersion.cs = Common\AssemblyVersion.cs
+		clean.cmd = clean.cmd
 		Common\CommonAssemblyInfo.cs = Common\CommonAssemblyInfo.cs
 		Common\CommonVersionInfo.cs = Common\CommonVersionInfo.cs
 		LICENSE = LICENSE
@@ -20,14 +21,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{314D5AFE-2A7B-4CFF-8476-4929AC47EDEA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{45A30107-E174-4EBF-BC57-D43BD3AB29ED}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspecs", "nuspecs", "{98352AFB-64AF-456F-9E44-CB5CCB186F62}"
-	ProjectSection(SolutionItems) = preProject
-		nuspecs\clean_nupkg.bat = nuspecs\clean_nupkg.bat
-		nuspecs\clean_symbols.bat = nuspecs\clean_symbols.bat
-		nuspecs\pack.bat = nuspecs\pack.bat
-		nuspecs\publishing.cmd = nuspecs\publishing.cmd
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CuteAnt.Extensions.DependencyInjection.Abstractions", "src\CuteAnt.Extensions.DependencyInjection.Abstractions\CuteAnt.Extensions.DependencyInjection.Abstractions.csproj", "{00DF17D0-D331-4963-9290-983279C1CA85}"
 EndProject
@@ -52,6 +45,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CuteAnt.Extensions.Logging", "src\CuteAnt.Extensions.Logging\CuteAnt.Extensions.Logging.csproj", "{87D8FB96-CC8D-4497-AF98-4C5922664951}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CuteAnt.Extensions.Logging.Filter", "src\CuteAnt.Extensions.Logging.Filter\CuteAnt.Extensions.Logging.Filter.csproj", "{9DB4FFA1-33C1-4927-A634-643E8017D36D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CuteAnt.Text.RegularExpressions", "src\CuteAnt.Text.RegularExpressions\CuteAnt.Text.RegularExpressions.csproj", "{DD24FC41-B4E0-486F-8F93-6BE1976F7F5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{227EF23F-F851-4D8C-A77C-46537F78C38A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CuteAnt.Text.RegularExpressions.Tests", "test\CuteAnt.Text.RegularExpressions.Tests\CuteAnt.Text.RegularExpressions.Tests.csproj", "{0CADD040-A2B7-478E-B186-6842FA8F22FA}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -93,6 +92,14 @@ Global
 		{9DB4FFA1-33C1-4927-A634-643E8017D36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DB4FFA1-33C1-4927-A634-643E8017D36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DB4FFA1-33C1-4927-A634-643E8017D36D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD24FC41-B4E0-486F-8F93-6BE1976F7F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD24FC41-B4E0-486F-8F93-6BE1976F7F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD24FC41-B4E0-486F-8F93-6BE1976F7F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD24FC41-B4E0-486F-8F93-6BE1976F7F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CADD040-A2B7-478E-B186-6842FA8F22FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CADD040-A2B7-478E-B186-6842FA8F22FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CADD040-A2B7-478E-B186-6842FA8F22FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CADD040-A2B7-478E-B186-6842FA8F22FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,5 +119,7 @@ Global
 		{A0E82B06-65F1-4B29-BADA-0C1FFE2E6FDA} = {314D5AFE-2A7B-4CFF-8476-4929AC47EDEA}
 		{87D8FB96-CC8D-4497-AF98-4C5922664951} = {314D5AFE-2A7B-4CFF-8476-4929AC47EDEA}
 		{9DB4FFA1-33C1-4927-A634-643E8017D36D} = {314D5AFE-2A7B-4CFF-8476-4929AC47EDEA}
+		{DD24FC41-B4E0-486F-8F93-6BE1976F7F5B} = {45A30107-E174-4EBF-BC57-D43BD3AB29ED}
+		{0CADD040-A2B7-478E-B186-6842FA8F22FA} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
 	EndGlobalSection
 EndGlobal
