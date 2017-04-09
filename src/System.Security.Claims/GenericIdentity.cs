@@ -2,19 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Security.Claims;
+using CuteAnt.Security.Claims;
 
-namespace System.Security.Principal
+namespace CuteAnt.Security.Principal
 {
   [Serializable]
-  public class GenericIdentityX : ClaimsIdentity
+  public class GenericIdentity : ClaimsIdentity
   {
     private readonly string m_name;
     private readonly string m_type;
 
-    public GenericIdentityX(string name)
+    public GenericIdentity(string name)
     {
       if (name == null)
         throw new ArgumentNullException(nameof(name));
@@ -26,7 +27,7 @@ namespace System.Security.Principal
       AddNameClaim();
     }
 
-    public GenericIdentityX(string name, string type)
+    public GenericIdentity(string name, string type)
     {
       if (name == null)
         throw new ArgumentNullException(nameof(name));
@@ -40,12 +41,12 @@ namespace System.Security.Principal
       AddNameClaim();
     }
 
-    GenericIdentityX()
+    GenericIdentity()
       : base()
     { }
 
 
-    protected GenericIdentityX(GenericIdentityX identity)
+    protected GenericIdentity(GenericIdentity identity)
       : base(identity)
     {
       m_name = identity.m_name;
@@ -53,11 +54,11 @@ namespace System.Security.Principal
     }
 
     /// <summary>
-    /// Returns a new instance of <see cref="GenericIdentityX"/> with values copied from this object.
+    /// Returns a new instance of <see cref="GenericIdentity"/> with values copied from this object.
     /// </summary>
     public override ClaimsIdentity Clone()
     {
-      return new GenericIdentityX(this);
+      return new GenericIdentity(this);
     }
 
     public override IEnumerable<Claim> Claims

@@ -2,13 +2,13 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("System.Security.Claims")]
+[assembly: AssemblyTitle("CuteAnt.Security.Claims")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
-[assembly: AssemblyDescription("System.Security.Claims Library (Flavor=Debug)")]
+[assembly: AssemblyDescription("CuteAnt.Security.Claims Library (Flavor=Debug)")]
 #else
 [assembly: AssemblyConfiguration("Retail")]
-[assembly: AssemblyDescription("System.Security.Claims Library (Flavor=Retail)")]
+[assembly: AssemblyDescription("CuteAnt.Security.Claims Library (Flavor=Retail)")]
 #endif
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM

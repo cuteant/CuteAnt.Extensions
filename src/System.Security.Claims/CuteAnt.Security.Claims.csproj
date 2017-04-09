@@ -4,8 +4,8 @@
   
   <PropertyGroup>
     <TargetFrameworks>net40</TargetFrameworks>
-    <RootNamespace>System.Security.Claims</RootNamespace>
-    <AssemblyName>System.Security.Claims</AssemblyName>
+    <RootNamespace>CuteAnt.Security.Claims</RootNamespace>
+    <AssemblyName>CuteAnt.Security.Claims</AssemblyName>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
 

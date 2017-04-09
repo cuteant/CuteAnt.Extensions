@@ -2,14 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Security;
 using System.Security.Principal;
 
-namespace System.Security.Claims
+namespace CuteAnt.Security.Claims
 {
     /// <summary>
     /// An Identity that is represented by a set of claims.
