@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ClosedGenericMatcher.Sources\CuteAnt.Extensions.ClosedGenericMatcher.Sources.projitems" Label="Shared" />
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.aspnet.props" />
+  <Import Project="..\..\common\JpVersion.props" />
   
   <PropertyGroup>
     <TargetFramework>net40</TargetFramework>
@@ -11,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.Extensions.JsonPatch.Net40</PackageId>
+    <PackageId>Microsoft.AspNetCore.JsonPatch.Net40</PackageId>
     <Title>Microsoft.AspNetCore.JsonPatch-net40-fork</Title>
     <Description>ASP.NET Core support for JSON PATCH.</Description>
     <PackageTags>aspnetcore;json;jsonpatch</PackageTags>
@@ -25,7 +24,7 @@
   <ItemGroup>
     <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
     <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\JpVersionInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>

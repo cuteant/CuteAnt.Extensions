@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.aspnet.props" />
+  <Import Project="..\..\common\OpVersion.props" />
   
   <PropertyGroup>
     <TargetFramework>net40</TargetFramework>
@@ -24,6 +23,6 @@
   <ItemGroup>
     <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
     <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\OpVersionInfo.cs" />
   </ItemGroup>
 </Project>

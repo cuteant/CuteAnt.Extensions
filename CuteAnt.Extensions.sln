@@ -58,6 +58,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.JsonPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.JsonPatch.Test", "test\Microsoft.AspNetCore.JsonPatch.Test\Microsoft.AspNetCore.JsonPatch.Test.csproj", "{FB6DF08A-C7F5-4D7E-B8CB-63F8017F0C4A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.ObjectPool.Test", "test\Microsoft.Extensions.ObjectPool.Test\Microsoft.Extensions.ObjectPool.Test.csproj", "{29DB7892-9A90-4942-8875-16D0AB0A4E4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CuteAnt.Extensions.Primitives.Tests", "test\CuteAnt.Extensions.Primitives.Tests\CuteAnt.Extensions.Primitives.Tests.csproj", "{860027CF-70F9-47A4-A0A6-2DF571188C39}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ClosedGenericMatcher.Sources\CuteAnt.Extensions.ClosedGenericMatcher.Sources.projitems*{3f0f0ded-3903-4de9-a8ca-a2eb97e78e7f}*SharedItemsImports = 13
@@ -118,6 +122,14 @@ Global
 		{FB6DF08A-C7F5-4D7E-B8CB-63F8017F0C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB6DF08A-C7F5-4D7E-B8CB-63F8017F0C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB6DF08A-C7F5-4D7E-B8CB-63F8017F0C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29DB7892-9A90-4942-8875-16D0AB0A4E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29DB7892-9A90-4942-8875-16D0AB0A4E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29DB7892-9A90-4942-8875-16D0AB0A4E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29DB7892-9A90-4942-8875-16D0AB0A4E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{860027CF-70F9-47A4-A0A6-2DF571188C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{860027CF-70F9-47A4-A0A6-2DF571188C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{860027CF-70F9-47A4-A0A6-2DF571188C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{860027CF-70F9-47A4-A0A6-2DF571188C39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,5 +154,7 @@ Global
 		{29FE7BDD-6CDF-42B9-9ADB-4E0DFD75D4F4} = {45A30107-E174-4EBF-BC57-D43BD3AB29ED}
 		{DB71472A-5AA3-48D4-AC13-D92732D30C56} = {40CB25EA-DCAE-47E3-A360-694C12E12977}
 		{FB6DF08A-C7F5-4D7E-B8CB-63F8017F0C4A} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
+		{29DB7892-9A90-4942-8875-16D0AB0A4E4E} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
+		{860027CF-70F9-47A4-A0A6-2DF571188C39} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
 	EndGlobalSection
 EndGlobal
