@@ -61,8 +61,8 @@ namespace CuteAnt.Text.RegularExpressions.Tests
         {
             Regex regex = new Regex("e");
             MatchCollection matches = regex.Matches("dotnet");
-            Assert.Throws<ArgumentOutOfRangeException>("i", () => matches[-1]);
-            Assert.Throws<ArgumentOutOfRangeException>("i", () => matches[matches.Count]);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("i", () => matches[-1]);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("i", () => matches[matches.Count]);
         }
 
         [Fact]

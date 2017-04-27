@@ -3,12 +3,16 @@
   <Import Project="..\..\common\define.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFrameworks>net452</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\AssertExtensions.cs" Link="AssertExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\CuteAnt.Extensions.Primitives\CuteAnt.Extensions.Primitives.csproj" />
+    <ProjectReference Include="..\..\src\System.Buffers\System.Buffers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,7 +23,7 @@ namespace CuteAnt.Text.RegularExpressions.Tests
         [Fact]
         public void Escape_NullString_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("str", () => Regex.Escape(null));
+            AssertExtensions.Throws<ArgumentNullException>("str", () => Regex.Escape(null));
         }
 
         [Theory]
@@ -41,7 +41,7 @@ namespace CuteAnt.Text.RegularExpressions.Tests
         [Fact]
         public void Unscape_NullString_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("str", () => Regex.Unescape(null));
+            AssertExtensions.Throws<ArgumentNullException>("str", () => Regex.Unescape(null));
         }
     }
 }
