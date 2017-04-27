@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common\version.props" />
+  <Import Project="..\..\common\nuget.aspnet.props" />
+  
+  <PropertyGroup>
+    <TargetFramework>net40</TargetFramework>
+    <AssemblyName>Microsoft.Extensions.ObjectPool</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.ObjectPool</RootNamespace>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>Microsoft.Extensions.ObjectPool.Net40</PackageId>
+    <Title>Microsoft.Extensions.ObjectPool-net40-fork</Title>
+    <Description>A simple object pool implementation.</Description>
+    <PackageTags>pooling</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
+    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+  </ItemGroup>
+</Project>
