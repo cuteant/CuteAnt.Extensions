@@ -99,7 +99,7 @@ namespace CuteAnt.Text.Encodings.Web
 
     public override int MaxOutputCharactersPerInputCharacter
     {
-      get { return 9; } // "&#xFFFFF;" is the longest encoded form
+      get { return 10; } // "&#x10FFFF;" is the longest encoded form
     }
 
     static readonly char[] s_quote = "&quot;".ToCharArray();
