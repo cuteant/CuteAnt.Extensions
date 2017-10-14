@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common\version.props" />
+  <Import Project="..\..\common\nuget.aspnet.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net451;net40</TargetFrameworks>
+    <AssemblyName>Microsoft.Extensions.FileProviders.Composite</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.FileProviders</RootNamespace>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>Microsoft.Extensions.FileProviders.Composite.Unofficial</PackageId>
+    <Description>Composite file and directory providers for Microsoft.Extensions.FileProviders.</Description>
+    <Title>Microsoft.Extensions.FileProviders.Composite-net40-fork</Title>
+    <PackageTags>files;filesystem</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
+    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\shared\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.FileProviders.Abstractions\Microsoft.Extensions.FileProviders.Abstractions.csproj" />
+  </ItemGroup>
+</Project>

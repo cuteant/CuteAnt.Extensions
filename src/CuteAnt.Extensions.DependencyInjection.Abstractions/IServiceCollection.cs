@@ -3,10 +3,12 @@
 
 using System.Collections.Generic;
 
-namespace CuteAnt.Extensions.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
-  /// <summary>Specifies the contract for a collection of service descriptors.</summary>
-  public interface IServiceCollection : IList<ServiceDescriptor>
-  {
-  }
+    /// <summary>
+    /// Specifies the contract for a collection of service descriptors.
+    /// </summary>
+    public interface IServiceCollection : IList<ServiceDescriptor>
+    {
+    }
 }

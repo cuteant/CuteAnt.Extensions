@@ -1,15 +1,12 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-namespace CuteAnt.Extensions.Logging
+namespace Microsoft.Extensions.Logging
 {
     public struct EventId
     {
         private int _id;
         private string _name;
-
-        // ## 苦竹 添加 ##
-        public static readonly EventId Zero = new EventId(0);
 
         public EventId(int id, string name = null)
         {

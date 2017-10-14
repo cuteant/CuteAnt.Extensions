@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CuteAnt.Extensions.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
     /// Provides an extension point for creating a container specific builder and an <see cref="IServiceProvider"/>.

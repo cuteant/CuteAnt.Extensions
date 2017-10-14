@@ -17,11 +17,6 @@
     <PackageTags>primitives</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
   <ItemGroup>
     <None Remove="Resources\unicode8definedcharacters.bin" />
   </ItemGroup>
@@ -37,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CuteAnt.Extensions.Primitives\CuteAnt.Extensions.Primitives.csproj" />
+    <ProjectReference Include="..\CuteAnt.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
   </ItemGroup>
 
   <ItemGroup>

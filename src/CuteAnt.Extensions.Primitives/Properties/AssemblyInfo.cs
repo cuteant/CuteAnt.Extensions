@@ -2,13 +2,13 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("CuteAnt.Extensions.Primitives")]
+[assembly: AssemblyTitle("Microsoft.Extensions.Primitives")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
-[assembly: AssemblyDescription("CuteAnt.Extensions.Primitives Library (Flavor=Debug)")]
+[assembly: AssemblyDescription("Microsoft.Extensions.Primitives Library (Flavor=Debug)")]
 #else
 [assembly: AssemblyConfiguration("Retail")]
-[assembly: AssemblyDescription("CuteAnt.Extensions.Primitives Library (Flavor=Retail)")]
+[assembly: AssemblyDescription("Microsoft.Extensions.Primitives Library (Flavor=Retail)")]
 #endif
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM

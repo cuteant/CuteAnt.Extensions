@@ -1,47 +1,35 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Generic;
-using CuteAnt.Extensions.Logging.Abstractions.Internal;
+using Microsoft.Extensions.Logging.Abstractions.Internal;
 
-namespace CuteAnt.Extensions.Logging
+namespace Microsoft.Extensions.Logging
 {
     internal class Logger : ILogger
     {
-        private readonly LoggerFactory _loggerFactory;
-        private readonly string _name;
-        private ILogger[] _loggers;
-
-        public Logger(LoggerFactory loggerFactory, string name)
-        {
-            _loggerFactory = loggerFactory;
-            _name = name;
-
-            var providers = loggerFactory.GetProviders();
-            if (providers.Length > 0)
-            {
-                _loggers = new ILogger[providers.Length];
-                for (var index = 0; index < providers.Length; index++)
-                {
-                    _loggers[index] = providers[index].CreateLogger(name);
-                }
-            }
-        }
+        public LoggerInformation[] Loggers { get; set; }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (_loggers == null)
+            var loggers = Loggers;
+            if (loggers == null)
             {
                 return;
             }
 
             List<Exception> exceptions = null;
-            foreach (var logger in _loggers)
+            foreach (var loggerInfo in loggers)
             {
+                if (!loggerInfo.IsEnabled(logLevel))
+                {
+                    continue;
+                }
+
                 try
                 {
-                    logger.Log(logLevel, eventId, state, exception, formatter);
+                    loggerInfo.Logger.Log(logLevel, eventId, state, exception, formatter);
                 }
                 catch (Exception ex)
                 {
@@ -63,17 +51,23 @@ namespace CuteAnt.Extensions.Logging
 
         public bool IsEnabled(LogLevel logLevel)
         {
-            if (_loggers == null)
+            var loggers = Loggers;
+            if (loggers == null)
             {
                 return false;
             }
 
             List<Exception> exceptions = null;
-            foreach (var logger in _loggers)
+            foreach (var loggerInfo in loggers)
             {
+                if (!loggerInfo.IsEnabled(logLevel))
+                {
+                    continue;
+                }
+
                 try
                 {
-                    if (logger.IsEnabled(logLevel))
+                    if (loggerInfo.Logger.IsEnabled(logLevel))
                     {
                         return true;
                     }
@@ -101,17 +95,17 @@ namespace CuteAnt.Extensions.Logging
 
         public IDisposable BeginScope<TState>(TState state)
         {
-            if (_loggers == null)
+            var loggers = Loggers;
+
+            if (loggers == null)
             {
                 return NullScope.Instance;
             }
 
-            if (_loggers.Length == 1)
+            if (loggers.Length == 1)
             {
-                return _loggers[0].BeginScope(state);
+                return loggers[0].Logger.BeginScope(state);
             }
-
-            var loggers = _loggers;
 
             var scope = new Scope(loggers.Length);
             List<Exception> exceptions = null;
@@ -119,7 +113,7 @@ namespace CuteAnt.Extensions.Logging
             {
                 try
                 {
-                    var disposable = loggers[index].BeginScope(state);
+                    var disposable = loggers[index].Logger.BeginScope(state);
                     scope.SetDisposable(index, disposable);
                 }
                 catch (Exception ex)
@@ -142,22 +136,6 @@ namespace CuteAnt.Extensions.Logging
             return scope;
         }
 
-        internal void AddProvider(ILoggerProvider provider)
-        {
-            var logger = provider.CreateLogger(_name);
-            int logIndex;
-            if (_loggers == null)
-            {
-                logIndex = 0;
-                _loggers = new ILogger[1];
-            }
-            else
-            {
-                logIndex = _loggers.Length;
-                Array.Resize(ref _loggers, logIndex + 1);
-            }
-            _loggers[logIndex] = logger;
-        }
 
         private class Scope : IDisposable
         {
@@ -217,11 +195,6 @@ namespace CuteAnt.Extensions.Logging
 
                     _isDisposed = true;
                 }
-            }
-
-            internal void Add(IDisposable disposable)
-            {
-                throw new NotImplementedException();
             }
         }
     }

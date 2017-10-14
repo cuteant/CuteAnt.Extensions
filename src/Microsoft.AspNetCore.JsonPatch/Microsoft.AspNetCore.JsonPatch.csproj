@@ -3,23 +3,18 @@
   <Import Project="..\..\common\JpVersion.props" />
   
   <PropertyGroup>
-    <TargetFramework>net40</TargetFramework>
+    <TargetFrameworks>net451;net40</TargetFrameworks>
     <AssemblyName>Microsoft.AspNetCore.JsonPatch</AssemblyName>
     <RootNamespace>Microsoft.AspNetCore.JsonPatch</RootNamespace>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.AspNetCore.JsonPatch.Net40</PackageId>
+    <PackageId>Microsoft.AspNetCore.JsonPatch.Unofficial</PackageId>
     <Title>Microsoft.AspNetCore.JsonPatch-net40-fork</Title>
     <Description>ASP.NET Core support for JSON PATCH.</Description>
     <PackageTags>aspnetcore;json;jsonpatch</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
@@ -28,6 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 </Project>

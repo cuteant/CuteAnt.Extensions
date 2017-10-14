@@ -1,4 +1,4 @@
-﻿#if !NET_4_0_GREATER
+﻿#if NET40
 #pragma warning disable 0420
 // ==++==
 //

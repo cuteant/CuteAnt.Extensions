@@ -16,11 +16,6 @@
     <PackageTags>buffer</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
     <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
@@ -28,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CuteAnt.Extensions.Primitives\CuteAnt.Extensions.Primitives.csproj" />
+    <ProjectReference Include="..\CuteAnt.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
   </ItemGroup>
 
   <ItemGroup>

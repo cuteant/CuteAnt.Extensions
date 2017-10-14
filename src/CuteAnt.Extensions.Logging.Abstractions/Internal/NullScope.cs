@@ -3,7 +3,7 @@
 
 using System;
 
-namespace CuteAnt.Extensions.Logging.Abstractions.Internal
+namespace Microsoft.Extensions.Logging.Abstractions.Internal
 {
     /// <summary>
     /// An empty scope without any logic

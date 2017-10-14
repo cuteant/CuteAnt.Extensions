@@ -4,10 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CuteAnt.Extensions.Logging.Abstractions;
-using CuteAnt.Extensions.Logging.Internal;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Logging.Internal;
 
-namespace CuteAnt.Extensions.Logging
+namespace Microsoft.Extensions.Logging
 {
     /// <summary>
     /// Creates delegates which can be later cached to log messages in a performant way.
@@ -245,7 +245,11 @@ namespace CuteAnt.Extensions.Logging
             return logValuesFormatter;
         }
 
+#if NET40
+        private class LogValues : IList<KeyValuePair<string, object>>
+#else
         private class LogValues : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues)state)._formatter.Format(((LogValues)state).ToArray());
 
@@ -268,6 +272,9 @@ namespace CuteAnt.Extensions.Logging
                     }
                     throw new IndexOutOfRangeException(nameof(index));
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public int Count
@@ -291,9 +298,56 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
 
+#if NET40
+        private class LogValues<T0> : IList<KeyValuePair<string, object>>
+#else
         private class LogValues<T0> : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues<T0>)state)._formatter.Format(((LogValues<T0>)state).ToArray());
 
@@ -320,6 +374,9 @@ namespace CuteAnt.Extensions.Logging
                     }
                     throw new IndexOutOfRangeException(nameof(index));
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public int Count
@@ -346,9 +403,56 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
 
+#if NET40
+        private class LogValues<T0, T1> : IList<KeyValuePair<string, object>>
+#else
         private class LogValues<T0, T1> : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues<T0, T1>)state)._formatter.Format(((LogValues<T0, T1>)state).ToArray());
 
@@ -379,6 +483,9 @@ namespace CuteAnt.Extensions.Logging
                             throw new IndexOutOfRangeException(nameof(index));
                     }
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public int Count
@@ -405,9 +512,56 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
 
+#if NET40
+        private class LogValues<T0, T1, T2> : IList<KeyValuePair<string, object>>
+#else
         private class LogValues<T0, T1, T2> : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues<T0, T1, T2>)state)._formatter.Format(((LogValues<T0, T1, T2>)state).ToArray());
 
@@ -442,6 +596,9 @@ namespace CuteAnt.Extensions.Logging
                             throw new IndexOutOfRangeException(nameof(index));
                     }
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public LogValues(LogValuesFormatter formatter, T0 value0, T1 value1, T2 value2)
@@ -468,9 +625,56 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
 
+#if NET40
+        private class LogValues<T0, T1, T2, T3> : IList<KeyValuePair<string, object>>
+#else
         private class LogValues<T0, T1, T2, T3> : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues<T0, T1, T2, T3>)state)._formatter.Format(((LogValues<T0, T1, T2, T3>)state).ToArray());
 
@@ -508,6 +712,9 @@ namespace CuteAnt.Extensions.Logging
                             throw new IndexOutOfRangeException(nameof(index));
                     }
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public LogValues(LogValuesFormatter formatter, T0 value0, T1 value1, T2 value2, T3 value3)
@@ -535,9 +742,56 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
 
+#if NET40
+        private class LogValues<T0, T1, T2, T3, T4> : IList<KeyValuePair<string, object>>
+#else
         private class LogValues<T0, T1, T2, T3, T4> : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues<T0, T1, T2, T3, T4>)state)._formatter.Format(((LogValues<T0, T1, T2, T3, T4>)state).ToArray());
 
@@ -578,6 +832,9 @@ namespace CuteAnt.Extensions.Logging
                             throw new IndexOutOfRangeException(nameof(index));
                     }
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public LogValues(LogValuesFormatter formatter, T0 value0, T1 value1, T2 value2, T3 value3, T4 value4)
@@ -606,9 +863,56 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
 
+#if NET40
+        private class LogValues<T0, T1, T2, T3, T4, T5> : IList<KeyValuePair<string, object>>
+#else
         private class LogValues<T0, T1, T2, T3, T4, T5> : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues<T0, T1, T2, T3, T4, T5>)state)._formatter.Format(((LogValues<T0, T1, T2, T3, T4, T5>)state).ToArray());
 
@@ -652,6 +956,9 @@ namespace CuteAnt.Extensions.Logging
                             throw new IndexOutOfRangeException(nameof(index));
                     }
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public LogValues(LogValuesFormatter formatter, T0 value0, T1 value1, T2 value2, T3 value3, T4 value4, T5 value5)
@@ -681,9 +988,56 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
 
+#if NET40
+        private class LogValues<T0, T1, T2, T3, T4, T5, T6> : IList<KeyValuePair<string, object>>
+#else
         private class LogValues<T0, T1, T2, T3, T4, T5, T6> : IReadOnlyList<KeyValuePair<string, object>>
+#endif
         {
             public static Func<object, Exception, string> Callback = (state, exception) => ((LogValues<T0, T1, T2, T3, T4, T5, T6>)state)._formatter.Format(((LogValues<T0, T1, T2, T3, T4, T5, T6>)state).ToArray());
 
@@ -730,6 +1084,9 @@ namespace CuteAnt.Extensions.Logging
                             throw new IndexOutOfRangeException(nameof(index));
                     }
                 }
+#if NET40
+                set => throw new NotImplementedException();
+#endif
             }
 
             public LogValues(LogValuesFormatter formatter, T0 value0, T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6)
@@ -760,6 +1117,49 @@ namespace CuteAnt.Extensions.Logging
             {
                 return GetEnumerator();
             }
+#if NET40
+            public bool IsReadOnly => throw new NotImplementedException();
+
+            public int IndexOf(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(int index, KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Add(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Remove(KeyValuePair<string, object> item)
+            {
+                throw new NotImplementedException();
+            }
+#endif
         }
     }
 }

@@ -4,18 +4,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CuteAnt.Extensions.Internal;
+using Microsoft.Extensions.Internal;
 
-namespace CuteAnt.Extensions.Primitives
+namespace Microsoft.Extensions.Primitives
 {
     /// <summary>
     /// Represents zero/null, one, or many strings in an efficient way.
     /// </summary>
-    public struct StringValues : IList<string>,
-#if !NET40
-      IReadOnlyList<string>,
-#endif
-      IEquatable<StringValues>, IEquatable<string>, IEquatable<string[]>
+    public struct StringValues : IList<string>, IReadOnlyList<string>, IEquatable<StringValues>, IEquatable<string>, IEquatable<string[]>
     {
         private static readonly string[] EmptyArray = new string[0];
         public static readonly StringValues Empty = new StringValues(EmptyArray);
@@ -468,7 +464,7 @@ namespace CuteAnt.Extensions.Primitives
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
+            public void Dispose()
             {
             }
         }

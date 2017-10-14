@@ -37,7 +37,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             }
         }
 
+#if NET40
         public IList<string> Segments => _segments ?? Empty;
+#else
+        public IReadOnlyList<string> Segments => _segments ?? Empty;
+#endif
 
         private static string[] ParsePath(string path)
         {

@@ -4,7 +4,7 @@
 using System;
 using System.Threading;
 
-namespace CuteAnt.Extensions.Primitives
+namespace Microsoft.Extensions.Primitives
 {
     /// <summary>
     /// A <see cref="IChangeToken"/> implementation using <see cref="CancellationToken"/>.

@@ -2,23 +2,18 @@
   <Import Project="..\..\common\OpVersion.props" />
   
   <PropertyGroup>
-    <TargetFramework>net40</TargetFramework>
+    <TargetFrameworks>net451;net40</TargetFrameworks>
     <AssemblyName>Microsoft.Extensions.ObjectPool</AssemblyName>
     <RootNamespace>Microsoft.Extensions.ObjectPool</RootNamespace>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.ObjectPool.Net40</PackageId>
+    <PackageId>Microsoft.Extensions.ObjectPool.Unofficial</PackageId>
     <Title>Microsoft.Extensions.ObjectPool-net40-fork</Title>
     <Description>A simple object pool implementation.</Description>
     <PackageTags>pooling</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />

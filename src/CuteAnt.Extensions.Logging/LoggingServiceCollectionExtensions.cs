@@ -1,26 +1,51 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using CuteAnt.Extensions.Logging;
-using CuteAnt.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
-namespace CuteAnt.Extensions.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
-  /// <summary>Extension methods for setting up logging services in an <see cref="IServiceCollection" />.</summary>
-  public static class LoggingServiceCollectionExtensions
-  {
-    /// <summary>Adds logging services to the specified <see cref="IServiceCollection" />.</summary>
-    /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-    public static IServiceCollection AddLogging(this IServiceCollection services)
+    /// <summary>
+    /// Extension methods for setting up logging services in an <see cref="IServiceCollection" />.
+    /// </summary>
+    public static class LoggingServiceCollectionExtensions
     {
-      if (services == null) { throw new ArgumentNullException(nameof(services)); }
+        /// <summary>
+        /// Adds logging services to the specified <see cref="IServiceCollection" />.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
+        /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
+        public static IServiceCollection AddLogging(this IServiceCollection services)
+        {
+            return AddLogging(services, builder => { });
+        }
 
-      services.TryAdd(ServiceDescriptor.Singleton<ILoggerFactory, LoggerFactory>());
-      services.TryAdd(ServiceDescriptor.Singleton(typeof(ILogger<>), typeof(Logger<>)));
+        /// <summary>
+        /// Adds logging services to the specified <see cref="IServiceCollection" />.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
+        /// <param name="configure">The <see cref="ILoggingBuilder"/> configuration delegate.</param>
+        /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
+        public static IServiceCollection AddLogging(this IServiceCollection services, Action<ILoggingBuilder> configure)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
 
-      return services;
+            services.AddOptions();
+
+            services.TryAdd(ServiceDescriptor.Singleton<ILoggerFactory, LoggerFactory>());
+            services.TryAdd(ServiceDescriptor.Singleton(typeof(ILogger<>), typeof(Logger<>)));
+
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
+                new DefaultLoggerLevelConfigureOptions(LogLevel.Information)));
+
+            configure(new LoggingBuilder(services));
+            return services;
+        }
     }
-  }
 }

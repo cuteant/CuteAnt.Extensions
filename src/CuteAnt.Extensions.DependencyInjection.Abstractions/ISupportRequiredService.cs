@@ -3,7 +3,7 @@
 
 using System;
 
-namespace CuteAnt.Extensions.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
     /// Optional contract used by <see cref="ServiceProviderServiceExtensions.GetRequiredService{T}(IServiceProvider)"/>

@@ -3,7 +3,7 @@
 
 using System;
 
-namespace CuteAnt.Extensions.Primitives
+namespace Microsoft.Extensions.Primitives
 {
     /// <summary>
     /// Propagates notifications that a change has occured.
