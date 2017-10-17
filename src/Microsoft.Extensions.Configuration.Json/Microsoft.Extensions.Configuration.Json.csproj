@@ -12,7 +12,7 @@
   <PropertyGroup Label="NuGet">
     <PackageId>Microsoft.Extensions.Configuration.Json.Unofficial</PackageId>
     <Description>JSON configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
-    <Title>Microsoft.Extensions.Configuration.Json-net40-fork</Title>
+    <Title>Microsoft.Extensions.Configuration.Json-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>
   </PropertyGroup>
 

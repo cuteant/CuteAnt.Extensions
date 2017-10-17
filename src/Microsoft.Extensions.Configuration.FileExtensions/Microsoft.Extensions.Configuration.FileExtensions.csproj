@@ -12,7 +12,7 @@
   <PropertyGroup Label="NuGet">
     <PackageId>Microsoft.Extensions.Configuration.FileExtensions.Unofficial</PackageId>
     <Description>Extension methods for configuring file-based configuration providers for Microsoft.Extensions.Configuration.</Description>
-    <Title>Microsoft.Extensions.Configuration.FileExtensions-net40-fork</Title>
+    <Title>Microsoft.Extensions.Configuration.FileExtensions-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>
   </PropertyGroup>
 

@@ -18,7 +18,7 @@ Microsoft.Extensions.Configuration.IConfigurationBuilder
 Microsoft.Extensions.Configuration.IConfigurationProvider
 Microsoft.Extensions.Configuration.IConfigurationRoot
 Microsoft.Extensions.Configuration.IConfigurationSection</Description>
-    <Title>Microsoft.Extensions.Configuration.Abstractions-net40-fork</Title>
+    <Title>Microsoft.Extensions.Configuration.Abstractions-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>
   </PropertyGroup>
 

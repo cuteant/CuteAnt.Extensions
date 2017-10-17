@@ -11,7 +11,7 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>Microsoft.Extensions.Logging.Abstractions.Unofficial</PackageId>
-    <Title>Microsoft.Extensions.Logging.Abstractions-net40-fork</Title>
+    <Title>Microsoft.Extensions.Logging.Abstractions-net40-net451-fork</Title>
     <Description>Logging abstractions for Microsoft.Extensions.Logging.
 Commonly used types:
 Microsoft.Extensions.Logging.ILogger
