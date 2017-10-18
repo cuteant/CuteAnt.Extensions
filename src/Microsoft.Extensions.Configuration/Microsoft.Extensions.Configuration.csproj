@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Configuration.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Configuration</PackageId>
     <Description>Implementation of key-value pair based configuration for Microsoft.Extensions.Configuration. Includes the memory configuration provider.</Description>
     <Title>Microsoft.Extensions.Configuration.Abstractions-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>

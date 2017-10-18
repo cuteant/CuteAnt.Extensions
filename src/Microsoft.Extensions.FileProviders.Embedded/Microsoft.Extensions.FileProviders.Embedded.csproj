@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.FileProviders.Embedded.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.FileProviders.Embedded</PackageId>
     <Description>File provider for files in embedded resources for Microsoft.Extensions.FileProviders.</Description>
     <Title>Microsoft.Extensions.FileProviders.Embedded-net40-net451-fork</Title>
     <PackageTags>files;filesystem</PackageTags>

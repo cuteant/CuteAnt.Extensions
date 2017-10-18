@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Options.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Options</PackageId>
     <Title>Microsoft.Extensions.Options-net40-net451-fork</Title>
     <Description>Provides a strongly typed way of specifying and accessing settings using dependency injection.</Description>
     <PackageTags>aspnetcore;options</PackageTags>

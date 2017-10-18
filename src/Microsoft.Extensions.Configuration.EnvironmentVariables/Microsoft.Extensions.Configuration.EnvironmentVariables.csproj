@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Configuration.EnvironmentVariables.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Configuration.EnvironmentVariables</PackageId>
     <Description>Environment variables configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
     <Title>Microsoft.Extensions.Configuration.EnvironmentVariables-net40-net451-fork</Title>
     <PackageTags>configuration;envvar;environmentvariable</PackageTags>

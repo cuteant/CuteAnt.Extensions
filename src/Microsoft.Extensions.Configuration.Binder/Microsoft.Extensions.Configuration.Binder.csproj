@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Configuration.Binder.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Configuration.Binder</PackageId>
     <Description>Functionality to bind an object to data in configuration providers for Microsoft.Extensions.Configuration.</Description>
     <Title>Microsoft.Extensions.Configuration.Binder-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>

@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.AspNetCore.JsonPatch.Unofficial</PackageId>
+    <PackageId>CuteAnt.AspNetCore.JsonPatch</PackageId>
     <Title>Microsoft.AspNetCore.JsonPatch-net40-net451-fork</Title>
     <Description>ASP.NET Core support for JSON PATCH.</Description>
     <PackageTags>aspnetcore;json;jsonpatch</PackageTags>

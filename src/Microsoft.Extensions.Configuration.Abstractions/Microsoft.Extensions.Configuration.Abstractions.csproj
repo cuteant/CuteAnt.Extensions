@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Configuration.Abstractions.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Configuration.Abstractions</PackageId>
     <Description>Abstractions of key-value pair based configuration.
 Commonly used types:
 Microsoft.Extensions.Configuration.IConfiguration

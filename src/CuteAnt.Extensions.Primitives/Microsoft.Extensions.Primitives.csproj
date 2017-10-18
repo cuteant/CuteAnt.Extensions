@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Primitives.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Primitives</PackageId>
     <Title>Microsoft.Extensions.Primitives-net40-net451-fork</Title>
     <Description>Primitives shared by framework extensions.</Description>
     <PackageTags>primitives</PackageTags>

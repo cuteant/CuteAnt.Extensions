@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.FileProviders.Abstractions.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.FileProviders.Abstractions</PackageId>
     <Description>Abstractions of files and directories.
 Commonly used types:
 Microsoft.Extensions.FileProviders.IDirectoryContents

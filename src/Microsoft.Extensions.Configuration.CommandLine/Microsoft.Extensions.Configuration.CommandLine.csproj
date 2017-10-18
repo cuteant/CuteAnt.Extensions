@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Configuration.CommandLine.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Configuration.CommandLine</PackageId>
     <Description>Command line configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
     <Title>Microsoft.Extensions.Configuration.CommandLine-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>

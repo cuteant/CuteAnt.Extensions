@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Logging.Abstractions.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Logging.Abstractions</PackageId>
     <Title>Microsoft.Extensions.Logging.Abstractions-net40-net451-fork</Title>
     <Description>Logging abstractions for Microsoft.Extensions.Logging.
 Commonly used types:

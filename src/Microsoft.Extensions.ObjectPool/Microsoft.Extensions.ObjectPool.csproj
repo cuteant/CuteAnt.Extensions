@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.ObjectPool.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.ObjectPool</PackageId>
     <Title>Microsoft.Extensions.ObjectPool-net40-net451-fork</Title>
     <Description>A simple object pool implementation.</Description>
     <PackageTags>pooling</PackageTags>

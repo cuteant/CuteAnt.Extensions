@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.DependencyInjection.Abstractions.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.DependencyInjection.Abstractions</PackageId>
     <Title>Microsoft.Extensions.DependencyInjection.Abstractions-net40-net451-fork</Title>
     <Description>Abstractions for dependency injection.
 Commonly used types:

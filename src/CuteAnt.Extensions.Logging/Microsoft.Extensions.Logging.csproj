@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Logging.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Logging</PackageId>
     <Title>Microsoft.Extensions.Logging-net40-net451-fork</Title>
     <Description>Logging infrastructure default implementation for Microsoft.Extensions.Logging.</Description>
     <PackageTags>logging</PackageTags>

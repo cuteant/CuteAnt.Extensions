@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>Microsoft.Extensions.Configuration.Ini.Unofficial</PackageId>
+    <PackageId>CuteAnt.Extensions.Configuration.Ini</PackageId>
     <Description>INI configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
     <Title>Microsoft.Extensions.Configuration.Ini-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>
