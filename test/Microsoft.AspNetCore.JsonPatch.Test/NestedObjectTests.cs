@@ -597,7 +597,7 @@ namespace Microsoft.AspNetCore.JsonPatch
             patchDoc.ApplyTo(doc);
 
             // Assert
-            Assert.Equal(null, doc.SimpleDTO.StringProperty);
+            Assert.Null(doc.SimpleDTO.StringProperty);
         }
 
         [Fact]
@@ -623,7 +623,7 @@ namespace Microsoft.AspNetCore.JsonPatch
             deserialized.ApplyTo(doc);
 
             // Assert
-            Assert.Equal(null, doc.SimpleDTO.StringProperty);
+            Assert.Null(doc.SimpleDTO.StringProperty);
         }
 
         [Fact]
@@ -905,6 +905,29 @@ namespace Microsoft.AspNetCore.JsonPatch
             // Assert
             Assert.Equal("B", doc.SimpleDTO.StringProperty);
             Assert.Equal(12, doc.SimpleDTO.DecimalValue);
+        }
+
+        [Fact]
+        public void Replace_DTOWithNullCheck()
+        {
+            // Arrange
+            var doc = new SimpleDTOWithNestedDTOWithNullCheck()
+            {
+                SimpleDTOWithNullCheck = new SimpleDTOWithNullCheck()
+                {
+                    StringProperty = "A"
+                }
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTOWithNullCheck>();
+            patchDoc.Replace(o => o.SimpleDTOWithNullCheck.StringProperty, "B");
+
+            // Act
+            patchDoc.ApplyTo(doc);
+
+            // Assert
+            Assert.Equal("B", doc.SimpleDTOWithNullCheck.StringProperty);
         }
 
         [Fact]
@@ -1677,6 +1700,81 @@ namespace Microsoft.AspNetCore.JsonPatch
         }
 
         [Fact]
+        public void Copy_DeepClonesObject()
+        {
+            // Arrange
+            var doc = new SimpleDTOWithNestedDTO()
+            {
+                SimpleDTO = new SimpleDTO()
+                {
+                    StringProperty = "A",
+                    AnotherStringProperty = "B"
+                },
+                InheritedDTO = new InheritedDTO()
+                {
+                    StringProperty = "C",
+                    AnotherStringProperty = "D"
+                }
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTO>();
+            patchDoc.Copy<SimpleDTO>(o => o.InheritedDTO, o => o.SimpleDTO);
+
+            // Act
+            patchDoc.ApplyTo(doc);
+
+            // Assert
+            Assert.Equal("C", doc.SimpleDTO.StringProperty);
+            Assert.Equal("D", doc.SimpleDTO.AnotherStringProperty);
+            Assert.Equal("C", doc.InheritedDTO.StringProperty);
+            Assert.Equal("D", doc.InheritedDTO.AnotherStringProperty);
+            Assert.NotSame(doc.SimpleDTO.StringProperty, doc.InheritedDTO.StringProperty);
+        }
+
+        [Fact]
+        public void Copy_KeepsObjectType()
+        {
+            // Arrange
+            var doc = new SimpleDTOWithNestedDTO()
+            {
+                SimpleDTO = new SimpleDTO(),
+                InheritedDTO = new InheritedDTO()
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTO>();
+            patchDoc.Copy<SimpleDTO>(o => o.InheritedDTO, o => o.SimpleDTO);
+
+            // Act
+            patchDoc.ApplyTo(doc);
+
+            // Assert
+            Assert.Equal(typeof(InheritedDTO), doc.SimpleDTO.GetType());
+        }
+
+        [Fact]
+        public void Copy_BreaksObjectReference()
+        {
+            // Arrange
+            var doc = new SimpleDTOWithNestedDTO()
+            {
+                SimpleDTO = new SimpleDTO(),
+                InheritedDTO = new InheritedDTO()
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTO>();
+            patchDoc.Copy<SimpleDTO>(o => o.InheritedDTO, o => o.SimpleDTO);
+
+            // Act
+            patchDoc.ApplyTo(doc);
+
+            // Assert
+            Assert.NotSame(doc.SimpleDTO, doc.InheritedDTO);
+        }
+
+        [Fact]
         public void Move()
         {
             // Arrange
@@ -1698,7 +1796,7 @@ namespace Microsoft.AspNetCore.JsonPatch
 
             // Assert
             Assert.Equal("A", doc.SimpleDTO.AnotherStringProperty);
-            Assert.Equal(null, doc.SimpleDTO.StringProperty);
+            Assert.Null(doc.SimpleDTO.StringProperty);
         }
 
         [Fact]
@@ -1726,7 +1824,78 @@ namespace Microsoft.AspNetCore.JsonPatch
 
             // Assert
             Assert.Equal("A", doc.SimpleDTO.AnotherStringProperty);
-            Assert.Equal(null, doc.SimpleDTO.StringProperty);
+            Assert.Null(doc.SimpleDTO.StringProperty);
+        }
+
+        [Fact]
+        public void Move_KeepsObjectReference()
+        {
+            // Arrange
+            var sDto = new SimpleDTO()
+            {
+                StringProperty = "A",
+                AnotherStringProperty = "B"
+            };
+            var iDto = new InheritedDTO()
+            {
+                StringProperty = "C",
+                AnotherStringProperty = "D"
+            };
+            var doc = new SimpleDTOWithNestedDTO()
+            {
+                SimpleDTO = sDto,
+                InheritedDTO = iDto
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTO>();
+            patchDoc.Move<SimpleDTO>(o => o.InheritedDTO, o => o.SimpleDTO);
+
+            // Act
+            patchDoc.ApplyTo(doc);
+
+            // Assert
+            Assert.Equal("C", doc.SimpleDTO.StringProperty);
+            Assert.Equal("D", doc.SimpleDTO.AnotherStringProperty);
+            Assert.Same(iDto, doc.SimpleDTO);
+            Assert.Null(doc.InheritedDTO);
+        }
+
+        [Fact]
+        public void Move_KeepsObjectReferenceWithSerialization()
+        {
+            // Arrange
+            var sDto = new SimpleDTO()
+            {
+                StringProperty = "A",
+                AnotherStringProperty = "B"
+            };
+            var iDto = new InheritedDTO()
+            {
+                StringProperty = "C",
+                AnotherStringProperty = "D"
+            };
+            var doc = new SimpleDTOWithNestedDTO()
+            {
+                SimpleDTO = sDto,
+                InheritedDTO = iDto
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTO>();
+            patchDoc.Move<SimpleDTO>(o => o.InheritedDTO, o => o.SimpleDTO);
+
+            var serialized = JsonConvert.SerializeObject(patchDoc);
+            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleDTOWithNestedDTO>>(serialized);
+
+            // Act
+            deserialized.ApplyTo(doc);
+
+            // Assert
+            Assert.Equal("C", doc.SimpleDTO.StringProperty);
+            Assert.Equal("D", doc.SimpleDTO.AnotherStringProperty);
+            Assert.Same(iDto, doc.SimpleDTO);
+            Assert.Null(doc.InheritedDTO);
         }
 
         [Fact]
@@ -1776,6 +1945,71 @@ namespace Microsoft.AspNetCore.JsonPatch
 
             // Assert
             Assert.Equal(new List<int>() { 2, 1, 3 }, doc.SimpleDTO.IntegerList);
+        }
+
+        [Fact]
+        public void Move_KeepsObjectReferenceInList()
+        {
+            // Arrange
+            var sDto1 = new SimpleDTO() { IntegerValue = 1 };
+            var sDto2 = new SimpleDTO() { IntegerValue = 2 };
+            var sDto3 = new SimpleDTO() { IntegerValue = 3 };
+            var doc = new SimpleDTOWithNestedDTO()
+            {
+                SimpleDTOList = new List<SimpleDTO>() {
+                    sDto1,
+                    sDto2,
+                    sDto3
+                }
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTO>();
+            patchDoc.Move<SimpleDTO>(o => o.SimpleDTOList, 0, o => o.SimpleDTOList, 1);
+
+            // Act
+            patchDoc.ApplyTo(doc);
+
+            // Assert
+            Assert.Equal(new List<SimpleDTO>() { sDto2, sDto1, sDto3 }, doc.SimpleDTOList);
+            Assert.Equal(2, doc.SimpleDTOList[0].IntegerValue);
+            Assert.Equal(1, doc.SimpleDTOList[1].IntegerValue);
+            Assert.Same(sDto2, doc.SimpleDTOList[0]);
+            Assert.Same(sDto1, doc.SimpleDTOList[1]);
+        }
+
+        [Fact]
+        public void Move_KeepsObjectReferenceInListWithSerialization()
+        {
+            // Arrange
+            var sDto1 = new SimpleDTO() { IntegerValue = 1 };
+            var sDto2 = new SimpleDTO() { IntegerValue = 2 };
+            var sDto3 = new SimpleDTO() { IntegerValue = 3 };
+            var doc = new SimpleDTOWithNestedDTO()
+            {
+                SimpleDTOList = new List<SimpleDTO>() {
+                    sDto1,
+                    sDto2,
+                    sDto3
+                }
+            };
+
+            // create patch
+            var patchDoc = new JsonPatchDocument<SimpleDTOWithNestedDTO>();
+            patchDoc.Move<SimpleDTO>(o => o.SimpleDTOList, 0, o => o.SimpleDTOList, 1);
+
+            var serialized = JsonConvert.SerializeObject(patchDoc);
+            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleDTOWithNestedDTO>>(serialized);
+
+            // Act
+            patchDoc.ApplyTo(doc);
+
+            // Assert
+            Assert.Equal(new List<SimpleDTO>() { sDto2, sDto1, sDto3 }, doc.SimpleDTOList);
+            Assert.Equal(2, doc.SimpleDTOList[0].IntegerValue);
+            Assert.Equal(1, doc.SimpleDTOList[1].IntegerValue);
+            Assert.Same(sDto2, doc.SimpleDTOList[0]);
+            Assert.Same(sDto1, doc.SimpleDTOList[1]);
         }
 
         [Fact]

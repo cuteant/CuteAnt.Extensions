@@ -3,10 +3,10 @@
   <Import Project="..\..\common\define.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net452</TargetFrameworks>
+    <TargetFrameworks>net461</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>

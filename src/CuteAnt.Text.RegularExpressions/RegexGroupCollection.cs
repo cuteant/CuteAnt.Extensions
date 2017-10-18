@@ -19,8 +19,12 @@ namespace CuteAnt.Text.RegularExpressions
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(RegexCollectionDebuggerProxy<Group>))]
     [Serializable]
-    public class GroupCollection : IList<Group>, IReadOnlyList<Group>, IList
-    {
+    public class GroupCollection : IList<Group>,
+#if !NET40
+        IReadOnlyList<Group>,
+#endif
+        IList
+  {
         private readonly Match _match;
         private readonly Hashtable _captureMap;
 

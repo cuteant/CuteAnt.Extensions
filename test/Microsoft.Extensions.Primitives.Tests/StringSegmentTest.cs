@@ -4,10 +4,34 @@
 using System;
 using Xunit;
 
-namespace CuteAnt.Extensions.Primitives
+namespace Microsoft.Extensions.Primitives
 {
     public class StringSegmentTest
     {
+        [Fact]
+        public void StringSegment_Empty()
+        {
+            // Arrange & Act
+            var segment = StringSegment.Empty;
+
+            // Assert
+            Assert.True(segment.HasValue);
+            Assert.Same(string.Empty, segment.Value);
+            Assert.Equal(0, segment.Offset);
+            Assert.Equal(0, segment.Length);
+        }
+
+        [Fact]
+        public void StringSegment_ImplicitConvertFromString()
+        {
+            StringSegment segment = "Hello";
+
+            Assert.True(segment.HasValue);
+            Assert.Equal(0, segment.Offset);
+            Assert.Equal(5, segment.Length);
+            Assert.Equal("Hello", segment.Value);
+        }
+
         [Fact]
         public void StringSegment_StringCtor_AllowsNullBuffers()
         {
@@ -18,6 +42,41 @@ namespace CuteAnt.Extensions.Primitives
             Assert.False(segment.HasValue);
             Assert.Equal(0, segment.Offset);
             Assert.Equal(0, segment.Length);
+        }
+
+        [Fact]
+        public void StringSegmentConstructor_NullBuffer_Throws()
+        {
+            // Arrange, Act and Assert
+            var exception = Assert.Throws<ArgumentNullException>(() => new StringSegment(null, 0, 0));
+            Assert.Contains("buffer", exception.Message);
+        }
+
+        [Fact]
+        public void StringSegmentConstructor_NegativeOffset_Throws()
+        {
+            // Arrange, Act and Assert
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new StringSegment("", -1, 0));
+            Assert.Contains("offset", exception.Message);
+        }
+
+        [Fact]
+        public void StringSegmentConstructor_NegativeLength_Throws()
+        {
+            // Arrange, Act and Assert
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new StringSegment("", 0, -1));
+            Assert.Contains("length", exception.Message);
+        }
+
+        [Theory]
+        [InlineData(0, 10)]
+        [InlineData(10, 0)]
+        [InlineData(5, 5)]
+        [InlineData(int.MaxValue, int.MaxValue)]
+        public void StringSegmentConstructor_OffsetOrLengthOutOfBounds_Throws(int offset, int length)
+        {
+            // Arrange, Act and Assert
+            Assert.Throws<ArgumentException>(() => new StringSegment("lengthof9", offset, length));
         }
 
         [Theory]
@@ -99,6 +158,33 @@ namespace CuteAnt.Extensions.Primitives
 
             // Assert
             Assert.False(hasValue);
+        }
+
+        [Theory]
+        [InlineData("a", 0, 1, 0, 'a')]
+        [InlineData("abc", 1, 1, 0, 'b')]
+        [InlineData("abcdef", 1, 4, 0, 'b')]
+        [InlineData("abcdef", 1, 4, 1, 'c')]
+        [InlineData("abcdef", 1, 4, 2, 'd')]
+        [InlineData("abcdef", 1, 4, 3, 'e')]
+        public void StringSegment_Indexer_InRange(string value, int offset, int length, int index, char expected)
+        {
+            var segment = new StringSegment(value, offset, length);
+
+            var result = segment[index];
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("", 0, 0, 0)]
+        [InlineData("a", 0, 1, -1)]
+        [InlineData("a", 0, 1, 1)]
+        public void StringSegment_Indexer_OutOfRangeThrows(string value, int offset, int length, int index)
+        {
+            var segment = new StringSegment(value, offset, length);
+
+            Assert.Throws<IndexOutOfRangeException>(() => segment[index]);
         }
 
         public static TheoryData<string, StringComparison, bool> EndsWithData
@@ -224,6 +310,46 @@ namespace CuteAnt.Extensions.Primitives
             Assert.Equal(expectedResult, result);
         }
 
+        [Fact]
+        public void StringSegment_StaticEquals_Valid()
+        {
+            var segment1 = new StringSegment("My Car Is Cool", 3, 3);
+            var segment2 = new StringSegment("Your Carport is blue", 5, 3);
+
+            Assert.True(StringSegment.Equals(segment1, segment2));
+        }
+
+        [Fact]
+        public void StringSegment_StaticEquals_Invalid()
+        {
+            var segment1 = new StringSegment("My Car Is Cool", 3, 4);
+            var segment2 = new StringSegment("Your Carport is blue", 5, 4);
+
+            Assert.False(StringSegment.Equals(segment1, segment2));
+        }
+
+        [Fact]
+        public void StringSegment_IsNullOrEmpty_Valid()
+        {
+            Assert.True(StringSegment.IsNullOrEmpty(null));
+            Assert.True(StringSegment.IsNullOrEmpty(string.Empty));
+            Assert.True(StringSegment.IsNullOrEmpty(new StringSegment(null)));
+            Assert.True(StringSegment.IsNullOrEmpty(new StringSegment(string.Empty)));
+            Assert.True(StringSegment.IsNullOrEmpty(StringSegment.Empty));
+            Assert.True(StringSegment.IsNullOrEmpty(new StringSegment(string.Empty, 0, 0)));
+            Assert.True(StringSegment.IsNullOrEmpty(new StringSegment("Hello", 0, 0)));
+            Assert.True(StringSegment.IsNullOrEmpty(new StringSegment("Hello", 3, 0)));
+        }
+
+        [Fact]
+        public void StringSegment_IsNullOrEmpty_Invalid()
+        {
+            Assert.False(StringSegment.IsNullOrEmpty("A"));
+            Assert.False(StringSegment.IsNullOrEmpty("ABCDefg"));
+            Assert.False(StringSegment.IsNullOrEmpty(new StringSegment("A", 0 , 1)));
+            Assert.False(StringSegment.IsNullOrEmpty(new StringSegment("ABCDefg", 3, 2)));
+        }
+
         public static TheoryData GetHashCode_ReturnsSameValueForEqualSubstringsData
         {
             get
@@ -308,12 +434,12 @@ namespace CuteAnt.Extensions.Primitives
         }
 
         [Theory]
-        [MemberData(nameof(DefaultStringSegmentEqualsStringSegmentData))]       
+        [MemberData(nameof(DefaultStringSegmentEqualsStringSegmentData))]
         public void DefaultStringSegment_EqualsStringSegment(StringSegment candidate)
         {
             // Arrange
             var segment = default(StringSegment);
-           
+
             // Act
             var result = segment.Equals(candidate, StringComparison.Ordinal);
 
@@ -363,12 +489,12 @@ namespace CuteAnt.Extensions.Primitives
         }
 
         [Theory]
-        [MemberData(nameof(DefaultStringSegmentDoesNotEqualStringData))]       
+        [MemberData(nameof(DefaultStringSegmentDoesNotEqualStringData))]
         public void DefaultStringSegment_DoesNotEqualString(string candidate)
         {
             // Arrange
             var segment = default(StringSegment);
-            
+
             // Act
             var result = segment.Equals(candidate, StringComparison.Ordinal);
 
@@ -422,6 +548,19 @@ namespace CuteAnt.Extensions.Primitives
         }
 
         [Fact]
+        public void StringSegment_SubstringOffset_Valid()
+        {
+            // Arrange
+            var segment = new StringSegment("Hello, World!", 1, 4);
+
+            // Act
+            var result = segment.Substring(offset: 1);
+
+            // Assert
+            Assert.Equal("llo", result);
+        }
+
+        [Fact]
         public void StringSegment_Substring_Valid()
         {
             // Arrange
@@ -462,6 +601,20 @@ namespace CuteAnt.Extensions.Primitives
 
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => segment.Substring(2, 3));
+        }
+
+        [Fact]
+        public void StringSegment_SubsegmentOffset_Valid()
+        {
+            // Arrange
+            var segment = new StringSegment("Hello, World!", 1, 4);
+
+            // Act
+            var result = segment.Subsegment(offset: 1);
+
+            // Assert
+            Assert.Equal(new StringSegment("Hello, World!", 2, 3), result);
+            Assert.Equal("llo", result.Value);
         }
 
         [Fact]
@@ -557,6 +710,86 @@ namespace CuteAnt.Extensions.Primitives
 
             // Act
             var result = segment.IndexOf('!', 15, 5);
+
+            // Assert
+            Assert.Equal(-1, result);
+        }
+
+        [Fact]
+        public void IndexOfAny_ComputesIndex_RelativeToTheCurrentSegment()
+        {
+            // Arrange
+            var segment = new StringSegment("Hello, World!", 1, 10);
+
+            // Act
+            var result = segment.IndexOfAny(new[] { ',' });
+
+            // Assert
+            Assert.Equal(4, result);
+        }
+
+        [Fact]
+        public void IndexOfAny_ReturnsMinusOne_IfElementNotInSegment()
+        {
+            // Arrange
+            var segment = new StringSegment("Hello, World!", 1, 3);
+
+            // Act
+            var result = segment.IndexOfAny(new[] { ',' });
+
+            // Assert
+            Assert.Equal(-1, result);
+        }
+
+        [Fact]
+        public void IndexOfAny_SkipsANumberOfCaracters_IfStartIsProvided()
+        {
+            // Arrange
+            const string buffer = "Hello, World!, Hello people!";
+            var segment = new StringSegment(buffer, 3, buffer.Length - 3);
+
+            // Act
+            var result = segment.IndexOfAny(new[] { '!' }, 15);
+
+            // Assert
+            Assert.Equal(buffer.Length - 4, result);
+        }
+
+        [Fact]
+        public void IndexOfAny_SearchOnlyInsideTheRange_IfStartAndCountAreProvided()
+        {
+            // Arrange
+            const string buffer = "Hello, World!, Hello people!";
+            var segment = new StringSegment(buffer, 3, buffer.Length - 3);
+
+            // Act
+            var result = segment.IndexOfAny(new[] { '!' }, 15, 5);
+
+            // Assert
+            Assert.Equal(-1, result);
+        }
+
+        [Fact]
+        public void LastIndexOf_ComputesIndex_RelativeToTheCurrentSegment()
+        {
+            // Arrange
+            var segment = new StringSegment("Hello, World, how, are, you!", 1, 14);
+
+            // Act
+            var result = segment.LastIndexOf(',');
+
+            // Assert
+            Assert.Equal(11, result);
+        }
+
+        [Fact]
+        public void LastIndexOf_ReturnsMinusOne_IfElementNotInSegment()
+        {
+            // Arrange
+            var segment = new StringSegment("Hello, World!", 1, 3);
+
+            // Act
+            var result = segment.LastIndexOf(',');
 
             // Assert
             Assert.Equal(-1, result);

@@ -4,7 +4,7 @@
 using System;
 using Xunit;
 
-namespace CuteAnt.Extensions.Primitives
+namespace Microsoft.Extensions.Primitives
 {
     public class ChangeTokenTests
     {

@@ -4,7 +4,7 @@
 using System.Linq;
 using Xunit;
 
-namespace CuteAnt.Extensions.Primitives
+namespace Microsoft.Extensions.Primitives
 {
     public class StringTokenizerTest
     {
@@ -27,7 +27,6 @@ namespace CuteAnt.Extensions.Primitives
         [InlineData("a", new[] { "a" })]
         [InlineData("abc", new[] { "abc" })]
         [InlineData("a,b", new[] { "a", "b" })]
-        [InlineData("a,b", new[] { "a", "b" })]
         [InlineData("a,,b", new[] { "a", "", "b" })]
         [InlineData(",a,b", new[] { "", "a", "b" })]
         [InlineData(",,a,b", new[] { "", "", "a", "b" })]
@@ -45,7 +44,7 @@ namespace CuteAnt.Extensions.Primitives
             // Assert
             Assert.Equal(expected, result);
         }
-        
+
         [Theory]
         [InlineData("", new[] { "" })]
         [InlineData("a", new[] { "a" })]

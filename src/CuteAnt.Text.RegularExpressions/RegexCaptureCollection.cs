@@ -24,7 +24,11 @@ namespace CuteAnt.Text.RegularExpressions
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(RegexCollectionDebuggerProxy<Capture>))]
     [Serializable]
-    public class CaptureCollection : IList<Capture>, IReadOnlyList<Capture>, IList
+    public class CaptureCollection : IList<Capture>,
+#if !NET40
+        IReadOnlyList<Capture>, 
+#endif
+        IList
     {
         private readonly Group _group;
         private readonly int _capcount;

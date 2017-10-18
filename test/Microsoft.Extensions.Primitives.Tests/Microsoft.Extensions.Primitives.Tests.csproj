@@ -6,21 +6,21 @@
     <TargetFrameworks>net461</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <Reference Include="System.Linq.Expressions" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.7.8" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <ProjectReference Include="..\..\src\CuteAnt.Extensions.Primitives\CuteAnt.Extensions.Primitives.csproj" />
+    <ProjectReference Include="..\..\src\CuteAnt.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
   </ItemGroup>
+
 
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
+
 </Project>

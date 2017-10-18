@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace CuteAnt.Extensions.Primitives
+namespace Microsoft.Extensions.Primitives
 {
     public class StringValuesTests
     {
