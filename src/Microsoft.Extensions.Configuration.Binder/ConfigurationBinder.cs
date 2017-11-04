@@ -142,7 +142,11 @@ namespace Microsoft.Extensions.Configuration
         {
             if (instance != null)
             {
+#if NET40
+                foreach (var property in GetAllProperties(instance.GetType()))
+#else
                 foreach (var property in GetAllProperties(instance.GetType().GetTypeInfo()))
+#endif
                 {
                     BindProperty(property, instance, configuration);
                 }
@@ -152,15 +156,25 @@ namespace Microsoft.Extensions.Configuration
         private static void BindProperty(PropertyInfo property, object instance, IConfiguration config)
         {
             // We don't support set only, non public, or indexer properties
-            if (property.GetMethod == null ||
-                !property.GetMethod.IsPublic ||
-                property.GetMethod.GetParameters().Length > 0)
+#if NET40
+            var getMethod = property.GetGetMethod(true);
+#else
+            var getMethod = property.GetMethod;
+#endif
+            if (getMethod == null ||
+                !getMethod.IsPublic ||
+                getMethod.GetParameters().Length > 0)
             {
                 return;
             }
 
             var propertyValue = property.GetValue(instance);
-            var hasPublicSetter = property.SetMethod != null && property.SetMethod.IsPublic;
+#if NET40
+            var setMethod = property.GetSetMethod(true);
+#else
+            var setMethod = property.SetMethod;
+#endif
+            var hasPublicSetter = setMethod != null && setMethod.IsPublic;
 
             if (propertyValue == null && !hasPublicSetter)
             {
@@ -513,6 +527,21 @@ namespace Microsoft.Extensions.Configuration
             return null;
         }
 
+#if NET40
+        private static IEnumerable<PropertyInfo> GetAllProperties(Type type)
+        {
+            var allProperties = new List<PropertyInfo>();
+
+            do
+            {
+                allProperties.AddRange(type.GetProperties(BindingFlagsHelper.MSDeclaredOnlyLookup));
+                type = type.BaseType;
+            }
+            while (type != typeof(object));
+
+            return allProperties;
+        }
+#else
         private static IEnumerable<PropertyInfo> GetAllProperties(TypeInfo type)
         {
             var allProperties = new List<PropertyInfo>();
@@ -526,5 +555,6 @@ namespace Microsoft.Extensions.Configuration
 
             return allProperties;
         }
+#endif
     }
 }

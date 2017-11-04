@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common\version.props" />
+  <Import Project="..\..\common\nuget.aspnet.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net451;net40</TargetFrameworks>
+    <AssemblyName>Microsoft.Extensions.Options.ConfigurationExtensions</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.Options</RootNamespace>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>CuteAnt.Extensions.Options.ConfigurationExtensions</PackageId>
+    <Title>Microsoft.Extensions.Options.ConfigurationExtensions-net40-net451-fork</Title>
+    <Description>Provides additional configuration specific functionality related to Options.</Description>
+    <PackageTags>aspnetcore;configuration;options</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
+    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.Configuration.Binder\Microsoft.Extensions.Configuration.Binder.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.FileProviders.Abstractions\Microsoft.Extensions.FileProviders.Abstractions.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.Options\Microsoft.Extensions.Options.csproj" />
+  </ItemGroup>
+</Project>

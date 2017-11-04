@@ -3,7 +3,7 @@
   <Import Project="..\..\common\nuget.aspnet.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net451</TargetFrameworks>
+    <TargetFrameworks>net451;net40</TargetFrameworks>
     <AssemblyName>Microsoft.Extensions.Configuration.Binder</AssemblyName>
     <RootNamespace>Microsoft.Extensions.Configuration</RootNamespace>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
@@ -22,6 +22,9 @@
     <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
   </ItemGroup>
 
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.Reflection.Sources\CuteAnt.Extensions.Reflection.Sources.projitems" Label="Shared" />
+  </ImportGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Extensions.Configuration\Microsoft.Extensions.Configuration.csproj" />
   </ItemGroup>
