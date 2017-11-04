@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common\version.props" />
+  <Import Project="..\..\common\nuget.aspnet.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net451;net40</TargetFrameworks>
+    <AssemblyName>Microsoft.Extensions.DependencyInjection</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.DependencyInjection</RootNamespace>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>CuteAnt.Extensions.DependencyInjection</PackageId>
+    <Title>Microsoft.Extensions.DependencyInjection-net40-net451-fork</Title>
+    <Description>Default implementation of dependency injection for Microsoft.Extensions.DependencyInjection.</Description>
+    <PackageTags>dependencyinjection;di</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
+    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\CuteAnt.Extensions.Common\src\Microsoft.Extensions.ParameterDefaultValue.Sources\Microsoft.Extensions.ParameterDefaultValue.Sources.projitems" Label="Shared" />
+  <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.Reflection.Sources\CuteAnt.Extensions.Reflection.Sources.projitems" Label="Shared" />
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Import Project="..\..\..\CuteAnt.Extensions.Common\src\Nito.AsyncEx.ExceptionEnlightenment.Sources\Nito.AsyncEx.ExceptionEnlightenment.Sources.projitems" Label="Shared" />
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CuteAnt.Extensions.DependencyInjection.Abstractions\Microsoft.Extensions.DependencyInjection.Abstractions.csproj" />
+  </ItemGroup>
+</Project>
