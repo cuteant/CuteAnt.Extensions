@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common\version.props" />
+  <Import Project="..\..\common\nuget.dotnet.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net40</TargetFrameworks>
+    <RootNamespace>System.Reflection</RootNamespace>
+    <AssemblyName>System.Reflection.Metadata</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>System.Reflection.Metadata.Net40</PackageId>
+    <Title>System.Reflection.Metadata-net40-fork</Title>
+    <Description>Provides the System.Text.RegularExpressions.Regex class, an implementation of a regular expression engine.</Description>
+    <PackageTags>Regular</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
+    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+  </ItemGroup>
+
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.Reflection.Sources\CuteAnt.Extensions.Reflection.Sources.projitems" Label="Shared" />
+    <Import Project="..\..\..\CuteAnt.Extensions.Common\src\Nito.AsyncEx.ExceptionEnlightenment.Sources\Nito.AsyncEx.ExceptionEnlightenment.Sources.projitems" Label="Shared" />
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\System.Collections.Immutable\System.Collections.Immutable.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

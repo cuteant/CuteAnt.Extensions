@@ -1,0 +1,106 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common\common.props" />
+  <Import Project="..\..\common\define.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net461</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\Interop\Interop.Mock01.cs" />
+    <Compile Remove="Resources\Interop\Interop.Mock01.Impl.cs" />
+    <Compile Remove="Resources\Misc\Debug.cs" />
+    <Compile Remove="Resources\Misc\Deterministic.cs" />
+    <Compile Remove="Resources\Misc\Members.cs" />
+    <Compile Remove="Resources\Misc\Signed.cs" />
+    <Compile Remove="Resources\Namespace\NamespaceForwardedCS.cs" />
+    <Compile Remove="Resources\Namespace\NamespaceTests.cs" />
+    <Compile Remove="Resources\NetModule\AppCS.cs" />
+    <Compile Remove="Resources\NetModule\ModuleCS00.cs" />
+    <Compile Remove="Resources\NetModule\ModuleCS01.cs" />
+    <Compile Remove="Resources\PortablePdbs\Documents.cs" />
+    <Compile Remove="Resources\WinRT\Lib.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\Microsoft.Extensions.FileProviders.Physical\System.Security.Cryptography\IncrementalHash.net46.cs" Link="IncrementalHash.net46.cs" />
+    <Compile Include="..\AssertExtensions.cs" Link="AssertExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\Namespace\NamespaceForwardedCS.cs" />
+    <None Include="Resources\Namespace\NamespaceTests.cs" />
+    <EmbeddedResource Include="Resources\Namespace\NamespaceForwardedCS.dll" />
+    <EmbeddedResource Include="Resources\Namespace\NamespaceTests.dll" />
+    <None Include="Resources\Interop\Interop.Mock01.cs" />
+    <None Include="Resources\Interop\Interop.Mock01.Impl.cs" />
+    <None Include="Resources\Interop\IndexerWithByRefParam.il" />
+    <EmbeddedResource Include="Resources\Interop\IndexerWithByRefParam.dll" />
+    <EmbeddedResource Include="Resources\Interop\Interop.Mock01.dll" />
+    <EmbeddedResource Include="Resources\Interop\Interop.Mock01.Impl.dll" />
+    <None Include="Resources\Misc\CPPClassLibrary2.h" />
+    <EmbeddedResource Include="Resources\Misc\KeyPair.snk" />
+    <EmbeddedResource Include="Resources\Misc\CPPClassLibrary2.obj" />
+    <None Include="Resources\Misc\EmptyType.il" />
+    <EmbeddedResource Include="Resources\Misc\EmptyType.dll" />
+    <None Include="Resources\Misc\Members.cs" />
+    <EmbeddedResource Include="Resources\Misc\Members.dll" />
+    <None Include="Resources\Misc\Deterministic.cs" />
+    <EmbeddedResource Include="Resources\Misc\Deterministic.dll" />
+    <None Include="Resources\Misc\Debug.cs" />
+    <EmbeddedResource Include="Resources\Misc\Debug.dll" />
+    <None Include="Resources\NetModule\AppCS.cs" />
+    <EmbeddedResource Include="Resources\NetModule\AppCS.exe" />
+    <None Include="Resources\NetModule\ModuleCS00.cs" />
+    <EmbeddedResource Include="Resources\NetModule\ModuleCS00.mod" />
+    <None Include="Resources\NetModule\ModuleCS01.cs" />
+    <EmbeddedResource Include="Resources\NetModule\ModuleCS01.mod" />
+    <EmbeddedResource Include="Resources\NetModule\ModuleVB01.mod" />
+    <None Include="Resources\NetModule\ModuleVB01.vb" />
+    <EmbeddedResource Include="Resources\WinRT\Lib.winmd" />
+    <None Include="Resources\WinRT\Lib.cs" />
+    <EmbeddedResource Include="Resources\PortablePdbs\Documents.dll" />
+    <EmbeddedResource Include="Resources\PortablePdbs\Documents.pdb" />
+    <EmbeddedResource Include="Resources\PortablePdbs\Documents.Embedded.dll" />
+    <None Include="Resources\PortablePdbs\Documents.cmd" />
+    <None Include="Resources\PortablePdbs\Documents.cs" />
+    <None Include="Resources\Misc\Signed.cmd" />
+    <None Include="Resources\Misc\Signed.cs" />
+    <EmbeddedResource Include="Resources\Misc\Signed.exe" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.7.8" />
+    <PackageReference Include="xunit" Version="2.3.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata">
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="System.Reflection.Metadata.Tests.xunit.runner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common\version.props" />
+  <Import Project="..\..\common\nuget.dotnet.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net40</TargetFrameworks>
+    <RootNamespace>System</RootNamespace>
+    <AssemblyName>System.Collections.Immutable</AssemblyName>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>System.Collections.Immutable.Net40</PackageId>
+    <Title>System.Collections.Immutable-net40-fork</Title>
+    <Description>Provides the System.Text.RegularExpressions.Regex class, an implementation of a regular expression engine.</Description>
+    <PackageTags>Regular</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
+    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CuteAnt.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Collections\Immutable\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Collections\Immutable\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
