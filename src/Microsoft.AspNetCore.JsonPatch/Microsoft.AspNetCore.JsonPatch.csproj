@@ -19,7 +19,7 @@
   <ItemGroup>
     <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
     <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\JpVersionInfo.cs" />
+    <Compile Include="..\..\common\JpVersionInfo.cs" Link="Properties\JpVersionInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
