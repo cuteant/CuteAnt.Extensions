@@ -338,12 +338,12 @@ namespace System.Reflection.Metadata.Decoding.Tests
         {
             public string GetSystemType()
             {
-                return "[System.Runtime]System.Type";
+                return "[mscorlib]System.Type";
             }
 
             public bool IsSystemType(string type)
             {
-                return type == "[System.Runtime]System.Type"  // encountered as typeref
+                return type == "[mscorlib]System.Type"  // encountered as typeref
                     || Type.GetType(type) == typeof(Type);    // encountered as serialized to reflection notation
             }
 

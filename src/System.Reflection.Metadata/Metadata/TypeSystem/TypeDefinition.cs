@@ -222,7 +222,7 @@ namespace System.Reflection.Metadata
             {
                 case TypeDefTreatment.NormalNonAttribute:
 #if NET40
-                    flags |= TypeAttributes.Import;
+                    flags |= (TypeAttributes)0x00004000 | TypeAttributes.Import;
 #else
                     flags |= TypeAttributes.WindowsRuntime | TypeAttributes.Import;
 #endif
@@ -230,7 +230,7 @@ namespace System.Reflection.Metadata
 
                 case TypeDefTreatment.NormalAttribute:
 #if NET40
-                    flags |= TypeAttributes.Sealed;
+                    flags |= (TypeAttributes)0x00004000 | TypeAttributes.Sealed;
 #else
                     flags |= TypeAttributes.WindowsRuntime | TypeAttributes.Sealed;
 #endif

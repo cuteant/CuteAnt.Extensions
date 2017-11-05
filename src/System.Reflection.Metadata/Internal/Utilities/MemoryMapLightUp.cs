@@ -40,6 +40,7 @@ namespace System.Reflection.Internal
         }
 
 #if NET40
+        // TODO .Net40 无法获取 MemoryMappedViewAccessor.PointerOffset 属性
         internal static bool TryGetSafeBufferAndPointerOffset(object accessor, Int64 pointerOffset, out SafeBuffer safeBuffer, out long offset)
         {
             var viewAccessor = (MemoryMappedViewAccessor)accessor;

@@ -82,7 +82,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public void DecodeVarArgsDefAndRef()
         {
             using (FileStream stream = File.OpenRead(typeof(VarArgsToDecode).Assembly.Location))
-            using (var peReader = new PEReader(stream))
+            using (var peReader = new PEReader(stream, PEStreamOptions.PrefetchMetadata))
             {
                 MetadataReader metadataReader = peReader.GetMetadataReader();
                 TypeDefinitionHandle typeDefHandle = TestMetadataResolver.FindTestType(metadataReader, typeof(VarArgsToDecode));
@@ -134,7 +134,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public void SimpleSignatureProviderCoverage()
         {
             using (FileStream stream = File.OpenRead(typeof(SignaturesToDecode<>).Assembly.Location))
-            using (var peReader = new PEReader(stream))
+            using (var peReader = new PEReader(stream, PEStreamOptions.PrefetchMetadata))
             {
 
                 MetadataReader reader = peReader.GetMetadataReader();
@@ -207,7 +207,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                     Assert.Equal(expected, provider.GetTypeFromHandle(reader, genericTypeContext, @event.Type));
                 }
 
-                Assert.Equal("[System.Collections]System.Collections.Generic.List`1<!T>", provider.GetTypeFromHandle(reader, genericTypeContext, handle: type.BaseType));
+                Assert.Equal("[mscorlib]System.Collections.Generic.List`1<!T>", provider.GetTypeFromHandle(reader, genericTypeContext, handle: type.BaseType));
             }
         }
 
@@ -246,7 +246,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public void PinnedAndUnpinnedLocals()
         {
             using (FileStream stream = File.OpenRead(typeof(PinnedAndUnpinnedLocalsToDecode).Assembly.Location))
-            using (var peReader = new PEReader(stream))
+            using (var peReader = new PEReader(stream, PEStreamOptions.PrefetchEntireImage))
             {
                 MetadataReader reader = peReader.GetMetadataReader();
                 var provider = new DisassemblingTypeProvider();
@@ -285,7 +285,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public void WrongSignatureType()
         {
             using (FileStream stream = File.OpenRead(typeof(VarArgsToDecode).Assembly.Location))
-            using (var peReader = new PEReader(stream))
+            using (var peReader = new PEReader(stream, PEStreamOptions.PrefetchMetadata))
             {
                 MetadataReader reader = peReader.GetMetadataReader();
                 var provider = new DisassemblingTypeProvider();
@@ -322,12 +322,12 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 { "UIntPtr", "native uint" },
                 { "Boolean", "bool" },
                 { "Char", "char" },
-                { "ModifiedType", "int32 modreq([System.Runtime]System.Runtime.CompilerServices.IsVolatile)" },
+                { "ModifiedType", "int32 modreq([mscorlib]System.Runtime.CompilerServices.IsVolatile)" },
                 { "Pointer", "int32*"  },
                 { "SZArray", "int32[]" },
                 { "Array", "int32[0...,0...]" },
                 { "GenericTypeParameter", "!T" },
-                { "GenericInstantiation", "[System.Collections]System.Collections.Generic.List`1<int32>" },
+                { "GenericInstantiation", "[mscorlib]System.Collections.Generic.List`1<int32>" },
             };
         }
 
@@ -340,8 +340,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 { "GenericMethodParameter", "method !!U *()" },
                 { ".ctor", "method void *()" },
                 { "get_Property", "method System.Reflection.Metadata.Decoding.Tests.SignatureDecoderTests/SignaturesToDecode`1/Nested<!T> *()"  },
-                { "add_Event",  "method void *([System.Runtime]System.EventHandler`1<[System.Runtime]System.EventArgs>)" },
-                { "remove_Event", "method void *([System.Runtime]System.EventHandler`1<[System.Runtime]System.EventArgs>)" },
+                { "add_Event",  "method void *([mscorlib]System.EventHandler`1<[mscorlib]System.EventArgs>)" },
+                { "remove_Event", "method void *([mscorlib]System.EventHandler`1<[mscorlib]System.EventArgs>)" },
             };
         }
 
@@ -359,7 +359,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
             // event name -> signature
             return new Dictionary<string, string>()
             {
-                { "Event", "[System.Runtime]System.EventHandler`1<[System.Runtime]System.EventArgs>" },
+                { "Event", "[mscorlib]System.EventHandler`1<[mscorlib]System.EventArgs>" },
             };
         }
 

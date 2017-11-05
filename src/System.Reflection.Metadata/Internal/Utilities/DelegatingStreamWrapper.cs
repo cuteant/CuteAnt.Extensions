@@ -11,8 +11,6 @@ namespace System.Reflection.Internal
 {
     internal sealed class DelegatingStreamWrapper : DelegatingStream
     {
-        private const String net_http_content_readonly_stream = "The stream does not support writing.";
-
         public DelegatingStreamWrapper(Stream innerStream)
             : base(innerStream)
         {
@@ -20,12 +18,12 @@ namespace System.Reflection.Internal
 
         public override void Close()
         {
-            // Disabled. The server will close the response when the AppFunc task completes.
+            // Disabled.
         }
 
         protected override void Dispose(Boolean disposing)
         {
-            // Disabled. The server will close the response when the AppFunc task completes.
+            // Disabled.
         }
     }
 
