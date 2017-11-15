@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text.Internal;
 using System.Text.Unicode;
 
-namespace CuteAnt.Text.Encodings.Web
+namespace System.Text.Encodings.Web
 {
     /// <summary>
     /// Represents a filter which allows only certain Unicode code points through.

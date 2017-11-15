@@ -9,7 +9,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Unicode;
 
-namespace CuteAnt.Text.Encodings.Web
+namespace System.Text.Encodings.Web
 {
   /// <summary>
   /// An abstraction representing various text encoders. 

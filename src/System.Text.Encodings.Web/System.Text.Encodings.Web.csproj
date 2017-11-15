@@ -5,13 +5,13 @@
   
   <PropertyGroup>
     <TargetFramework>net40</TargetFramework>
-    <AssemblyName>CuteAnt.Text.Encodings.Web</AssemblyName>
-    <RootNamespace>CuteAnt.Text.Encodings.Web</RootNamespace>
+    <AssemblyName>System.Text.Encodings.Web</AssemblyName>
+    <RootNamespace>System.Text.Encodings.Web</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.Text.Encodings.Web</PackageId>
+    <PackageId>System.Text.Encodings.Web.Net40</PackageId>
     <Title>System.Text.Encodings.Web-net40-fork</Title>
     <Description>Provides types for encoding and escaping strings for use in JavaScript, HyperText Markup Language (HTML), and uniform resource locators (URL).</Description>
     <PackageTags>primitives</PackageTags>
@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CuteAnt.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
   </ItemGroup>
 
   <ItemGroup>

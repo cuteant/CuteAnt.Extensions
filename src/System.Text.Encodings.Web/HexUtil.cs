@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace CuteAnt.Text.Encodings.Web
+namespace System.Text.Encodings.Web
 {
   /// <summary>
   /// Contains helpers for dealing with byte-hex char conversions.

@@ -35,7 +35,7 @@ namespace System.Text.Unicode
     private static uint[] CreateDefinedCharacterBitmap()
     {
       // The stream should be exactly 8KB in size.
-      var stream = typeof(UnicodeRange).GetTypeInfo().Assembly.GetManifestResourceStream("CuteAnt.Text.Encodings.Web.Resources.unicode8definedcharacters.bin");
+      var stream = typeof(UnicodeRange).GetTypeInfo().Assembly.GetManifestResourceStream("System.Text.Encodings.Web.Resources.unicode8definedcharacters.bin");
 
       if (stream == null)
       {

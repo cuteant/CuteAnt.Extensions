@@ -81,13 +81,13 @@
 
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Primitives">
-      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\Microsoft.Extensions.Primitives.dll</HintPath>
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Release\net40\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Collections.Immutable">
-      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\System.Collections.Immutable.dll</HintPath>
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Release\net40\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Reflection.Metadata">
-      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\System.Reflection.Metadata.dll</HintPath>
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Release\net40\System.Reflection.Metadata.dll</HintPath>
     </Reference>
   </ItemGroup>
 

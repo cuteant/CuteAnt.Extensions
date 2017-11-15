@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Internal;
 using System.Text.Unicode;
 
-namespace CuteAnt.Text.Encodings.Web
+namespace System.Text.Encodings.Web
 {
   /// <summary>
   /// Represents a type used to do URL encoding.
