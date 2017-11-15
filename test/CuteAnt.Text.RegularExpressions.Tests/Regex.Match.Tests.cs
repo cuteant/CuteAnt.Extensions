@@ -266,7 +266,7 @@ namespace CuteAnt.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(Match_Basic_TestData))]
-        public void Match(string pattern, string input, RegexOptions options, int beginning, int length, bool expectedSuccess, string expectedValue)
+        public void Match1(string pattern, string input, RegexOptions options, int beginning, int length, bool expectedSuccess, string expectedValue)
         {
             bool isDefaultStart = RegexHelpers.IsDefaultStart(input, options, beginning);
             bool isDefaultCount = RegexHelpers.IsDefaultCount(input, options, length);
@@ -698,14 +698,14 @@ namespace CuteAnt.Text.RegularExpressions.Tests
             try
             {
                 CultureInfo.CurrentCulture = enUSCulture;
-                Match("\u0131", "\u0049", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
-                Match("\u0131", "\u0069", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
+                Match1("\u0131", "\u0049", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
+                Match1("\u0131", "\u0069", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
 
                 CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-                Match("\u0131", "\u0049", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
-                Match("\u0131", "\u0069", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
-                Match("\u0130", "\u0049", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
-                Match("\u0130", "\u0069", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
+                Match1("\u0131", "\u0049", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
+                Match1("\u0131", "\u0069", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
+                Match1("\u0130", "\u0049", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
+                Match1("\u0130", "\u0069", RegexOptions.IgnoreCase, 0, 1, false, string.Empty);
             }
             finally
             {

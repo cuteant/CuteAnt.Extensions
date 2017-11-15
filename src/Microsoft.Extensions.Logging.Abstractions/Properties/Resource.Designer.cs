@@ -7,17 +7,12 @@ namespace Microsoft.Extensions.Logging.Abstractions
 
     internal static class Resource
     {
-        private static readonly ResourceManager _resourceManager
-#if NET40
-            = new ResourceManager("CuteAnt.Extensions.Logging.Abstractions.Resource", typeof(Resource).Assembly);
-#else
-            = new ResourceManager("CuteAnt.Extensions.Logging.Abstractions.Resource", typeof(Resource).GetTypeInfo().Assembly);
-#endif
+        private static readonly ResourceManager _resourceManager = LoggingSR.ResourceManager;
 
-    /// <summary>
-    /// The format string '{0}' does not have the expected number of named parameters. Expected {1} parameter(s) but found {2} parameter(s).
-    /// </summary>
-    internal static string UnexpectedNumberOfNamedParameters
+        /// <summary>
+        /// The format string '{0}' does not have the expected number of named parameters. Expected {1} parameter(s) but found {2} parameter(s).
+        /// </summary>
+        internal static string UnexpectedNumberOfNamedParameters
         {
             get { return GetString("UnexpectedNumberOfNamedParameters"); }
         }

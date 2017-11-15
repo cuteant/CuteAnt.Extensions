@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
 
-namespace CuteAnt.Security.Claims
+namespace System.Text.Claims
 {
     /// <summary>
     /// A Claim is a statement about an entity by an Issuer.

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.HashCodeCombiner.Sources\CuteAnt.Extensions.HashCodeCombiner.Sources.projitems" Label="Shared" />
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.dotnet.props" />
+  <Import Project="..\version.donet.props" />
+  <Import Project="..\nuget.dotnet.props" />
   
   <PropertyGroup>
     <TargetFramework>net40</TargetFramework>
@@ -19,12 +19,6 @@
 
   <ItemGroup>
     <None Remove="Resources\unicode8definedcharacters.bin" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>

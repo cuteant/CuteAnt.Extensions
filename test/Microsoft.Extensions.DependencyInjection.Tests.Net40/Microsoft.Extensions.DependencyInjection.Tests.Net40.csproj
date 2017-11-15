@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net461</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\CallSiteTests.cs" Link="CallSiteTests.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\CircularDependencyTests.cs" Link="CircularDependencyTests.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\AbstractClass.cs" Link="Fakes\AbstractClass.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\DirectCircularDependencyA.cs" Link="Fakes\CircularReferences\DirectCircularDependencyA.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\DirectCircularDependencyB.cs" Link="Fakes\CircularReferences\DirectCircularDependencyB.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\IndirectCircularDependencyA.cs" Link="Fakes\CircularReferences\IndirectCircularDependencyA.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\IndirectCircularDependencyB.cs" Link="Fakes\CircularReferences\IndirectCircularDependencyB.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\IndirectCircularDependencyC.cs" Link="Fakes\CircularReferences\IndirectCircularDependencyC.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\ISelfCircularDependencyWithInterface.cs" Link="Fakes\CircularReferences\ISelfCircularDependencyWithInterface.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\NoCircularDependencySameTypeMultipleTimesA.cs" Link="Fakes\CircularReferences\NoCircularDependencySameTypeMultipleTimesA.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\NoCircularDependencySameTypeMultipleTimesB.cs" Link="Fakes\CircularReferences\NoCircularDependencySameTypeMultipleTimesB.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\NoCircularDependencySameTypeMultipleTimesC.cs" Link="Fakes\CircularReferences\NoCircularDependencySameTypeMultipleTimesC.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\SelfCircularDependency.cs" Link="Fakes\CircularReferences\SelfCircularDependency.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\SelfCircularDependencyGeneric.cs" Link="Fakes\CircularReferences\SelfCircularDependencyGeneric.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\CircularReferences\SelfCircularDependencyWithInterface.cs" Link="Fakes\CircularReferences\SelfCircularDependencyWithInterface.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\ClassDependsOnPrivateConstructorClass.cs" Link="Fakes\ClassDependsOnPrivateConstructorClass.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\ClassWithNestedReferencesToProvider.cs" Link="Fakes\ClassWithNestedReferencesToProvider.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\ClassWithOptionalArgsCtorWithStructs.cs" Link="Fakes\ClassWithOptionalArgsCtorWithStructs.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Fakes\DependOnNonexistentService.cs" Link="Fakes\DependOnNonexistentService.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Microsoft.AspNetCore.Testing\CultureReplacer.cs" Link="Microsoft.AspNetCore.Testing\CultureReplacer.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Microsoft.AspNetCore.Testing\ExceptionAssertions.cs" Link="Microsoft.AspNetCore.Testing\ExceptionAssertions.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceCollectionDescriptorExtensionsTests.cs" Link="ServiceCollectionDescriptorExtensionsTests.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceCollectionServiceExtensionsTest.cs" Link="ServiceCollectionServiceExtensionsTest.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\CallSiteFactoryTest.cs" Link="ServiceLookup\CallSiteFactoryTest.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithDefaultConstructorParameters.cs" Link="ServiceLookup\Types\TypeWithDefaultConstructorParameters.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithEnumerableConstructors.cs" Link="ServiceLookup\Types\TypeWithEnumerableConstructors.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithGenericServices.cs" Link="ServiceLookup\Types\TypeWithGenericServices.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithMultipleParameterizedConstructors.cs" Link="ServiceLookup\Types\TypeWithMultipleParameterizedConstructors.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithNoConstructors.cs" Link="ServiceLookup\Types\TypeWithNoConstructors.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithNonOverlappedConstructors.cs" Link="ServiceLookup\Types\TypeWithNonOverlappedConstructors.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithNoPublicConstructors.cs" Link="ServiceLookup\Types\TypeWithNoPublicConstructors.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithParameterizedAndNullaryConstructor.cs" Link="ServiceLookup\Types\TypeWithParameterizedAndNullaryConstructor.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithParameterizedConstructor.cs" Link="ServiceLookup\Types\TypeWithParameterizedConstructor.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithParameterlessConstructor.cs" Link="ServiceLookup\Types\TypeWithParameterlessConstructor.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithParameterlessPublicConstructor.cs" Link="ServiceLookup\Types\TypeWithParameterlessPublicConstructor.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceLookup\Types\TypeWithUnresolvableEnumerableConstructors.cs" Link="ServiceLookup\Types\TypeWithUnresolvableEnumerableConstructors.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceProviderContainerTests.cs" Link="ServiceProviderContainerTests.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceProviderServiceExtensionsTest.cs" Link="ServiceProviderServiceExtensionsTest.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceProviderValidationTests.cs" Link="ServiceProviderValidationTests.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\ServiceTableTest.cs" Link="ServiceTableTest.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Tests\Utils\MultiServiceHelpers.cs" Link="Utils\MultiServiceHelpers.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
+    <PackageReference Include="Moq" Version="$(MoqVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xUnitVersion)" />
+    <PackageReference Include="xunit" Version="$(xUnitVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests.Net40\Microsoft.Extensions.DependencyInjection.Specification.Tests.Net40.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>..\..\src\Microsoft.Extensions.DependencyInjection\bin\Release\net40\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\src\Microsoft.Extensions.DependencyInjection.Abstractions\bin\Release\net40\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fakes\CircularReferences\" />
+    <Folder Include="Microsoft.AspNetCore.Testing\" />
+    <Folder Include="ServiceLookup\Types\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
+</Project>

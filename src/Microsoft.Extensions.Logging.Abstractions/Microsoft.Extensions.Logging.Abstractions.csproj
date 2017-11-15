@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.aspnet.props" />
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
   
   <PropertyGroup>
     <TargetFrameworks>net40;net451</TargetFrameworks>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.Extensions.Logging.Abstractions</PackageId>
+    <PackageId>NetFx.Extensions.Logging.Abstractions</PackageId>
     <Title>Microsoft.Extensions.Logging.Abstractions-net40-net451-fork</Title>
     <Description>Logging abstractions for Microsoft.Extensions.Logging.
 Commonly used types:
@@ -25,8 +25,18 @@ Microsoft.Extensions.Logging.Abstractions.NullLogger</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
+    <Compile Update="LoggingSR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LoggingSR.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="LoggingSR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoggingSR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

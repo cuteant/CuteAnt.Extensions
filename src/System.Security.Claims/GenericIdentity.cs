@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using CuteAnt.Security.Claims;
+using System.Text.Claims;
 
 namespace CuteAnt.Security.Principal
 {

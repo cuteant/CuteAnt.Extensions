@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.aspnet.props" />
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
 
   <PropertyGroup>
     <TargetFrameworks>net451;net40</TargetFrameworks>
@@ -10,22 +10,29 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.Extensions.Configuration.Binder</PackageId>
+    <PackageId>NetFx.Extensions.Configuration.Binder</PackageId>
     <Description>Functionality to bind an object to data in configuration providers for Microsoft.Extensions.Configuration.</Description>
     <Title>Microsoft.Extensions.Configuration.Binder-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
-  </ItemGroup>
 
   <ImportGroup Condition=" '$(TargetFramework)' == 'net40' ">
     <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.Reflection.Sources\CuteAnt.Extensions.Reflection.Sources.projitems" Label="Shared" />
   </ImportGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Extensions.Configuration\Microsoft.Extensions.Configuration.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ConfigBinderSR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ConfigBinderSR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="ConfigBinderSR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfigBinderSR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -12,8 +12,8 @@ using Xunit;
 //[assembly: AssemblyDescription("System.Buffers Library (Flavor=Retail)")]
 //#endif
 
-//// The following GUID is for the ID of the typelib if this project is exposed to COM
-//[assembly: Guid("54B99CB6-F227-4BF6-8AD8-6CE382F13481")]
-//[assembly: CollectionBehavior(MaxParallelThreads = 1, DisableTestParallelization = true)]
+////// The following GUID is for the ID of the typelib if this project is exposed to COM
+////[assembly: Guid("54B99CB6-F227-4BF6-8AD8-6CE382F13481")]
+////[assembly: CollectionBehavior(MaxParallelThreads = 1, DisableTestParallelization = true)]
 
-[assembly: AssemblyVersion(CuteAnt.AssemblyInfo.StaticVersion)]
+//[assembly: AssemblyVersion(CuteAnt.AssemblyInfo.StaticVersion)]

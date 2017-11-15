@@ -110,7 +110,7 @@ namespace CuteAnt.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(Replace_String_TestData))]
-        public void Replace(string pattern, string input, string replacement, RegexOptions options, int count, int start, string expected)
+        public void Replace1(string pattern, string input, string replacement, RegexOptions options, int count, int start, string expected)
         {
             bool isDefaultStart = RegexHelpers.IsDefaultStart(input, options, start);
             bool isDefaultCount = RegexHelpers.IsDefaultCount(input, options, count);

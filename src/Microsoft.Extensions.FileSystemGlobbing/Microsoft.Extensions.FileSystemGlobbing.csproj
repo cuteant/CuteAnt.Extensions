@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.aspnet.props" />
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
 
   <PropertyGroup>
     <TargetFrameworks>net451;net40</TargetFrameworks>
@@ -10,17 +10,11 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.Extensions.FileSystemGlobbing</PackageId>
+    <PackageId>NetFx.Extensions.FileSystemGlobbing</PackageId>
     <Description>File system globbing to find files matching a specified pattern.</Description>
     <Title>Microsoft.Extensions.FileSystemGlobbing-net40-net451-fork</Title>
     <PackageTags>files;filesystem;glob;globbing</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
-  </ItemGroup>
 
   <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.HashCodeCombiner.Sources\CuteAnt.Extensions.HashCodeCombiner.Sources.projitems" Label="Shared" />
 </Project>

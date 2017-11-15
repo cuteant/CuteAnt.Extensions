@@ -4,7 +4,7 @@
 using System;
 using System.Diagnostics;
 #if NET40
-using System.Reflection;
+using Microsoft.Extensions.Internal;
 #endif
 
 namespace Microsoft.Extensions.DependencyInjection

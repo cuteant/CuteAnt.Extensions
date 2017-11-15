@@ -7,8 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
     internal static class Resources
     {
-        private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Microsoft.Extensions.DependencyInjection.Resources", typeof(Resources).Assembly);
+        private static readonly ResourceManager _resourceManager = DiSR.ResourceManager;
 
         /// <summary>
         /// Unable to activate type '{0}'. The following constructors are ambigious:

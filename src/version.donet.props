@@ -1,0 +1,6 @@
+<Project>
+  <!-- Versioning properties -->
+  <PropertyGroup>
+    <VersionPrefix Condition=" '$(VersionPrefix)'=='' ">2.0.2</VersionPrefix>
+  </PropertyGroup>
+</Project>

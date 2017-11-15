@@ -7,8 +7,7 @@ namespace Microsoft.Extensions.Configuration
 
     internal static class Resources
     {
-        private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Microsoft.Extensions.Configuration.Resources", typeof(Resources).Assembly);
+        private static readonly ResourceManager _resourceManager = ConfigSR.ResourceManager;
 
         /// <summary>
         /// A configuration source is not registered. Please register one before setting a value.

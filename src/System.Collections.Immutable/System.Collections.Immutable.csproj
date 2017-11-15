@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\SysVersion.props" />
+  <Import Project="..\version.donet.props" />
+  <Import Project="..\nuget.dotnet.props" />
   
   <PropertyGroup>
     <TargetFrameworks>net40</TargetFrameworks>
@@ -14,12 +15,6 @@
     <Description>Provides the System.Text.RegularExpressions.Regex class, an implementation of a regular expression engine.</Description>
     <PackageTags>Regular</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\SysVersionInfo.cs" Link="Properties\SysVersionInfo.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />

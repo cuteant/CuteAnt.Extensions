@@ -1,0 +1,25 @@
+<Project>
+  <!-- Shared Package Versions -->
+  <PropertyGroup Label="Package Versions">
+    <!-- System packages -->
+    <SystemRuntimeVersion>4.3.0</SystemRuntimeVersion>
+    <SystemValueTupleVersion>4.4.0</SystemValueTupleVersion>
+
+    <!-- Microsoft packages -->
+    <MicrosoftBuildVersion>15.3.409</MicrosoftBuildVersion>
+
+    <MicrosoftBclVersion>1.1.10</MicrosoftBclVersion>
+    <MicrosoftBclAsyncVersion>1.0.168</MicrosoftBclAsyncVersion>
+    <MicrosoftBclBuildVersion>1.0.21</MicrosoftBclBuildVersion>
+
+    <!-- 3rd party packages -->
+    <NewtonsoftJsonVersion>10.0.3</NewtonsoftJsonVersion>
+
+    <!-- Test related packages -->
+    <TestSdkVersion>15.5.0</TestSdkVersion>
+    <xUnitVersion>2.3.0</xUnitVersion>
+    <MoqVersion>4.7.145</MoqVersion>
+
+    <!-- Tooling related packages -->
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,71 @@
+<Project>
+  <PropertyGroup>
+    <_ParentDirectoryBuildPropsPath Condition="'$(_DirectoryBuildPropsFile)' != ''">$([System.IO.Path]::Combine('..', '$(_DirectoryBuildPropsFile)'))</_ParentDirectoryBuildPropsPath>
+  </PropertyGroup>
+
+  <Import Project="$(_ParentDirectoryBuildPropsPath)" Condition="Exists('$(_ParentDirectoryBuildPropsPath)')"/>
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(TargetFramework)' == 'net40'">
+      <PropertyGroup>
+        <FileVersion>2.0.0.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net45'">
+      <PropertyGroup>
+        <FileVersion>2.0.1000.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net451'">
+      <PropertyGroup>
+        <FileVersion>2.0.1100.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net452'">
+      <PropertyGroup>
+        <FileVersion>2.0.1200.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net46'">
+      <PropertyGroup>
+        <FileVersion>2.0.2000.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net461'">
+      <PropertyGroup>
+        <FileVersion>2.0.2100.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net462'">
+      <PropertyGroup>
+        <FileVersion>2.0.2200.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net47'">
+      <PropertyGroup>
+        <FileVersion>2.0.3000.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'net471'">
+      <PropertyGroup>
+        <FileVersion>2.0.3100.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'netstandard2.0'">
+      <PropertyGroup>
+        <FileVersion>2.0.5000.0</FileVersion>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <FileVersion>2.0.9000.0</FileVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+</Project>

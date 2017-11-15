@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.aspnet.props" />
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
 
   <PropertyGroup>
     <TargetFrameworks>net451;net40</TargetFrameworks>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.Extensions.FileProviders.Abstractions</PackageId>
+    <PackageId>NetFx.Extensions.FileProviders.Abstractions</PackageId>
     <Description>Abstractions of files and directories.
 Commonly used types:
 Microsoft.Extensions.FileProviders.IDirectoryContents
@@ -19,12 +19,6 @@ Microsoft.Extensions.FileProviders.IFileProvider</Description>
     <Title>Microsoft.Extensions.FileProviders.Abstractions-net40-net451-fork</Title>
     <PackageTags>files;filesystem</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\..\shared\**\*.cs" />

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ClosedGenericMatcher.Sources\CuteAnt.Extensions.ClosedGenericMatcher.Sources.projitems" Label="Shared" />
-  <Import Project="..\..\common\JpVersion.props" />
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
   
   <PropertyGroup>
     <TargetFrameworks>net451;net40</TargetFrameworks>
@@ -10,19 +11,28 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.AspNetCore.JsonPatch</PackageId>
+    <PackageId>NetFx.AspNetCore.JsonPatch</PackageId>
     <Title>Microsoft.AspNetCore.JsonPatch-net40-net451-fork</Title>
     <Description>ASP.NET Core support for JSON PATCH.</Description>
     <PackageTags>aspnetcore;json;jsonpatch</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\JpVersionInfo.cs" Link="Properties\JpVersionInfo.cs" />
+    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <Compile Update="JsonPatchSR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>JsonPatchSR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="JsonPatchSR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>JsonPatchSR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

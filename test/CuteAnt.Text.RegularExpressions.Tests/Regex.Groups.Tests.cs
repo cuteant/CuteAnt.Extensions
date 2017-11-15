@@ -595,7 +595,7 @@ namespace CuteAnt.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(Groups_Basic_TestData))]
-        public void Groups(string pattern, string input, RegexOptions options, string[] expectedGroups) => Groups(pattern, input, options, null, expectedGroups);
+        public void Groups1(string pattern, string input, RegexOptions options, string[] expectedGroups) => Groups(pattern, input, options, null, expectedGroups);
 
         public static IEnumerable<object[]> Groups_CustomCulture_TestData()
         {

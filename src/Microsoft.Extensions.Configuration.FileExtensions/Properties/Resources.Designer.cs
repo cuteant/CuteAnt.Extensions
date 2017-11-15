@@ -7,8 +7,7 @@ namespace Microsoft.Extensions.Configuration.FileExtensions
 
     internal static class Resources
     {
-        private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Microsoft.Extensions.Configuration.FileExtensions.Resources", typeof(Resources).Assembly);
+        private static readonly ResourceManager _resourceManager = ConfigFileSR.ResourceManager;
 
         /// <summary>
         /// The expected physical path was '{0}'.

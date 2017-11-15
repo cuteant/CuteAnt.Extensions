@@ -11,7 +11,7 @@ using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Principal;
 
-namespace CuteAnt.Security.Claims
+namespace System.Text.Claims
 {
     /// <summary>
     /// An Identity that is represented by a set of claims.

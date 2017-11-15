@@ -16,7 +16,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public void TestCustomAttributeDecoder()
         {
             using (FileStream stream = File.OpenRead(typeof(HasAttributes).Assembly.Location))
-            using (var peReader = new PEReader(stream))
+            using (var peReader = new PEReader(stream, PEStreamOptions.PrefetchEntireImage))
             {
                 MetadataReader reader = peReader.GetMetadataReader();
                 var provider = new CustomAttributeTypeProvider();

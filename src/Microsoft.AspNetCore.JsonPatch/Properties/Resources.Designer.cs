@@ -7,8 +7,7 @@ namespace Microsoft.AspNetCore.JsonPatch
 
     internal static class Resources
     {
-        private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Microsoft.AspNetCore.JsonPatch.Resources", typeof(Resources).GetTypeInfo().Assembly);
+        private static readonly ResourceManager _resourceManager = JsonPatchSR.ResourceManager;
 
         /// <summary>
         /// The type of the property at path '{0}' could not be determined.

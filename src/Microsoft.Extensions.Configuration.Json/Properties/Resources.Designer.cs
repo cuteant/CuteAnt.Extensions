@@ -7,8 +7,7 @@ namespace Microsoft.Extensions.Configuration.Json
 
     internal static class Resources
     {
-        private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Microsoft.Extensions.Configuration.Json.Resources", typeof(Resources).Assembly);
+        private static readonly ResourceManager _resourceManager = ConfigJsonSR.ResourceManager;
 
         /// <summary>
         /// File path must be a non-empty string.

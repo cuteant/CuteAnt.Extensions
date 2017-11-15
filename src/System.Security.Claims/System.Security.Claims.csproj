@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\version.donet.props" />
+  <Import Project="..\nuget.dotnet.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net40</TargetFrameworks>
+    <RootNamespace>System.Security.Claims</RootNamespace>
+    <AssemblyName>System.Security.Claims</AssemblyName>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>System.Security.Claims.Net40</PackageId>
+    <Title>System.Security.Claims-net40-fork</Title>
+    <Description>Provides classes that implement claims-based identity in the .NET Framework, including classes that represent claims, claims-based identities, and claims-based principals.</Description>
+    <PackageTags>claims</PackageTags>
+  </PropertyGroup>
+
+</Project>

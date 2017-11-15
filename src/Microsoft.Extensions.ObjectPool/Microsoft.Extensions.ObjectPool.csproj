@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\OpVersion.props" />
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
   
   <PropertyGroup>
     <TargetFrameworks>net451;net40</TargetFrameworks>
@@ -9,15 +10,10 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>CuteAnt.Extensions.ObjectPool</PackageId>
+    <PackageId>NetFx.Extensions.ObjectPool</PackageId>
     <Title>Microsoft.Extensions.ObjectPool-net40-net451-fork</Title>
     <Description>A simple object pool implementation.</Description>
     <PackageTags>pooling</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\OpVersionInfo.cs" />
-  </ItemGroup>
 </Project>

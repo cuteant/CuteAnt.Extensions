@@ -9,7 +9,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Security.Principal;
 
-namespace CuteAnt.Security.Claims
+namespace System.Text.Claims
 {
     /// <summary>
     /// Concrete IPrincipal supporting multiple claims-based identities

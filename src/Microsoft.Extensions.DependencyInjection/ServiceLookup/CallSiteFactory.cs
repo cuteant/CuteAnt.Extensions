@@ -257,8 +257,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private IServiceCallSite CreateConstructorCallSite(Type serviceType, Type implementationType, ISet<Type> callSiteChain)
         {
+#if NET40
+            var constructors = implementationType.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly)
+#else
             var constructors = implementationType.GetTypeInfo()
                 .DeclaredConstructors
+#endif
                 .Where(constructor => constructor.IsPublic)
                 .ToArray();
 

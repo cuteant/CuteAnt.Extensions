@@ -7,8 +7,7 @@ namespace Microsoft.Extensions.Configuration.CommandLine
 
     internal static class Resources
     {
-        private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Microsoft.Extensions.Configuration.CommandLine.Resources", typeof(Resources).Assembly);
+        private static readonly ResourceManager _resourceManager = ConfigCmdSR.ResourceManager;
 
         /// <summary>
         /// Keys in switch mappings are case-insensitive. A duplicated key '{0}' was found.

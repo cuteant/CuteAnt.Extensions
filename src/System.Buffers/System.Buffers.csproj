@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common\version.props" />
-  <Import Project="..\..\common\nuget.dotnet.props" />
+  <Import Project="..\version.donet.props" />
+  <Import Project="..\nuget.dotnet.props" />
   
   <PropertyGroup>
     <TargetFrameworks>net40</TargetFrameworks>
@@ -15,12 +15,6 @@
     <Description>Provides resource pooling of any type for performance-critical applications that allocate and deallocate objects frequently.</Description>
     <PackageTags>buffer</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\common\AssemblyVersion.cs" Link="Properties\AssemblyVersion.cs" />
-    <Compile Include="..\..\common\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\common\CommonVersionInfo.cs" Link="Properties\CommonVersionInfo.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
