@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <PackageId>System.Collections.Immutable.Net40</PackageId>
+    <PackageId>Net40.Collections.Immutable</PackageId>
     <Title>System.Collections.Immutable-net40-fork</Title>
     <Description>Provides the System.Text.RegularExpressions.Regex class, an implementation of a regular expression engine.</Description>
     <PackageTags>Regular</PackageTags>
