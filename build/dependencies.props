@@ -4,6 +4,7 @@
     <!-- System packages -->
     <SystemRuntimeVersion>4.3.0</SystemRuntimeVersion>
     <SystemValueTupleVersion>4.4.0</SystemValueTupleVersion>
+    <SystemRuntimeCompilerServicesUnsafeVersion>4.4.0</SystemRuntimeCompilerServicesUnsafeVersion>
 
     <!-- Microsoft packages -->
     <MicrosoftBuildVersion>15.3.409</MicrosoftBuildVersion>
