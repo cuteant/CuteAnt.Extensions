@@ -54,7 +54,11 @@ namespace Microsoft.Extensions.Logging
 
                     if (valueProperty != null)
                     {
+#if NET40
+                        return valueProperty.GetValue(attribute, null) as string;
+#else
                         return valueProperty.GetValue(attribute) as string;
+#endif
                     }
                 }
             }

@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+#if NET40
+using Microsoft.Extensions.Internal;
+#endif
 
 namespace Microsoft.AspNetCore.JsonPatch.Converters
 {
@@ -27,7 +30,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
                     return null;
                 }
 
+#if NET40
+                var genericType = objectType.GetTypeGenericArguments()[0];
+#else
                 var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];
+#endif
 
                 // load jObject
                 var jObject = JArray.Load(reader);

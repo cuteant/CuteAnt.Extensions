@@ -4,9 +4,11 @@
 
 using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
+#if !NET40
+using System.Reflection;
+#endif
 
 namespace System.Text.Unicode
 {
@@ -35,7 +37,11 @@ namespace System.Text.Unicode
     private static uint[] CreateDefinedCharacterBitmap()
     {
       // The stream should be exactly 8KB in size.
-      var stream = typeof(UnicodeRange).GetTypeInfo().Assembly.GetManifestResourceStream("System.Text.Encodings.Web.Resources.unicode8definedcharacters.bin");
+      var stream = typeof(UnicodeRange)
+#if !NET40
+          .GetTypeInfo()
+#endif
+          .Assembly.GetManifestResourceStream("System.Text.Encodings.Web.Resources.unicode8definedcharacters.bin");
 
       if (stream == null)
       {

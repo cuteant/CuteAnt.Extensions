@@ -240,7 +240,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 else
                 {
 #if NET40
-                    listTypeArgument = genericList.GenericTypeArguments()[0];
+                    listTypeArgument = genericList.GetTypeGenericArguments()[0];
 #else
                     listTypeArgument = genericList.GenericTypeArguments[0];
 #endif

@@ -10,27 +10,17 @@ namespace Microsoft.Extensions.Internal
 {
   internal static class ReflectionUtils
   {
-#if NET40
-    /// <summary>IsConstructedGenericType
-    /// http://stackoverflow.com/questions/14476904/distinguish-between-generic-type-that-is-based-on-non-generic-value-type-and-oth
-    /// </summary>
-    /// <param name="t"></param>
-    /// <returns></returns>
+#if !NET40
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
     public static bool IsConstructedGenericType(this Type t)
     {
-      if (!t.IsGenericType || t.ContainsGenericParameters)
-      {
-        return false;
-      }
-
-      if (!t.GetGenericArguments().All(a => !a.IsGenericType || a.IsConstructedGenericType()))
-      {
-        return false;
-      }
-
-      return true;
-    }
+#if NET40
+      return t.IsGenericType && !t.IsGenericTypeDefinition;
+#else
+      return t.IsConstructedGenericType;
 #endif
+    }
 
 #if !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
