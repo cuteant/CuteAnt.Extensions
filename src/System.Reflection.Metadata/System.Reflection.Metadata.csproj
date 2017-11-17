@@ -12,7 +12,7 @@
   <PropertyGroup Label="NuGet">
     <PackageId>Net40.Reflection.Metadata</PackageId>
     <Title>System.Reflection.Metadata-net40-fork</Title>
-    <Description>Provides the System.Text.RegularExpressions.Regex class, an implementation of a regular expression engine.</Description>
+    <Description>This packages provides a low-level .NET (ECMA-335) metadata reader and writer. It's geared for performance and is the ideal choice for building higher-level libraries that intend to provide their own object model, such as compilers.</Description>
     <PackageTags>Regular</PackageTags>
   </PropertyGroup>
 
