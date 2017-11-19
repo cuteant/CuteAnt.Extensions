@@ -20,6 +20,7 @@
     <TestSdkVersion>15.5.0</TestSdkVersion>
     <xUnitVersion>2.3.0</xUnitVersion>
     <MoqVersion>4.7.145</MoqVersion>
+    <BenchmarkDotNetVersion>0.10.10</BenchmarkDotNetVersion>
 
     <!-- Tooling related packages -->
   </PropertyGroup>

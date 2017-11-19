@@ -128,6 +128,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Reflection.Metadata.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Collections.Immutable.Tests", "test\System.Collections.Immutable.Tests\System.Collections.Immutable.Tests.csproj", "{54460FE7-3546-478E-A492-9197A0A37EF1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.DependencyInjection.Performance", "test\Microsoft.Extensions.DependencyInjection.Performance\Microsoft.Extensions.DependencyInjection.Performance.csproj", "{C0854A4E-00C6-4218-903E-A2B6A28982E3}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ClosedGenericMatcher.Sources\CuteAnt.Extensions.ClosedGenericMatcher.Sources.projitems*{3f0f0ded-3903-4de9-a8ca-a2eb97e78e7f}*SharedItemsImports = 13
@@ -302,6 +304,10 @@ Global
 		{54460FE7-3546-478E-A492-9197A0A37EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54460FE7-3546-478E-A492-9197A0A37EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54460FE7-3546-478E-A492-9197A0A37EF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0854A4E-00C6-4218-903E-A2B6A28982E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0854A4E-00C6-4218-903E-A2B6A28982E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0854A4E-00C6-4218-903E-A2B6A28982E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0854A4E-00C6-4218-903E-A2B6A28982E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -361,6 +367,7 @@ Global
 		{FE932D75-FF95-4236-B03A-6105CF3BEB1B} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
 		{9CE05937-C66F-4BA9-B640-05D969D08856} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
 		{54460FE7-3546-478E-A492-9197A0A37EF1} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
+		{C0854A4E-00C6-4218-903E-A2B6A28982E3} = {2B996C00-6980-494F-BAE2-D1839183B756}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EE6CFC8-DD4D-4293-8418-14C4AD850DD3}
