@@ -37,7 +37,7 @@ namespace Microsoft.Extensions.Internal
 #if !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-    public static bool HasDefaultValueEx(this ParameterInfo pi)
+    public static bool HasDefaultValue(this ParameterInfo pi)
     {
 #if NET40
       const string _DBNullType = "System.DBNull";
