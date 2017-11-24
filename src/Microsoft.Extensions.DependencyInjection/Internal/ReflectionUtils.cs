@@ -41,7 +41,12 @@ namespace Microsoft.Extensions.Internal
     {
 #if NET40
       const string _DBNullType = "System.DBNull";
-      return pi.DefaultValue == null || pi.DefaultValue.GetType().FullName != _DBNullType;
+      var defaultValue = pi.DefaultValue;
+      if (null == defaultValue && pi.ParameterType.IsValueType)
+      {
+        defaultValue = Activator.CreateInstance(pi.ParameterType);
+      }
+      return null == defaultValue || !string.Equals(_DBNullType, defaultValue.GetType().FullName, StringComparison.Ordinal);
 #else
       return pi.HasDefaultValue;
 #endif
