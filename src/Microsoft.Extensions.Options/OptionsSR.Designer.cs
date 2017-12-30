@@ -95,5 +95,23 @@ namespace Microsoft.Extensions.Options {
                 return ResourceManager.GetString("Error_MissingParameterlessConstructor", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 No IConfigureOptions&lt;&gt; or IPostConfigureOptions&lt;&gt; implementations were found. 的本地化字符串。
+        /// </summary>
+        internal static string Error_NoIConfigureOptions {
+            get {
+                return ResourceManager.GetString("Error_NoIConfigureOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 No IConfigureOptions&lt;&gt; or IPostConfigureOptions&lt;&gt; implementations were found, did you mean to call Configure&lt;&gt; or PostConfigure&lt;&gt;? 的本地化字符串。
+        /// </summary>
+        internal static string Error_NoIConfigureOptionsAndAction {
+            get {
+                return ResourceManager.GetString("Error_NoIConfigureOptionsAndAction", resourceCulture);
+            }
+        }
     }
 }

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Microsoft.Extensions.FileSystemGlobbing</RootNamespace>
+    <AssemblyName>Microsoft.Extensions.FileSystemGlobbing.Tests</AssemblyName>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);TEST40</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.1.0" />
+    <PackageReference Include="xunit" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Microsoft.Extensions.FileSystemGlobbing\Microsoft.Extensions.FileSystemGlobbing.csproj" />
+  </ItemGroup>
+
+</Project>

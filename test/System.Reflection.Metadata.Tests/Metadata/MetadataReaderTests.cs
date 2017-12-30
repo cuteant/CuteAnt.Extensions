@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -241,7 +241,7 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal(0, blobReader.RemainingBytes);
         }
 
-        [Fact(Skip ="±¾°æ±¾²»Ö§³Ö")]
+        [Fact(Skip ="æœ¬ç‰ˆæœ¬ä¸æ”¯æŒ")]
         public void GetString_WinRTPrefixed_Projected()
         {
             var reader = GetMetadataReader(WinRT.Lib, options: MetadataReaderOptions.ApplyWindowsRuntimeProjections);

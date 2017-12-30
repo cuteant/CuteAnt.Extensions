@@ -1,68 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net452</TargetFrameworks>
+    <TargetFrameworks>net45</TargetFrameworks>
     <AssemblyName>Microsoft.Extensions.DependencyInjection.Specification.Tests.Net40</AssemblyName>
     <RootNamespace>Microsoft.Extensions.DependencyInjection.Specification</RootNamespace>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\ActivatorUtilitiesTests.cs" Link="ActivatorUtilitiesTests.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\DependencyInjectionSpecificationTests.cs" Link="DependencyInjectionSpecificationTests.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\AnotherClass.cs" Link="Fakes\AnotherClass.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\AnotherClassAcceptingData.cs" Link="Fakes\AnotherClassAcceptingData.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithAmbiguousCtors.cs" Link="Fakes\ClassWithAmbiguousCtors.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithInternalConstructor.cs" Link="Fakes\ClassWithInternalConstructor.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithNestedReferencesToProvider.cs" Link="Fakes\ClassWithNestedReferencesToProvider.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithOptionalArgsCtor.cs" Link="Fakes\ClassWithOptionalArgsCtor.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithOptionalArgsCtorWithStructs.cs" Link="Fakes\ClassWithOptionalArgsCtorWithStructs.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithPrivateCtor.cs" Link="Fakes\ClassWithPrivateCtor.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithProtectedConstructor.cs" Link="Fakes\ClassWithProtectedConstructor.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithStaticCtor.cs" Link="Fakes\ClassWithStaticCtor.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithThrowingCtor.cs" Link="Fakes\ClassWithThrowingCtor.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithThrowingEmptyCtor.cs" Link="Fakes\ClassWithThrowingEmptyCtor.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\CreationCountFakeService.cs" Link="Fakes\CreationCountFakeService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeDisposableCallbackInnerService.cs" Link="Fakes\FakeDisposableCallbackInnerService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeDisposableCallbackOuterService.cs" Link="Fakes\FakeDisposableCallbackOuterService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeDisposableCallbackService.cs" Link="Fakes\FakeDisposableCallbackService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeDisposeCallback.cs" Link="Fakes\FakeDisposeCallback.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeOneMultipleService.cs" Link="Fakes\FakeOneMultipleService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeOpenGenericService.cs" Link="Fakes\FakeOpenGenericService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeOuterService.cs" Link="Fakes\FakeOuterService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeService.cs" Link="Fakes\FakeService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeTwoMultipleService.cs" Link="Fakes\FakeTwoMultipleService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFactoryService.cs" Link="Fakes\IFactoryService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeEveryService.cs" Link="Fakes\IFakeEveryService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeMultipleService.cs" Link="Fakes\IFakeMultipleService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeOpenGenericService.cs" Link="Fakes\IFakeOpenGenericService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeOuterService.cs" Link="Fakes\IFakeOuterService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeScopedService.cs" Link="Fakes\IFakeScopedService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeService.cs" Link="Fakes\IFakeService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeServiceInstance.cs" Link="Fakes\IFakeServiceInstance.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeSingletonService.cs" Link="Fakes\IFakeSingletonService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\INonexistentService.cs" Link="Fakes\INonexistentService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\PocoClass.cs" Link="Fakes\PocoClass.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ScopedFactoryService.cs" Link="Fakes\ScopedFactoryService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ServiceAcceptingFactoryService.cs" Link="Fakes\ServiceAcceptingFactoryService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\TransientFactoryService.cs" Link="Fakes\TransientFactoryService.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\TypeWithSupersetConstructors.cs" Link="Fakes\TypeWithSupersetConstructors.cs" />
-    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\ServiceCollection.cs" Link="ServiceCollection.cs" />
+    <Compile Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\**\*.cs" Exclude="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\bin\**;..\Microsoft.Extensions.DependencyInjection.Specification.Tests\obj\**" />
+    <EmbeddedResource Include="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\**\*.resx" Exclude="..\Microsoft.Extensions.DependencyInjection.Specification.Tests\bin\**;..\Microsoft.Extensions.DependencyInjection.Specification.Tests\obj\**;@(EmbeddedResource)" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit.assert" Version="$(xUnitVersion)" />
-    <PackageReference Include="xunit.extensibility.core" Version="$(xUnitVersion)" />
+    <PackageReference Include="xunit.assert" Version="2.1.0" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-      <HintPath>..\..\src\Microsoft.Extensions.DependencyInjection.Abstractions\bin\Release\net40\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Fakes\" />
+    <ProjectReference Include="..\..\src\Microsoft.Extensions.DependencyInjection.Abstractions\Microsoft.Extensions.DependencyInjection.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -51,5 +51,25 @@ namespace Microsoft.Extensions.Internal
       return pi.HasDefaultValue;
 #endif
     }
+
+#if NET40
+    /// <summary>返回指定对象的属性值</summary>
+    /// <param name="property"></param>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public static Object GetValue(this PropertyInfo property, Object obj)
+    {
+      return property.GetValue(obj, null);
+    }
+
+    /// <summary>设置指定对象的属性值</summary>
+    /// <param name="property"></param>
+    /// <param name="obj"></param>
+    /// <param name="value"></param>
+    public static void SetValue(this PropertyInfo property, Object obj, Object value)
+    {
+      property.SetValue(obj, value, null);
+    }
+#endif
   }
 }

@@ -374,7 +374,7 @@ namespace Microsoft.Extensions.Configuration
                 return;
             }
 
-            var addMethod = typeInfo.GetDeclaredMethod("Add");
+            var setter = typeInfo.GetDeclaredProperty("Item");
             foreach (var child in config.GetChildren())
             {
                 var item = BindInstance(
@@ -386,12 +386,12 @@ namespace Microsoft.Extensions.Configuration
                     if (keyType == typeof(string))
                     {
                         var key = child.Key;
-                        addMethod.Invoke(dictionary, new[] { key, item });
+                        setter.SetValue(dictionary, item, new object[] { key });
                     }
                     else if (keyTypeIsEnum)
                     {
                         var key = Convert.ToInt32(Enum.Parse(keyType, child.Key));
-                        addMethod.Invoke(dictionary, new[] { key, item });
+                        setter.SetValue(dictionary, item, new object[] { key });
                     }
                 }
             }

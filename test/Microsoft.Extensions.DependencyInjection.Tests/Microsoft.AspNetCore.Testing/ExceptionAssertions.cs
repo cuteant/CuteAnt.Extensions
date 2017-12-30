@@ -224,10 +224,14 @@ namespace Microsoft.AspNetCore.Testing
         {
             try
             {
+#if TEST40
+                testCode();
+#else
                 using (new CultureReplacer())
                 {
                     testCode();
                 }
+#endif
                 return null;
             }
             catch (Exception exception)

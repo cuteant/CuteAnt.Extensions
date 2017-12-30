@@ -61,11 +61,11 @@ namespace Microsoft.Extensions.DependencyInjection {
         }
         
         /// <summary>
-        ///   查找类似 Unable to activate type &apos;{0}&apos;. The following constructors are ambigious: 的本地化字符串。
+        ///   查找类似 Unable to activate type &apos;{0}&apos;. The following constructors are ambiguous: 的本地化字符串。
         /// </summary>
-        internal static string AmbigiousConstructorException {
+        internal static string AmbiguousConstructorException {
             get {
-                return ResourceManager.GetString("AmbigiousConstructorException", resourceCulture);
+                return ResourceManager.GetString("AmbiguousConstructorException", resourceCulture);
             }
         }
         

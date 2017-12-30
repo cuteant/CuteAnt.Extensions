@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Microsoft.Extensions.Configuration.Json.Test</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.Configuration.Json.Test</RootNamespace>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);TEST40</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Microsoft.Extensions.Configuration.Json\Microsoft.Extensions.Configuration.Json.csproj" />
+    <ProjectReference Include="..\Config.Test.Common\Config.Test.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.1.0" />
+    <PackageReference Include="xunit" Version="2.1.0" />
+  </ItemGroup>
+
+</Project>

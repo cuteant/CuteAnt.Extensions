@@ -7,6 +7,7 @@
     <AssemblyName>Microsoft.Extensions.DependencyInjection.Abstractions</AssemblyName>
     <RootNamespace>Microsoft.Extensions.DependencyInjection</RootNamespace>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);ActivatorUtilities_In_DependencyInjection</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">

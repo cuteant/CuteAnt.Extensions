@@ -207,12 +207,18 @@ namespace Microsoft.Extensions.DependencyInjection
         public void TryAdd_WithType_DoesNotAddDuplicate(
             Action<IServiceCollection> addAction,
             Type expectedServiceType,
+            // Test verifies that descriptor is not added so we don't need to assert it's properties
+#pragma warning disable xUnit1026
             Type expectedImplementationType,
-            ServiceLifetime expectedLifetime)
+            ServiceLifetime expectedLifetime
+#pragma warning restore xUnit1026
+            )
         {
             // Arrange
-            var collection = new ServiceCollection();
-            collection.Add(ServiceDescriptor.Transient(expectedServiceType, expectedServiceType));
+            var collection = new ServiceCollection
+            {
+                ServiceDescriptor.Transient(expectedServiceType, expectedServiceType)
+            };
 
             // Act
             addAction(collection);
