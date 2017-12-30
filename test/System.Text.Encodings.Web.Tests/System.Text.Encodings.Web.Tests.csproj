@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Microsoft.Framework.WebEncoders</RootNamespace>
+    <AssemblyName>System.Text.Encodings.Web.Tests</AssemblyName>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);TEST40</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\System.Text.Encodings.Web.Tests.rd.xml" />
+    <None Remove="UnicodeData.8.0.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\System.Text.Encodings.Web.Tests.rd.xml" />
+    <EmbeddedResource Include="UnicodeData.8.0.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.1.0" />
+    <PackageReference Include="xunit" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\System.Text.Encodings.Web\System.Text.Encodings.Web.csproj" />
+  </ItemGroup>
+
+</Project>
