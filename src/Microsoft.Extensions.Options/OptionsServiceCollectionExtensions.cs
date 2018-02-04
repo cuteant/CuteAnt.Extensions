@@ -68,6 +68,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(configureOptions));
             }
 
+            services.AddOptions();
             services.AddSingleton<IConfigureOptions<TOptions>>(new ConfigureNamedOptions<TOptions>(name, configureOptions));
             return services;
         }
@@ -115,6 +116,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(configureOptions));
             }
 
+            services.AddOptions();
             services.AddSingleton<IPostConfigureOptions<TOptions>>(new PostConfigureOptions<TOptions>(name, configureOptions));
             return services;
         }
@@ -175,6 +177,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
         public static IServiceCollection ConfigureOptions(this IServiceCollection services, Type configureType)
         {
+            services.AddOptions();
             var serviceTypes = FindIConfigureOptions(configureType);
             foreach (var serviceType in serviceTypes)
             {
@@ -191,6 +194,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
         public static IServiceCollection ConfigureOptions(this IServiceCollection services, object configureInstance)
         {
+            services.AddOptions();
             var serviceTypes = FindIConfigureOptions(configureInstance.GetType());
             foreach (var serviceType in serviceTypes)
             {
@@ -224,7 +228,6 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             services.AddOptions();
-
             return new OptionsBuilder<TOptions>(services, name);
         }
     }
