@@ -3,8 +3,9 @@
 
 namespace Microsoft.AspNetCore.JsonPatch
 {
-    public class InheritedDTO : SimpleDTO
+    public class NestedObject
     {
-        public string AdditionalStringProperty { get; set; }
+        public string StringProperty { get; set; }
+        public dynamic DynamicProperty { get; set; }
     }
 }

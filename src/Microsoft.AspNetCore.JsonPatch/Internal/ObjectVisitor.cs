@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections;
-using System.Dynamic;
 using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal
@@ -15,13 +14,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 
         public ObjectVisitor(ParsedPath path, IContractResolver contractResolver)
         {
-            if (contractResolver == null)
-            {
-                throw new ArgumentNullException(nameof(contractResolver));
-            }
-
             _path = path;
-            _contractResolver = contractResolver;
+            _contractResolver = contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
         }
 
         public bool TryVisit(ref object target, out IAdapter adapter, out string errorMessage)
@@ -33,39 +27,41 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 return false;
             }
 
-            adapter = SelectAdapater(target);
+            adapter = SelectAdapter(target);
 
             // Traverse until the penultimate segment to get the target object and adapter
             for (var i = 0; i < _path.Segments.Count - 1; i++)
             {
-                object next;
-                if (!adapter.TryTraverse(target, _path.Segments[i], _contractResolver, out next, out errorMessage))
+                if (!adapter.TryTraverse(target, _path.Segments[i], _contractResolver, out var next, out errorMessage))
                 {
                     adapter = null;
                     return false;
                 }
 
                 target = next;
-                adapter = SelectAdapater(target);
+                adapter = SelectAdapter(target);
             }
 
             errorMessage = null;
             return true;
         }
 
-        private IAdapter SelectAdapater(object targetObject)
+        private IAdapter SelectAdapter(object targetObject)
         {
-            if (targetObject is ExpandoObject)
-            {
-                return new ExpandoObjectAdapter();
-            }
-            else if (targetObject is IDictionary)
-            {
-                return new DictionaryAdapter();
-            }
-            else if (targetObject is IList)
+            var jsonContract = _contractResolver.ResolveContract(targetObject.GetType());
+
+            if (targetObject is IList)
             {
                 return new ListAdapter();
+            }
+            else if (jsonContract is JsonDictionaryContract jsonDictionaryContract)
+            {
+                var type = typeof(DictionaryAdapter<,>).MakeGenericType(jsonDictionaryContract.DictionaryKeyType, jsonDictionaryContract.DictionaryValueType);
+                return (IAdapter)Activator.CreateInstance(type);
+            }
+            else if (jsonContract is JsonDynamicContract)
+            {
+                return new DynamicObjectAdapter();
             }
             else
             {

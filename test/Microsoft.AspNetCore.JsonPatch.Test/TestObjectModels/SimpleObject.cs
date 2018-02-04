@@ -4,13 +4,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.JsonPatch.Test.Dynamic
+namespace Microsoft.AspNetCore.JsonPatch
 {
-    public class SimpleDTO
+    public class SimpleObject
     {
-        public List<SimpleDTO> SimpleDTOList { get; set; }
+        public List<SimpleObject> SimpleObjectList { get; set; }
         public List<int> IntegerList { get; set; }
+        public IList<int> IntegerIList { get; set; }
         public int IntegerValue { get; set; }
+        public int AnotherIntegerValue { get; set; }
         public string StringProperty { get; set; }
         public string AnotherStringProperty { get; set; }
         public decimal DecimalValue { get; set; }

@@ -106,6 +106,15 @@ namespace Microsoft.AspNetCore.JsonPatch {
         }
         
         /// <summary>
+        ///   查找类似 The expression &apos;{0}&apos; is not supported. Supported expressions include member access and indexer expressions. 的本地化字符串。
+        /// </summary>
+        internal static string ExpressionTypeNotSupported {
+            get {
+                return ResourceManager.GetString("ExpressionTypeNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The index value provided by path segment &apos;{0}&apos; is out of bounds of the array size. 的本地化字符串。
         /// </summary>
         internal static string IndexOutOfBounds {
@@ -124,7 +133,7 @@ namespace Microsoft.AspNetCore.JsonPatch {
         }
         
         /// <summary>
-        ///   查找类似 The type &apos;{0}&apos; was malformed and could not be parsed. 的本地化字符串。
+        ///   查找类似 The JSON patch document was malformed and could not be parsed. 的本地化字符串。
         /// </summary>
         internal static string InvalidJsonPatchDocument {
             get {
@@ -138,6 +147,15 @@ namespace Microsoft.AspNetCore.JsonPatch {
         internal static string InvalidJsonPatchOperation {
             get {
                 return ResourceManager.GetString("InvalidJsonPatchOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The provided path segment &apos;{0}&apos; cannot be converted to the target type. 的本地化字符串。
+        /// </summary>
+        internal static string InvalidPathSegment {
+            get {
+                return ResourceManager.GetString("InvalidPathSegment", resourceCulture);
             }
         }
         
@@ -210,6 +228,33 @@ namespace Microsoft.AspNetCore.JsonPatch {
         internal static string TestOperationNotSupported {
             get {
                 return ResourceManager.GetString("TestOperationNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The current value &apos;{0}&apos; at position &apos;{2}&apos; is not equal to the test value &apos;{1}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string ValueAtListPositionNotEqualToTestValue {
+            get {
+                return ResourceManager.GetString("ValueAtListPositionNotEqualToTestValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The value at &apos;{0}&apos; cannot be null or empty to perform the test operation. 的本地化字符串。
+        /// </summary>
+        internal static string ValueForTargetSegmentCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ValueForTargetSegmentCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The current value &apos;{0}&apos; at path &apos;{2}&apos; is not equal to the test value &apos;{1}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string ValueNotEqualToTestValue {
+            get {
+                return ResourceManager.GetString("ValueNotEqualToTestValue", resourceCulture);
             }
         }
     }

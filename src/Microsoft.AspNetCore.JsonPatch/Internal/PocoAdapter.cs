@@ -4,6 +4,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal
@@ -17,8 +19,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             out string errorMessage)
         {
-            JsonProperty jsonProperty = null;
-            if (!TryGetJsonProperty(target, contractResolver, segment, out jsonProperty))
+            if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
                 return false;
@@ -30,8 +31,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 return false;
             }
 
-            object convertedValue = null;
-            if (!TryConvertValue(value, jsonProperty.PropertyType, out convertedValue))
+            if (!TryConvertValue(value, jsonProperty.PropertyType, out var convertedValue))
             {
                 errorMessage = Resources.FormatInvalidValueForProperty(value);
                 return false;
@@ -50,8 +50,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             out object value,
             out string errorMessage)
         {
-            JsonProperty jsonProperty = null;
-            if (!TryGetJsonProperty(target, contractResolver, segment, out jsonProperty))
+            if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
                 value = null;
@@ -76,8 +75,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out string errorMessage)
         {
-            JsonProperty jsonProperty = null;
-            if (!TryGetJsonProperty(target, contractResolver, segment, out jsonProperty))
+            if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
                 return false;
@@ -116,8 +114,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             out string errorMessage)
         {
-            JsonProperty jsonProperty = null;
-            if (!TryGetJsonProperty(target, contractResolver, segment, out jsonProperty))
+            if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
                 return false;
@@ -129,14 +126,50 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 return false;
             }
 
-            object convertedValue = null;
-            if (!TryConvertValue(value, jsonProperty.PropertyType, out convertedValue))
+            if (!TryConvertValue(value, jsonProperty.PropertyType, out var convertedValue))
             {
                 errorMessage = Resources.FormatInvalidValueForProperty(value);
                 return false;
             }
 
             jsonProperty.ValueProvider.SetValue(target, convertedValue);
+
+            errorMessage = null;
+            return true;
+        }
+
+        public bool TryTest(
+            object target,
+            string segment,
+            IContractResolver
+            contractResolver,
+            object value,
+            out string errorMessage)
+        {
+            if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
+            {
+                errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
+                return false;
+            }
+
+            if (!jsonProperty.Readable)
+            {
+                errorMessage = Resources.FormatCannotReadProperty(segment);
+                return false;
+            }
+
+            if (!TryConvertValue(value, jsonProperty.PropertyType, out var convertedValue))
+            {
+                errorMessage = Resources.FormatInvalidValueForProperty(value);
+                return false;
+            }
+
+            var currentValue = jsonProperty.ValueProvider.GetValue(target);
+            if (!JToken.DeepEquals(JsonConvert.SerializeObject(currentValue), JsonConvert.SerializeObject(convertedValue)))
+            {
+                errorMessage = Resources.FormatValueNotEqualToTestValue(currentValue, value, segment);
+                return false;
+            }
 
             errorMessage = null;
             return true;
@@ -156,8 +189,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 return false;
             }
 
-            JsonProperty jsonProperty = null;
-            if (TryGetJsonProperty(target, contractResolver, segment, out jsonProperty))
+            if (TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 value = jsonProperty.ValueProvider.GetValue(target);
                 errorMessage = null;
@@ -175,8 +207,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             out JsonProperty jsonProperty)
         {
-            var jsonObjectContract = contractResolver.ResolveContract(target.GetType()) as JsonObjectContract;
-            if (jsonObjectContract != null)
+            if (contractResolver.ResolveContract(target.GetType()) is JsonObjectContract jsonObjectContract)
             {
                 var pocoProperty = jsonObjectContract
                     .Properties

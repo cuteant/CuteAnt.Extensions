@@ -3,8 +3,8 @@
 
 namespace Microsoft.AspNetCore.JsonPatch
 {
-    public class JsonPropertyWithAnotherNameDTO
+    public class InheritedObject : SimpleObject
     {
-        public string AnotherName { get; set; }
+        public string AdditionalStringProperty { get; set; }
     }
 }

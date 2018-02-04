@@ -132,6 +132,9 @@
   <data name="CannotUpdateProperty" xml:space="preserve">
     <value>The property at path '{0}' could not be updated.</value>
   </data>
+  <data name="ExpressionTypeNotSupported" xml:space="preserve">
+    <value>The expression '{0}' is not supported. Supported expressions include member access and indexer expressions.</value>
+  </data>
   <data name="IndexOutOfBounds" xml:space="preserve">
     <value>The index value provided by path segment '{0}' is out of bounds of the array size.</value>
   </data>
@@ -139,10 +142,13 @@
     <value>The path segment '{0}' is invalid for an array index.</value>
   </data>
   <data name="InvalidJsonPatchDocument" xml:space="preserve">
-    <value>The type '{0}' was malformed and could not be parsed.</value>
+    <value>The JSON patch document was malformed and could not be parsed.</value>
   </data>
   <data name="InvalidJsonPatchOperation" xml:space="preserve">
     <value>Invalid JsonPatch operation '{0}'.</value>
+  </data>
+  <data name="InvalidPathSegment" xml:space="preserve">
+    <value>The provided path segment '{0}' cannot be converted to the target type.</value>
   </data>
   <data name="InvalidValueForPath" xml:space="preserve">
     <value>The provided string '{0}' is an invalid path.</value>
@@ -167,5 +173,14 @@
   </data>
   <data name="TestOperationNotSupported" xml:space="preserve">
     <value>The test operation is not supported.</value>
+  </data>
+  <data name="ValueAtListPositionNotEqualToTestValue" xml:space="preserve">
+    <value>The current value '{0}' at position '{2}' is not equal to the test value '{1}'.</value>
+  </data>
+  <data name="ValueForTargetSegmentCannotBeNullOrEmpty" xml:space="preserve">
+    <value>The value at '{0}' cannot be null or empty to perform the test operation.</value>
+  </data>
+  <data name="ValueNotEqualToTestValue" xml:space="preserve">
+    <value>The current value '{0}' at path '{2}' is not equal to the test value '{1}'.</value>
   </data>
 </root>

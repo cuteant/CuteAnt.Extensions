@@ -46,11 +46,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         {
             // Arrange
             var visitor = new ObjectVisitor(new ParsedPath(path), new DefaultContractResolver());
-            IAdapter adapter = null;
-            string message = null;
 
             // Act
-            var visitStatus = visitor.TryVisit(ref targetObject, out adapter, out message);
+            var visitStatus = visitor.TryVisit(ref targetObject, out var adapter, out var message);
 
             // Assert
             Assert.True(visitStatus);
@@ -81,27 +79,21 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         {
             // Arrange
             var visitor = new ObjectVisitor(new ParsedPath(path), new DefaultContractResolver());
-            IAdapter adapter = null;
-            string message = null;
 
             // Act
-            var visitStatus = visitor.TryVisit(ref targetObject, out adapter, out message);
+            var visitStatus = visitor.TryVisit(ref targetObject, out var adapter, out var message);
 
             // Assert
             Assert.True(visitStatus);
             Assert.True(string.IsNullOrEmpty(message), "Expected no error message");
             Assert.Same(expectedTargetObject, targetObject);
-            Assert.IsType<DictionaryAdapter>(adapter);
+            Assert.Equal(typeof(DictionaryAdapter<string, string>), adapter.GetType());
         }
 
         public static IEnumerable<object[]> ReturnsExpandoAdapterData
         {
             get
             {
-                var model = new Class1();
-                yield return new object[] { model, "/Items/Name", model.Items };
-                yield return new object[] { model.Items, "/Name", model.Items };
-
                 var nestedModel = new Class1Nested();
                 nestedModel.Customers.Add(new Class1());
                 yield return new object[] { nestedModel, "/Customers/0/Items/Name", nestedModel.Customers[0].Items };
@@ -115,18 +107,17 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         public void Visit_ValidPathToExpandoObject_ReturnsExpandoAdapter(object targetObject, string path, object expectedTargetObject)
         {
             // Arrange
-            var visitor = new ObjectVisitor(new ParsedPath(path), new DefaultContractResolver());
-            IAdapter adapter = null;
-            string message = null;
+            var contractResolver = new DefaultContractResolver();
+            var visitor = new ObjectVisitor(new ParsedPath(path), contractResolver);
 
             // Act
-            var visitStatus = visitor.TryVisit(ref targetObject, out adapter, out message);
+            var visitStatus = visitor.TryVisit(ref targetObject, out var adapter, out var message);
 
             // Assert
             Assert.True(visitStatus);
             Assert.True(string.IsNullOrEmpty(message), "Expected no error message");
             Assert.Same(expectedTargetObject, targetObject);
-            Assert.IsType<ExpandoObjectAdapter>(adapter);
+            Assert.Same(typeof(DictionaryAdapter<string, object>), adapter.GetType());
         }
 
         public static IEnumerable<object[]> ReturnsPocoAdapterData
@@ -150,11 +141,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         {
             // Arrange
             var visitor = new ObjectVisitor(new ParsedPath(path), new DefaultContractResolver());
-            IAdapter adapter = null;
-            string message = null;
 
             // Act
-            var visitStatus = visitor.TryVisit(ref targetObject, out adapter, out message);
+            var visitStatus = visitor.TryVisit(ref targetObject, out var adapter, out var message);
 
             // Assert
             Assert.True(visitStatus);
@@ -172,17 +161,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var visitor = new ObjectVisitor(new ParsedPath($"/Customers/{position}/States/-"), new DefaultContractResolver());
             var automobileDepartment = new Class1Nested();
             object targetObject = automobileDepartment;
-            IAdapter adapter = null;
-            string message = null;
 
             // Act
-            var visitStatus = visitor.TryVisit(ref targetObject, out adapter, out message);
+            var visitStatus = visitor.TryVisit(ref targetObject, out var adapter, out var message);
 
             // Assert
             Assert.False(visitStatus);
-            Assert.Equal(
-                string.Format("The index value provided by path segment '{0}' is out of bounds of the array size.", position),
-                message);
+            Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
         }
 
         [Theory]
@@ -194,20 +179,15 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var visitor = new ObjectVisitor(new ParsedPath($"/Customers/{position}/States/-"), new DefaultContractResolver());
             var automobileDepartment = new Class1Nested();
             object targetObject = automobileDepartment;
-            IAdapter adapter = null;
-            string message = null;
 
             // Act
-            var visitStatus = visitor.TryVisit(ref targetObject, out adapter, out message);
+            var visitStatus = visitor.TryVisit(ref targetObject, out var adapter, out var message);
 
             // Assert
             Assert.False(visitStatus);
-            Assert.Equal(string.Format(
-                "The path segment '{0}' is invalid for an array index.", position),
-                message);
+            Assert.Equal($"The path segment '{position}' is invalid for an array index.", message);
         }
 
-        // The adapter takes care of the responsibility of validating the final segment
         [Fact]
         public void Visit_DoesNotValidate_FinalPathSegment()
         {
@@ -215,16 +195,30 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var visitor = new ObjectVisitor(new ParsedPath($"/NonExisting"), new DefaultContractResolver());
             var model = new Class1();
             object targetObject = model;
-            IAdapter adapter = null;
-            string message = null;
 
             // Act
-            var visitStatus = visitor.TryVisit(ref targetObject, out adapter, out message);
+            var visitStatus = visitor.TryVisit(ref targetObject, out var adapter, out var message);
 
             // Assert
             Assert.True(visitStatus);
             Assert.True(string.IsNullOrEmpty(message), "Expected no error message");
             Assert.IsType<PocoAdapter>(adapter);
+        }
+
+        [Fact]
+        public void Visit_NullTarget_ReturnsNullAdapter()
+        {
+            // Arrange
+            var visitor = new ObjectVisitor(new ParsedPath("test"), new DefaultContractResolver());
+
+            // Act
+            object target = null;
+            var visitStatus = visitor.TryVisit(ref target, out var adapter, out var message);
+
+            // Assert
+            Assert.False(visitStatus);
+            Assert.Null(adapter);
+            Assert.Null(message);
         }
     }
 }

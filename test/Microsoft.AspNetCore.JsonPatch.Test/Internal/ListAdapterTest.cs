@@ -18,18 +18,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new[] { 20, 30 };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "0", resolver.Object, "40", out message);
+            var addStatus = listAdapter.TryAdd(targetObject, "0", resolver.Object, "40", out var message);
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal(
-                string.Format(
-                    "The type '{0}' which is an array is not supported for json patch operations as it has a fixed size.",
-                    targetObject.GetType().FullName),
-                message);
+            Assert.Equal($"The type '{targetObject.GetType().FullName}' which is an array is not supported for json patch operations as it has a fixed size.", message);
         }
 
         [Fact]
@@ -41,18 +36,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             targetObject.Add(20);
             targetObject.Add(30);
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, "40", out message);
+            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, "40", out var message);
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal(
-                string.Format(
-                    "The type '{0}' which is a non generic list is not supported for json patch operations. Only generic list types are supported.",
-                    targetObject.GetType().FullName),
-                message);
+            Assert.Equal($"The type '{targetObject.GetType().FullName}' which is a non generic list is not supported for json patch operations. Only generic list types are supported.", message);
         }
 
         [Fact]
@@ -62,11 +52,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<string>() { "James", "Mike" };
             var listAdapter = new ListAdapter();
-            string message = null;
             var position = targetObject.Count.ToString();
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, "Rob", out message);
+            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, "Rob", out var message);
 
             // Assert
             Assert.Null(message);
@@ -85,16 +74,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<string>() { "James", "Mike" };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, "40", out message);
+            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, "40", out var message);
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal(
-                string.Format("The index value provided by path segment '{0}' is out of bounds of the array size.", position),
-                message);
+            Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
         }
 
         [Theory]
@@ -106,16 +92,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<string>() { "James", "Mike" };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, "40", out message);
+            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, "40", out var message);
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal(
-                string.Format("The path segment '{0}' is invalid for an array index.", position),
-                message);
+            Assert.Equal($"The path segment '{position}' is invalid for an array index.", message);
         }
 
         public static TheoryData<List<int>, List<int>> AppendAtEndOfListData
@@ -143,10 +126,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             // Arrange
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, "20", out message);
+            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, "20", out var message);
 
             // Assert
             Assert.True(addStatus);
@@ -162,10 +144,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var listAdapter = new ListAdapter();
             var targetObject = new List<string>() { "James", "Mike" };
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, value: null, errorMessage: out message);
+            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, value: null, errorMessage: out var message);
 
             // Assert
             Assert.True(addStatus);
@@ -178,21 +159,20 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         public void Add_CompatibleTypeWorks()
         {
             // Arrange
-            var sDto = new SimpleDTO();
-            var iDto = new InheritedDTO();
+            var sDto = new SimpleObject();
+            var iDto = new InheritedObject();
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
-            var targetObject = new List<SimpleDTO>() { sDto };
+            var targetObject = new List<SimpleObject>() { sDto };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, iDto, out message);
+            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, iDto, out var message);
 
             // Assert
             Assert.True(addStatus);
             Assert.True(string.IsNullOrEmpty(message), "Expected no error message");
             Assert.Equal(2, targetObject.Count);
-            Assert.Equal(new List<SimpleDTO>() { sDto, iDto }, targetObject);
+            Assert.Equal(new List<SimpleObject>() { sDto, iDto }, targetObject);
         }
 
         [Fact]
@@ -202,14 +182,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>() { 10, 20 };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, "James", out message);
+            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver.Object, "James", out var message);
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal(string.Format("The value '{0}' is invalid for target location.", "James"), message);
+            Assert.Equal("The value 'James' is invalid for target location.", message);
         }
 
         public static TheoryData<IList, object, string, IList> AddingDifferentComplexTypeWorksData
@@ -253,10 +232,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             // Arrange
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, value, out message);
+            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, value, out var message);
 
             // Assert
             Assert.True(addStatus);
@@ -265,36 +243,38 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             Assert.Equal(expected, targetObject);
         }
 
-        public static TheoryData<IList, object, string, IList> AddingKeepsObjectReferenceData {
-            get {
-                var sDto1 = new SimpleDTO();
-                var sDto2 = new SimpleDTO();
-                var sDto3 = new SimpleDTO();
+        public static TheoryData<IList, object, string, IList> AddingKeepsObjectReferenceData
+        {
+            get
+            {
+                var sDto1 = new SimpleObject();
+                var sDto2 = new SimpleObject();
+                var sDto3 = new SimpleObject();
                 return new TheoryData<IList, object, string, IList>()
                 {
                     {
-                        new List<SimpleDTO>() { },
+                        new List<SimpleObject>() { },
                         sDto1,
                         "-",
-                        new List<SimpleDTO>() { sDto1 }
+                        new List<SimpleObject>() { sDto1 }
                     },
                     {
-                        new List<SimpleDTO>() { sDto1, sDto2 },
+                        new List<SimpleObject>() { sDto1, sDto2 },
                         sDto3,
                         "-",
-                        new List<SimpleDTO>() { sDto1, sDto2, sDto3 }
+                        new List<SimpleObject>() { sDto1, sDto2, sDto3 }
                     },
                     {
-                        new List<SimpleDTO>() { sDto1, sDto2 },
+                        new List<SimpleObject>() { sDto1, sDto2 },
                         sDto3,
                         "0",
-                        new List<SimpleDTO>() { sDto3, sDto1, sDto2 }
+                        new List<SimpleObject>() { sDto3, sDto1, sDto2 }
                     },
                     {
-                        new List<SimpleDTO>() {  sDto1, sDto2 },
+                        new List<SimpleObject>() {  sDto1, sDto2 },
                         sDto3,
                         "1",
-                        new List<SimpleDTO>() { sDto1, sDto3, sDto2 }
+                        new List<SimpleObject>() { sDto1, sDto3, sDto2 }
                     }
                 };
             }
@@ -307,10 +287,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             // Arrange
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, value, out message);
+            var addStatus = listAdapter.TryAdd(targetObject, position, resolver.Object, value, out var message);
 
             // Assert
             Assert.True(addStatus);
@@ -329,17 +308,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>(input);
             var listAdapter = new ListAdapter();
-            string message = null;
-            object value = null;
 
             // Act
-            var getStatus = listAdapter.TryGet(targetObject, position, resolver.Object, out value, out message);
+            var getStatus = listAdapter.TryGet(targetObject, position, resolver.Object, out var value, out var message);
 
             // Assert
             Assert.False(getStatus);
-            Assert.Equal(
-                string.Format("The index value provided by path segment '{0}' is out of bounds of the array size.", position),
-                message);
+            Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
         }
 
         [Theory]
@@ -352,11 +327,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>(input);
             var listAdapter = new ListAdapter();
-            string message = null;
-            object value = null;
 
             // Act
-            var getStatus = listAdapter.TryGet(targetObject, position, resolver.Object, out value, out message);
+            var getStatus = listAdapter.TryGet(targetObject, position, resolver.Object, out var value, out var message);
 
             // Assert
             Assert.True(getStatus);
@@ -374,16 +347,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>(input);
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var removeStatus = listAdapter.TryRemove(targetObject, position, resolver.Object, out message);
+            var removeStatus = listAdapter.TryRemove(targetObject, position, resolver.Object, out var message);
 
             // Assert
             Assert.False(removeStatus);
-            Assert.Equal(
-                string.Format("The index value provided by path segment '{0}' is out of bounds of the array size.", position),
-                message);
+            Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
         }
 
         [Theory]
@@ -396,10 +366,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>(input);
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var removeStatus = listAdapter.TryRemove(targetObject, position, resolver.Object, out message);
+            var removeStatus = listAdapter.TryRemove(targetObject, position, resolver.Object, out var message);
 
             // Assert
             Assert.True(removeStatus);
@@ -413,16 +382,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>() { 10, 20 };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver.Object, "James", out message);
+            var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver.Object, "James", out var message);
 
             // Assert
             Assert.False(replaceStatus);
-            Assert.Equal(
-                string.Format("The value '{0}' is invalid for target location.", "James"),
-                message);
+            Assert.Equal("The value 'James' is invalid for target location.", message);
         }
 
         [Fact]
@@ -432,10 +398,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>() { 10, 20 };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver.Object, "30", out message);
+            var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver.Object, "30", out var message);
 
             // Assert
             Assert.True(replaceStatus);
@@ -469,15 +434,64 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
             var targetObject = new List<int>() { 10, 20 };
             var listAdapter = new ListAdapter();
-            string message = null;
 
             // Act
-            var replaceStatus = listAdapter.TryReplace(targetObject, position, resolver.Object, "30", out message);
+            var replaceStatus = listAdapter.TryReplace(targetObject, position, resolver.Object, "30", out var message);
 
             // Assert
             Assert.True(replaceStatus);
             Assert.True(string.IsNullOrEmpty(message), "Expected no error message");
             Assert.Equal(expected, targetObject);
+        }
+
+        [Fact]
+        public void Test_DoesNotThrowException_IfTestIsSuccessful()
+        {
+            // Arrange
+            var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
+            var targetObject = new List<int>() { 10, 20 };
+            var listAdapter = new ListAdapter();
+
+            // Act
+            var testStatus = listAdapter.TryTest(targetObject, "0", resolver.Object, "10", out var message);
+
+            //Assert
+            Assert.True(testStatus);
+            Assert.True(string.IsNullOrEmpty(message), "Expected no error message");
+        }
+
+        [Fact]
+        public void Test_ThrowsJsonPatchException_IfTestFails()
+        {
+            // Arrange
+            var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
+            var targetObject = new List<int>() { 10, 20 };
+            var listAdapter = new ListAdapter();
+            var expectedErrorMessage = "The current value '20' at position '1' is not equal to the test value '10'.";
+
+            // Act
+            var testStatus = listAdapter.TryTest(targetObject, "1", resolver.Object, "10", out var errorMessage);
+
+            //Assert
+            Assert.False(testStatus);
+            Assert.Equal(expectedErrorMessage, errorMessage);
+        }
+
+        [Fact]
+        public void Test_ThrowsJsonPatchException_IfListPositionOutOfBounds()
+        {
+            // Arrange
+            var resolver = new Mock<IContractResolver>(MockBehavior.Strict);
+            var targetObject = new List<int>() { 10, 20 };
+            var listAdapter = new ListAdapter();
+            var expectedErrorMessage = "The index value provided by path segment '2' is out of bounds of the array size.";
+
+            // Act
+            var testStatus = listAdapter.TryTest(targetObject, "2", resolver.Object, "10", out var errorMessage);
+
+            //Assert
+            Assert.False(testStatus);
+            Assert.Equal(expectedErrorMessage, errorMessage);
         }
     }
 }
