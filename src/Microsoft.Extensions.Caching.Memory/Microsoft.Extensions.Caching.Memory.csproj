@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net451</TargetFrameworks>
+    <AssemblyName>Microsoft.Extensions.Caching.Memory</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.Caching.Memory</RootNamespace>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>NetFx.Extensions.Caching.Memory</PackageId>
+    <Description>In-memory cache implementation of Microsoft.Extensions.Caching.Memory.IMemoryCache.</Description>
+    <Title>Microsoft.Extensions.Caching.Memory-net451-fork</Title>
+    <PackageTags>cache;memorycache</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.Caching.Abstractions\Microsoft.Extensions.Caching.Abstractions.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.DependencyInjection.Abstractions\Microsoft.Extensions.DependencyInjection.Abstractions.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.Options\Microsoft.Extensions.Options.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net451</TargetFrameworks>
+    <AssemblyName>Microsoft.Extensions.Caching.Abstractions</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.Caching</RootNamespace>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>NetFx.Extensions.Caching.Abstractions</PackageId>
+    <Description>Caching abstractions for in-memory cache and distributed cache.
+Commonly used types:
+Microsoft.Extensions.Caching.Distributed.IDistributedCache
+Microsoft.Extensions.Caching.Memory.IMemoryCache</Description>
+    <Title>Microsoft.Extensions.Caching.Abstractions-net451-fork</Title>
+    <PackageTags>cache;memorycache;distributedcache</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.Primitives\Microsoft.Extensions.Primitives.csproj" />
+  </ItemGroup>
+</Project>
