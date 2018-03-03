@@ -11,12 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.FileProviders.Abstractions</PackageId>
-    <Description>Abstractions of files and directories.
-Commonly used types:
-Microsoft.Extensions.FileProviders.IDirectoryContents
-Microsoft.Extensions.FileProviders.IFileInfo
-Microsoft.Extensions.FileProviders.IFileProvider</Description>
-    <Title>Microsoft.Extensions.FileProviders.Abstractions-net40-net451-fork</Title>
+    <Description>Abstractions of files and directories.</Description>
+    <Title>Ms.Extensions.FileProviders.Abstractions-net40-net451-fork</Title>
     <PackageTags>files;filesystem</PackageTags>
   </PropertyGroup>
 

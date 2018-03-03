@@ -11,7 +11,7 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.Options</PackageId>
-    <Title>Microsoft.Extensions.Options-net40-net451-fork</Title>
+    <Title>Ms.Extensions.Options-net40-net451-fork</Title>
     <Description>Provides a strongly typed way of specifying and accessing settings using dependency injection.</Description>
     <PackageTags>aspnetcore;options</PackageTags>
   </PropertyGroup>

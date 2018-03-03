@@ -12,7 +12,7 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.AspNetCore.JsonPatch</PackageId>
-    <Title>Microsoft.AspNetCore.JsonPatch-net40-net451-fork</Title>
+    <Title>Ms.AspNetCore.JsonPatch-net40-net451-fork</Title>
     <Description>ASP.NET Core support for JSON PATCH.</Description>
     <PackageTags>json;jsonpatch</PackageTags>
   </PropertyGroup>

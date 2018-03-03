@@ -86,23 +86,5 @@ namespace Microsoft.Extensions.Configuration {
                 return ResourceManager.GetString("Error_ShortSwitchNotDefined", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   查找类似 Unrecognized argument format: &apos;{0}&apos;. 的本地化字符串。
-        /// </summary>
-        internal static string Error_UnrecognizedArgumentFormat {
-            get {
-                return ResourceManager.GetString("Error_UnrecognizedArgumentFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Value for switch &apos;{0}&apos; is missing. 的本地化字符串。
-        /// </summary>
-        internal static string Error_ValueIsMissing {
-            get {
-                return ResourceManager.GetString("Error_ValueIsMissing", resourceCulture);
-            }
-        }
     }
 }

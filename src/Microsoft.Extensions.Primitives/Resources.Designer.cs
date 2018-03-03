@@ -68,5 +68,32 @@ namespace Microsoft.Extensions.Primitives {
                 return ResourceManager.GetString("Argument_InvalidOffsetLength", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Cannot change capacity after write started. 的本地化字符串。
+        /// </summary>
+        internal static string Capacity_CannotChangeAfterWriteStarted {
+            get {
+                return ResourceManager.GetString("Capacity_CannotChangeAfterWriteStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Not enough capacity to write &apos;{0}&apos; characters, only &apos;{1}&apos; left. 的本地化字符串。
+        /// </summary>
+        internal static string Capacity_NotEnough {
+            get {
+                return ResourceManager.GetString("Capacity_NotEnough", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Entire reserved capacity was not used. Capacity: &apos;{0}&apos;, written &apos;{1}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string Capacity_NotUsedEntirely {
+            get {
+                return ResourceManager.GetString("Capacity_NotUsedEntirely", resourceCulture);
+            }
+        }
     }
 }

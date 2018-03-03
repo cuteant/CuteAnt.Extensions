@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.Primitives
     /// <summary>
     /// An optimized representation of a substring.
     /// </summary>
-    public struct StringSegment : IEquatable<StringSegment>, IEquatable<string>
+    public readonly struct StringSegment : IEquatable<StringSegment>, IEquatable<string>
     {
         /// <summary>
         /// A <see cref="StringSegment"/> for <see cref="string.Empty"/>.
@@ -129,14 +129,28 @@ namespace Microsoft.Extensions.Primitives
         {
             get
             {
-                if (index < 0 || (uint)index >= (uint)Length)
+                if ((uint)index >= (uint)Length)
                 {
-                    throw new IndexOutOfRangeException();
+                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
                 }
 
                 return Buffer[Offset + index];
             }
         }
+
+#if !NET40
+        /// <summary>
+        /// Gets a <see cref="ReadOnlySpan{T}"/> from the current <see cref="StringSegment"/>.
+        /// </summary>
+        /// <returns>The <see cref="ReadOnlySpan{T}"/> from this <see cref="StringSegment"/>.</returns>
+        public ReadOnlySpan<char> AsSpan() => Buffer.AsSpan(Offset, Length);
+
+        /// <summary>
+        /// Gets a <see cref="ReadOnlyMemory{T}"/> from the current <see cref="StringSegment"/>.
+        /// </summary>
+        /// <returns>The <see cref="ReadOnlyMemory{T}"/> from this <see cref="StringSegment"/>.</returns>
+        public ReadOnlyMemory<char> AsMemory() => Buffer.AsMemory(Offset, Length);
+#endif
 
         /// <inheritdoc />
         public override bool Equals(object obj)
@@ -146,7 +160,7 @@ namespace Microsoft.Extensions.Primitives
                 return false;
             }
 
-            return obj is StringSegment && Equals((StringSegment)obj);
+            return obj is StringSegment segment && Equals(segment);
         }
 
         /// <summary>
@@ -274,6 +288,20 @@ namespace Microsoft.Extensions.Primitives
         {
             return new StringSegment(value);
         }
+
+#if !NET40
+        /// <summary>
+        /// Creates a see <see cref="ReadOnlySpan{T}"/> from the given <see cref="StringSegment"/>.
+        /// </summary>
+        /// <param name="segment">The <see cref="StringSegment"/> to convert to a <see cref="ReadOnlySpan{T}"/>.</param>
+        public static implicit operator ReadOnlySpan<char>(StringSegment segment) => segment.AsSpan();
+
+        /// <summary>
+        /// Creates a see <see cref="ReadOnlyMemory{T}"/> from the given <see cref="StringSegment"/>.
+        /// </summary>
+        /// <param name="segment">The <see cref="StringSegment"/> to convert to a <see cref="ReadOnlyMemory{T}"/>.</param>
+        public static implicit operator ReadOnlyMemory<char>(StringSegment segment) => segment.AsMemory();
+#endif
 
         /// <summary>
         /// Checks if the beginning of this <see cref="StringSegment"/> matches the specified <see cref="string"/> when compared using the specified <paramref name="comparisonType"/>.

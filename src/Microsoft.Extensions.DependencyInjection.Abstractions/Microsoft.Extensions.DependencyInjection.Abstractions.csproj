@@ -12,10 +12,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.DependencyInjection.Abstractions</PackageId>
-    <Title>Microsoft.Extensions.DependencyInjection.Abstractions-net40-net451-fork</Title>
-    <Description>Abstractions for dependency injection.
-Commonly used types:
-Microsoft.Extensions.DependencyInjection.IServiceCollection</Description>
+    <Title>Ms.Extensions.DependencyInjection.Abstractions-net40-net451-fork</Title>
+    <Description>Abstractions for dependency injection.</Description>
     <PackageTags>dependencyinjection;di</PackageTags>
   </PropertyGroup>
 

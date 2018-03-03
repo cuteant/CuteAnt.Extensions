@@ -11,8 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.Configuration.EnvironmentVariables</PackageId>
-    <Description>Environment variables configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
-    <Title>Microsoft.Extensions.Configuration.EnvironmentVariables-net40-net451-fork</Title>
+    <Description>Environment variables configuration provider implementation for Ms.Extensions.Configuration.</Description>
+    <Title>Ms.Extensions.Configuration.EnvironmentVariables-net40-net451-fork</Title>
     <PackageTags>configuration;envvar;environmentvariable</PackageTags>
   </PropertyGroup>
 

@@ -11,8 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.FileProviders.Embedded</PackageId>
-    <Description>File provider for files in embedded resources for Microsoft.Extensions.FileProviders.</Description>
-    <Title>Microsoft.Extensions.FileProviders.Embedded-net40-net451-fork</Title>
+    <Description>File provider for files in embedded resources for Ms.Extensions.FileProviders.</Description>
+    <Title>Ms.Extensions.FileProviders.Embedded-net40-net451-fork</Title>
     <PackageTags>files;filesystem</PackageTags>
   </PropertyGroup>
 

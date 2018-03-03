@@ -11,8 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.FileProviders.Physical</PackageId>
-    <Description>File provider for physical files for Microsoft.Extensions.FileProviders.</Description>
-    <Title>Microsoft.Extensions.FileProviders.Physical-net40-net451-fork</Title>
+    <Description>File provider for physical files for Ms.Extensions.FileProviders.</Description>
+    <Title>Ms.Extensions.FileProviders.Physical-net40-net451-fork</Title>
     <PackageTags>files;filesystem</PackageTags>
   </PropertyGroup>
 

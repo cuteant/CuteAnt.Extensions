@@ -11,8 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.Caching.Memory</PackageId>
-    <Description>In-memory cache implementation of Microsoft.Extensions.Caching.Memory.IMemoryCache.</Description>
-    <Title>Microsoft.Extensions.Caching.Memory-net451-fork</Title>
+    <Description>In-memory cache implementation of Ms.Extensions.Caching.Memory.IMemoryCache.</Description>
+    <Title>Ms.Extensions.Caching.Memory-net451-fork</Title>
     <PackageTags>cache;memorycache</PackageTags>
   </PropertyGroup>
 

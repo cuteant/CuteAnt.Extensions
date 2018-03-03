@@ -11,14 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.Configuration.Abstractions</PackageId>
-    <Description>Abstractions of key-value pair based configuration.
-Commonly used types:
-Microsoft.Extensions.Configuration.IConfiguration
-Microsoft.Extensions.Configuration.IConfigurationBuilder
-Microsoft.Extensions.Configuration.IConfigurationProvider
-Microsoft.Extensions.Configuration.IConfigurationRoot
-Microsoft.Extensions.Configuration.IConfigurationSection</Description>
-    <Title>Microsoft.Extensions.Configuration.Abstractions-net40-net451-fork</Title>
+    <Description>Abstractions of key-value pair based configuration.</Description>
+    <Title>Ms.Extensions.Configuration.Abstractions-net40-net451-fork</Title>
     <PackageTags>configuration</PackageTags>
   </PropertyGroup>
 

@@ -11,7 +11,7 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>Net40.Buffers</PackageId>
-    <Title>System.Buffers-net40-fork</Title>
+    <Title>Corefx.Buffers-net40-fork</Title>
     <Description>Provides resource pooling of any type for performance-critical applications that allocate and deallocate objects frequently.</Description>
     <PackageTags>buffer</PackageTags>
   </PropertyGroup>

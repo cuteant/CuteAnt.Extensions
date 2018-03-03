@@ -11,11 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.Caching.Abstractions</PackageId>
-    <Description>Caching abstractions for in-memory cache and distributed cache.
-Commonly used types:
-Microsoft.Extensions.Caching.Distributed.IDistributedCache
-Microsoft.Extensions.Caching.Memory.IMemoryCache</Description>
-    <Title>Microsoft.Extensions.Caching.Abstractions-net451-fork</Title>
+    <Description>Caching abstractions for in-memory cache and distributed cache.</Description>
+    <Title>Ms.Extensions.Caching.Abstractions-net451-fork</Title>
     <PackageTags>cache;memorycache;distributedcache</PackageTags>
   </PropertyGroup>
 

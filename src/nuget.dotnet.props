@@ -1,6 +1,7 @@
 <Project>
   <!-- Set common properties regarding assembly information and nuget packages -->
   <PropertyGroup>
+    <Authors>Seabiscuit</Authors>
     <PackageProjectUrl>https://github.com/cuteant/CuteAnt.Extensions</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/cuteant/CuteAnt.Extensions.git</RepositoryUrl>

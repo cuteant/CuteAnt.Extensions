@@ -11,8 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.DependencyInjection</PackageId>
-    <Title>Microsoft.Extensions.DependencyInjection-net40-net451-fork</Title>
-    <Description>Default implementation of dependency injection for Microsoft.Extensions.DependencyInjection.</Description>
+    <Title>Ms.Extensions.DependencyInjection-net40-net451-fork</Title>
+    <Description>Default implementation of dependency injection for Ms.Extensions.DependencyInjection.</Description>
     <PackageTags>dependencyinjection;di</PackageTags>
   </PropertyGroup>
 

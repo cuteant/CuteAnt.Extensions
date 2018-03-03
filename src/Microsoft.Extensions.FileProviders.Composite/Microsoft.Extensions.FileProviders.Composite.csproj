@@ -11,8 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.FileProviders.Composite</PackageId>
-    <Description>Composite file and directory providers for Microsoft.Extensions.FileProviders.</Description>
-    <Title>Microsoft.Extensions.FileProviders.Composite-net40-net451-fork</Title>
+    <Description>Composite file and directory providers for Ms.Extensions.FileProviders.</Description>
+    <Title>Ms.Extensions.FileProviders.Composite-net40-net451-fork</Title>
     <PackageTags>files;filesystem</PackageTags>
   </PropertyGroup>
 

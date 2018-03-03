@@ -12,7 +12,7 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>Net40.Text.Encodings.Web</PackageId>
-    <Title>System.Text.Encodings.Web-net40-fork</Title>
+    <Title>Corefx.Text.Encodings.Web-net40-fork</Title>
     <Description>Provides types for encoding and escaping strings for use in JavaScript, HyperText Markup Language (HTML), and uniform resource locators (URL).</Description>
     <PackageTags>primitives</PackageTags>
   </PropertyGroup>

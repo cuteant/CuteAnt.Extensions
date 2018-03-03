@@ -11,8 +11,8 @@
 
   <PropertyGroup Label="NuGet">
     <PackageId>NetFx.Extensions.Logging</PackageId>
-    <Title>Microsoft.Extensions.Logging-net40-net451-fork</Title>
-    <Description>Logging infrastructure default implementation for Microsoft.Extensions.Logging.</Description>
+    <Title>Ms.Extensions.Logging-net40-net451-fork</Title>
+    <Description>Logging infrastructure default implementation for Ms.Extensions.Logging.</Description>
     <PackageTags>logging</PackageTags>
   </PropertyGroup>
 
