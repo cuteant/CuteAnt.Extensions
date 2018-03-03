@@ -3,8 +3,8 @@
   <PropertyGroup Label="Package Versions">
     <!-- System packages -->
     <SystemRuntimeVersion>4.3.0</SystemRuntimeVersion>
-    <SystemValueTupleVersion>4.5.0-preview2-26202-05</SystemValueTupleVersion>
-    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.0-preview2-26202-05</SystemRuntimeCompilerServicesUnsafeVersion>
+    <SystemValueTupleVersion>4.5.0-preview2-26224-02</SystemValueTupleVersion>
+    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.0-preview2-26224-02</SystemRuntimeCompilerServicesUnsafeVersion>
 
     <!-- Microsoft packages -->
     <MicrosoftBuildVersion>15.3.409</MicrosoftBuildVersion>
@@ -14,11 +14,14 @@
     <MicrosoftBclBuildVersion>1.0.21</MicrosoftBclBuildVersion>
 
     <!-- 3rd party packages -->
-    <NewtonsoftJsonVersion>11.0.1-beta3</NewtonsoftJsonVersion>
+    <NewtonsoftJsonVersion>11.0.1</NewtonsoftJsonVersion>
 
     <!-- Test related packages -->
-    <TestSdkVersion>15.5.0</TestSdkVersion>
+    <TestSdkVersion>15.6.0</TestSdkVersion>
     <xUnitVersion>2.3.1</xUnitVersion>
+    <xUnitPackageVersion>2.3.1</xUnitPackageVersion>
+    <xUnitAnalyzersPackageVersion>0.8.0</xUnitAnalyzersPackageVersion>
+    <xUnitRunnerVsPackageVersion>2.4.0-beta.1.build3958</xUnitRunnerVsPackageVersion>
     <MoqVersion>4.8.0</MoqVersion>
     <BenchmarkDotNetVersion>0.10.11</BenchmarkDotNetVersion>
 
