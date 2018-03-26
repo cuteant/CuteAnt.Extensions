@@ -3,9 +3,9 @@
   <PropertyGroup Label="Package Versions">
     <!-- System packages -->
     <SystemRuntimeVersion>4.3.0</SystemRuntimeVersion>
-    <SystemMemoryPackageVersion>4.5.0-preview2-26224-02</SystemMemoryPackageVersion>
-    <SystemValueTupleVersion>4.5.0-preview2-26224-02</SystemValueTupleVersion>
-    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.0-preview2-26224-02</SystemRuntimeCompilerServicesUnsafeVersion>
+    <SystemMemoryPackageVersion>4.5.0-preview2-26313-01</SystemMemoryPackageVersion>
+    <SystemValueTupleVersion>4.5.0-preview2-26313-01</SystemValueTupleVersion>
+    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.0-preview2-26313-01</SystemRuntimeCompilerServicesUnsafeVersion>
 
     <!-- Microsoft packages -->
     <MicrosoftBuildVersion>15.3.409</MicrosoftBuildVersion>
@@ -15,10 +15,10 @@
     <MicrosoftBclBuildVersion>1.0.21</MicrosoftBclBuildVersion>
 
     <!-- 3rd party packages -->
-    <NewtonsoftJsonVersion>11.0.1</NewtonsoftJsonVersion>
+    <NewtonsoftJsonVersion>11.0.2</NewtonsoftJsonVersion>
 
     <!-- Test related packages -->
-    <TestSdkVersion>15.6.0</TestSdkVersion>
+    <TestSdkVersion>15.6.1</TestSdkVersion>
     <xUnitVersion>2.3.1</xUnitVersion>
     <xUnitPackageVersion>2.3.1</xUnitPackageVersion>
     <xUnitAnalyzersPackageVersion>0.8.0</xUnitAnalyzersPackageVersion>
