@@ -24,8 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{45A301
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{B3A252F2-B55B-42AC-8DE4-AFA4C983028F}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CuteAnt.Extensions.ActivatorUtilities.Sources", "..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ActivatorUtilities.Sources\CuteAnt.Extensions.ActivatorUtilities.Sources.shproj", "{7D02563F-82AA-4322-ACFD-04E3C7319E30}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Nito.AsyncEx.ExceptionEnlightenment.Sources", "..\CuteAnt.Extensions.Common\src\Nito.AsyncEx.ExceptionEnlightenment.Sources\Nito.AsyncEx.ExceptionEnlightenment.Sources.shproj", "{D90E9B82-6317-4055-82E3-FE8625C143E9}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CuteAnt.Extensions.ClosedGenericMatcher.Sources", "..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ClosedGenericMatcher.Sources\CuteAnt.Extensions.ClosedGenericMatcher.Sources.shproj", "{3F0F0DED-3903-4DE9-A8CA-A2EB97E78E7F}"
@@ -162,11 +160,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Cachin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.Memory.Tests", "test\Microsoft.Extensions.Caching.Memory.Tests\Microsoft.Extensions.Caching.Memory.Tests.csproj", "{3B2A19A4-ABE5-41D8-A4E3-5FA1D3D32437}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CuteAnt.Extensions.ActivatorUtilities.Sources", "src\CuteAnt.Extensions.ActivatorUtilities.Sources\CuteAnt.Extensions.ActivatorUtilities.Sources.shproj", "{7D02563F-82AA-4322-ACFD-04E3C7319E30}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ClosedGenericMatcher.Sources\CuteAnt.Extensions.ClosedGenericMatcher.Sources.projitems*{3f0f0ded-3903-4de9-a8ca-a2eb97e78e7f}*SharedItemsImports = 13
 		..\CuteAnt.Extensions.Common\src\Microsoft.Extensions.ParameterDefaultValue.Sources\Microsoft.Extensions.ParameterDefaultValue.Sources.projitems*{4d92b029-ed5d-4ecb-8a74-5e8c1aaf74ef}*SharedItemsImports = 13
-		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.ActivatorUtilities.Sources\CuteAnt.Extensions.ActivatorUtilities.Sources.projitems*{7d02563f-82aa-4322-acfd-04e3c7319e30}*SharedItemsImports = 13
+		src\CuteAnt.Extensions.ActivatorUtilities.Sources\CuteAnt.Extensions.ActivatorUtilities.Sources.projitems*{7d02563f-82aa-4322-acfd-04e3c7319e30}*SharedItemsImports = 13
 		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.Logging.Sources\CuteAnt.Extensions.Logging.Sources.projitems*{8dbb7dc8-2b90-4a8c-a60d-d41466174bde}*SharedItemsImports = 13
 		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.TypeNameHelper.Sources\CuteAnt.Extensions.TypeNameHelper.Sources.projitems*{b8008769-2082-44fd-aefc-dd19bd973982}*SharedItemsImports = 13
 		..\CuteAnt.Extensions.Common\src\CuteAnt.Extensions.Reflection.Sources\CuteAnt.Extensions.Reflection.Sources.projitems*{c7f8dbe6-77b7-494d-af00-018f7579548c}*SharedItemsImports = 13
@@ -394,7 +394,6 @@ Global
 		{40CB25EA-DCAE-47E3-A360-694C12E12977} = {FD46156B-EDAA-4F1D-A9DE-4F023DA86EB8}
 		{314D5AFE-2A7B-4CFF-8476-4929AC47EDEA} = {FD46156B-EDAA-4F1D-A9DE-4F023DA86EB8}
 		{45A30107-E174-4EBF-BC57-D43BD3AB29ED} = {FD46156B-EDAA-4F1D-A9DE-4F023DA86EB8}
-		{7D02563F-82AA-4322-ACFD-04E3C7319E30} = {B3A252F2-B55B-42AC-8DE4-AFA4C983028F}
 		{D90E9B82-6317-4055-82E3-FE8625C143E9} = {B3A252F2-B55B-42AC-8DE4-AFA4C983028F}
 		{3F0F0DED-3903-4DE9-A8CA-A2EB97E78E7F} = {B3A252F2-B55B-42AC-8DE4-AFA4C983028F}
 		{CB50D1C8-FB58-4CF9-8ED8-27A0CD53897D} = {B3A252F2-B55B-42AC-8DE4-AFA4C983028F}
@@ -462,6 +461,7 @@ Global
 		{76A8C27E-F14E-411D-AA94-C3E5444C8282} = {4122A3E0-3FF4-48E4-83E1-447C5DCAD760}
 		{4AC027D2-7AA0-4BCB-9270-FFFB539A5682} = {4122A3E0-3FF4-48E4-83E1-447C5DCAD760}
 		{3B2A19A4-ABE5-41D8-A4E3-5FA1D3D32437} = {227EF23F-F851-4D8C-A77C-46537F78C38A}
+		{7D02563F-82AA-4322-ACFD-04E3C7319E30} = {2F85D2CE-A8C6-46B5-8E57-FF6911C0C8FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EE6CFC8-DD4D-4293-8418-14C4AD850DD3}

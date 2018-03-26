@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>7d02563f-82aa-4322-acfd-04e3c7319e30</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CuteAnt.Extensions.ActivatorUtilities.Sources</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ActivatorUtilities.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActivatorUtilitiesConstructorAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ObjectFactory.cs" />
+  </ItemGroup>
+</Project>
