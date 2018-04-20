@@ -7,6 +7,7 @@
     <AssemblyName>Microsoft.Extensions.DependencyInjection</AssemblyName>
     <RootNamespace>Microsoft.Extensions.DependencyInjection</RootNamespace>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);IL_EMIT</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
