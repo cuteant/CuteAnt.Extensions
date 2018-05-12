@@ -189,18 +189,18 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.OpCode(ILOpCode.Nop);
             il.MarkLabel(l5);
 
-            Assert.Throws<ArgumentException>(() => flow.AddCatchRegion(l1, l2, l3, l4, default(TypeDefinitionHandle)));
-            Assert.Throws<ArgumentException>(() => flow.AddCatchRegion(l1, l2, l3, l4, MetadataTokens.MethodDefinitionHandle(1)));
+            AssertExtensions.Throws<ArgumentException>("catchType", () => flow.AddCatchRegion(l1, l2, l3, l4, default(TypeDefinitionHandle)));
+            AssertExtensions.Throws<ArgumentException>("catchType", () => flow.AddCatchRegion(l1, l2, l3, l4, MetadataTokens.MethodDefinitionHandle(1)));
             
             Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(default(LabelHandle), l2, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
             Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(l1, default(LabelHandle), l3, l4, MetadataTokens.TypeReferenceHandle(1)));
             Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(l1, l2, default(LabelHandle), l4, MetadataTokens.TypeReferenceHandle(1)));
             Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(l1, l2, l3, default(LabelHandle), MetadataTokens.TypeReferenceHandle(1)));
 
-            Assert.Throws<ArgumentException>(() => flow.AddCatchRegion(lx, l2, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
-            Assert.Throws<ArgumentException>(() => flow.AddCatchRegion(l1, lx, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
-            Assert.Throws<ArgumentException>(() => flow.AddCatchRegion(l1, l2, lx, l4, MetadataTokens.TypeReferenceHandle(1)));
-            Assert.Throws<ArgumentException>(() => flow.AddCatchRegion(l1, l2, l3, lx, MetadataTokens.TypeReferenceHandle(1)));
+            AssertExtensions.Throws<ArgumentException>("tryStart", () => flow.AddCatchRegion(lx, l2, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
+            AssertExtensions.Throws<ArgumentException>("tryEnd", () => flow.AddCatchRegion(l1, lx, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
+            AssertExtensions.Throws<ArgumentException>("handlerStart", () => flow.AddCatchRegion(l1, l2, lx, l4, MetadataTokens.TypeReferenceHandle(1)));
+            AssertExtensions.Throws<ArgumentException>("handlerEnd", () => flow.AddCatchRegion(l1, l2, l3, lx, MetadataTokens.TypeReferenceHandle(1)));
         }
 
         [Fact]
@@ -257,6 +257,167 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             flow.AddFaultRegion(l1, l2, l4, l3);
             Assert.Throws<InvalidOperationException>(() => encoder.AddMethodBody(il));
+        }
+
+        [Fact]
+        public void Branch_ShortInstruction_LongDistance()
+        {
+            var code = new BlobBuilder();
+            var flow = new ControlFlowBuilder();
+            var il = new InstructionEncoder(code, flow);
+
+            var l1 = il.DefineLabel();
+
+            il.Branch(ILOpCode.Br_s, l1);
+
+            for (int i = 0; i < 100; i++)
+            {
+                il.Call(MetadataTokens.MethodDefinitionHandle(1));
+            }
+
+            il.MarkLabel(l1);
+            il.OpCode(ILOpCode.Ret);
+
+            var builder = new BlobBuilder();
+            var encoder = new MethodBodyStreamEncoder(builder);
+
+            Assert.Throws<InvalidOperationException>(() => encoder.AddMethodBody(il));
+        }
+
+        [Fact]
+        public void Branch_ShortInstruction_ShortDistance()
+        {
+            var code = new BlobBuilder();
+            var flow = new ControlFlowBuilder();
+            var il = new InstructionEncoder(code, flow);
+
+            var l1 = il.DefineLabel();
+
+            il.Branch(ILOpCode.Br_s, l1);
+            il.Call(MetadataTokens.MethodDefinitionHandle(1));
+
+            il.MarkLabel(l1);
+            il.OpCode(ILOpCode.Ret);
+
+            var builder = new BlobBuilder();
+            var encoder = new MethodBodyStreamEncoder(builder).AddMethodBody(il);
+
+            AssertEx.Equal(new byte[]
+            {
+                0x22, // header
+                (byte)ILOpCode.Br_s, 0x05,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Ret
+            }, builder.ToArray());
+        }
+
+        [Fact]
+        public void Branch_LongInstruction_ShortDistance()
+        {
+            var code = new BlobBuilder();
+            var flow = new ControlFlowBuilder();
+            var il = new InstructionEncoder(code, flow);
+
+            var l1 = il.DefineLabel();
+
+            il.Branch(ILOpCode.Br, l1);
+            il.Call(MetadataTokens.MethodDefinitionHandle(1));
+
+            il.MarkLabel(l1);
+            il.OpCode(ILOpCode.Ret);
+
+            var builder = new BlobBuilder();
+            new MethodBodyStreamEncoder(builder).AddMethodBody(il);
+
+            AssertEx.Equal(new byte[]
+            {
+                0x2E, // header
+                (byte)ILOpCode.Br, 0x05, 0x00, 0x00, 0x00,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Ret
+            }, builder.ToArray());
+        }
+
+        [Fact]
+        public void Branch_LongInstruction_LongDistance()
+        {
+            var code = new BlobBuilder();
+            var flow = new ControlFlowBuilder();
+            var il = new InstructionEncoder(code, flow);
+
+            var l1 = il.DefineLabel();
+
+            il.Branch(ILOpCode.Br, l1);
+
+            for (int i = 0; i < 256/5 + 1; i++)
+            {
+                il.Call(MetadataTokens.MethodDefinitionHandle(1));
+            }
+
+            il.MarkLabel(l1);
+            il.OpCode(ILOpCode.Ret);
+
+            var builder = new BlobBuilder();
+            var encoder = new MethodBodyStreamEncoder(builder).AddMethodBody(il);
+
+            AssertEx.Equal(new byte[]
+            {
+                0x13, 0x30, 0x08, 0x00, 0x0A, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,// header
+                (byte)ILOpCode.Br, 0x04, 0x01, 0x00, 0x00,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
+                (byte)ILOpCode.Ret
+            }, builder.ToArray());
         }
     }
 }

@@ -112,7 +112,7 @@ namespace System.Reflection.Metadata.Ecma335
           | TableMask.LocalConstant
           | TableMask.ImportScope;
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static EntityHandle ConvertToHandle(uint taggedReference)
         {
             uint tokenType = TagToTokenTypeArray[taggedReference & TagMask];

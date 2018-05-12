@@ -18,7 +18,7 @@ namespace System.Reflection.Metadata.Ecma335
           | TableMask.MemberRef;
         internal const uint TagToTokenTypeByteVector = TokenTypeIds.MethodDef >> 24 | TokenTypeIds.MemberRef >> 16;
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static EntityHandle ConvertToHandle(uint methodDefOrRef)
         {
             uint tokenType = (TagToTokenTypeByteVector >> ((int)(methodDefOrRef & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;

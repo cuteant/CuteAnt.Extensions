@@ -18,7 +18,7 @@ namespace System.Reflection.Metadata.Ecma335
           | TableMask.Property;
         internal const uint TagToTokenTypeByteVector = TokenTypeIds.Event >> 24 | TokenTypeIds.Property >> 16;
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static EntityHandle ConvertToHandle(uint hasSemantic)
         {
             uint tokenType = (TagToTokenTypeByteVector >> ((int)(hasSemantic & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;

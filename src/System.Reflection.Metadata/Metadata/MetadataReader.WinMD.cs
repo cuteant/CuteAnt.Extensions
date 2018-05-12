@@ -29,7 +29,7 @@ namespace System.Reflection.Metadata
         private static string[] s_projectedTypeNames;
         private static ProjectionInfo[] s_projectionInfos;
 
-        private struct ProjectionInfo
+        private readonly struct ProjectionInfo
         {
             public readonly string WinRTNamespace;
             public readonly StringHandle.VirtualIndex ClrNamespace;
@@ -309,7 +309,7 @@ namespace System.Reflection.Metadata
             }
 #endif
 
-                return TreatmentAndRowId((byte)treatment, handle.RowId);
+            return TreatmentAndRowId((byte)treatment, handle.RowId);
         }
 
         private bool IsClrImplementationType(TypeDefinitionHandle typeDef)

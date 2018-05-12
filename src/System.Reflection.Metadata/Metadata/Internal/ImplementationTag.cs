@@ -20,7 +20,7 @@ namespace System.Reflection.Metadata.Ecma335
           | TableMask.AssemblyRef
           | TableMask.ExportedType;
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static EntityHandle ConvertToHandle(uint implementation)
         {
             uint tokenType = (TagToTokenTypeByteVector >> ((int)(implementation & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;

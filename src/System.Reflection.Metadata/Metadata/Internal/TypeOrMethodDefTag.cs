@@ -18,7 +18,7 @@ namespace System.Reflection.Metadata.Ecma335
           TableMask.TypeDef
           | TableMask.MethodDef;
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static EntityHandle ConvertToHandle(uint typeOrMethodDef)
         {
             uint tokenType = (TagToTokenTypeByteVector >> ((int)(typeOrMethodDef & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;

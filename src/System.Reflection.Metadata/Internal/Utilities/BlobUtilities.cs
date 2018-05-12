@@ -315,7 +315,7 @@ namespace System.Reflection
             return unchecked((uint)(c - 0xDC00)) <= 0xDFFF - 0xDC00;
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static void ValidateRange(int bufferLength, int start, int byteCount, string byteCountParameterName)
         {
             if (start < 0 || start > bufferLength)

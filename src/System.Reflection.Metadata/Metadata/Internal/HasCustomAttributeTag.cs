@@ -98,7 +98,7 @@ namespace System.Reflection.Metadata.Ecma335
           | TableMask.GenericParamConstraint
           | TableMask.MethodSpec;
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static EntityHandle ConvertToHandle(uint hasCustomAttribute)
         {
             uint tokenType = TagToTokenTypeArray[hasCustomAttribute & TagMask];

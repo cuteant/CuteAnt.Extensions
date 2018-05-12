@@ -9,7 +9,7 @@ namespace System.Reflection.Metadata.Ecma335
     /// <summary>
     /// Decodes custom attribute blobs.
     /// </summary>
-    internal struct CustomAttributeDecoder<TType>
+    internal readonly struct CustomAttributeDecoder<TType>
     {
         private readonly ICustomAttributeTypeProvider<TType> _provider;
         private readonly MetadataReader _reader;

@@ -4,7 +4,7 @@
 
 namespace System.Reflection.Metadata
 {
-    public struct CustomAttributeTypedArgument<TType>
+    public readonly struct CustomAttributeTypedArgument<TType>
     {
         public TType Type { get; }
         public object Value { get; }

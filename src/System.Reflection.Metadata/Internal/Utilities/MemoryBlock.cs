@@ -11,7 +11,7 @@ using System.Text;
 namespace System.Reflection.Internal
 {
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    internal unsafe struct MemoryBlock
+    internal unsafe readonly struct MemoryBlock
     {
         internal readonly byte* Pointer;
         internal readonly int Length;
@@ -38,7 +38,7 @@ namespace System.Reflection.Internal
             return new MemoryBlock(buffer, length);
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         private void CheckBounds(int offset, int byteCount)
         {
             if (unchecked((ulong)(uint)offset + (uint)byteCount) > (ulong)Length)
@@ -123,7 +123,7 @@ namespace System.Reflection.Internal
             return (int)result;
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal uint PeekUInt32(int offset)
         {
             CheckBounds(offset, sizeof(uint));
@@ -184,7 +184,7 @@ namespace System.Reflection.Internal
             return BlobReader.InvalidCompressedInteger;
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal ushort PeekUInt16(int offset)
         {
             CheckBounds(offset, sizeof(ushort));

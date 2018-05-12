@@ -116,7 +116,7 @@ namespace System.Reflection.Metadata
         public int RemainingBytes => (int)(_endPointer - _currentPointer);
        
         /// <summary>
-        /// Repositions the reader to the start of the underluing memory block.
+        /// Repositions the reader to the start of the underlying memory block.
         /// </summary>
         public void Reset()
         {
@@ -165,7 +165,7 @@ namespace System.Reflection.Metadata
 
         #region Bounds Checking
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         private void CheckBounds(int offset, int byteCount)
         {
             if (unchecked((ulong)(uint)offset + (uint)byteCount) > (ulong)(_endPointer - _currentPointer))
@@ -174,7 +174,7 @@ namespace System.Reflection.Metadata
             }
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         private void CheckBounds(int byteCount)
         {
             if (unchecked((uint)byteCount) > (_endPointer - _currentPointer))
@@ -183,7 +183,7 @@ namespace System.Reflection.Metadata
             }
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         private byte* GetCurrentPointerAndAdvance(int length)
         {
             byte* p = _currentPointer;
@@ -197,7 +197,7 @@ namespace System.Reflection.Metadata
             return p;
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         private byte* GetCurrentPointerAndAdvance1()
         {
             byte* p = _currentPointer;

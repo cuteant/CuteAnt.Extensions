@@ -21,7 +21,7 @@ namespace System.Reflection.Metadata.Ecma335
           | TableMask.TypeSpec;
 
         // inlining improves perf of the tight loop in FindSystemObjectTypeDef by 25%
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(InlineMethod.Value)]
         internal static EntityHandle ConvertToHandle(uint typeDefOrRefTag)
         {
             uint tokenType = (TagToTokenTypeByteVector >> ((int)(typeDefOrRefTag & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;

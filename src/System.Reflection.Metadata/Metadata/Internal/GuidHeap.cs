@@ -6,7 +6,7 @@ using System.Reflection.Internal;
 
 namespace System.Reflection.Metadata.Ecma335
 {
-    internal struct GuidHeap
+    internal readonly struct GuidHeap
     {
         internal readonly MemoryBlock Block;
 

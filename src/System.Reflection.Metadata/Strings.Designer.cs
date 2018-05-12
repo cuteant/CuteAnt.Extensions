@@ -169,6 +169,15 @@ namespace System.Reflection {
         }
         
         /// <summary>
+        ///   查找类似 Expected non-empty array. 的本地化字符串。
+        /// </summary>
+        internal static string ExpectedNonEmptyArray {
+            get {
+                return ResourceManager.GetString("ExpectedNonEmptyArray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Expected non-empty list. 的本地化字符串。
         /// </summary>
         internal static string ExpectedNonEmptyList {
@@ -417,6 +426,15 @@ namespace System.Reflection {
         internal static string InvalidNumberOfSections {
             get {
                 return ResourceManager.GetString("InvalidNumberOfSections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Invalid PDB Checksum data format. 的本地化字符串。
+        /// </summary>
+        internal static string InvalidPdbChecksumDataFormat {
+            get {
+                return ResourceManager.GetString("InvalidPdbChecksumDataFormat", resourceCulture);
             }
         }
         

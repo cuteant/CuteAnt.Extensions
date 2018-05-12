@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45</TargetFrameworks>
+    <TargetFrameworks>net471</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -11,6 +11,7 @@
     <Compile Remove="Resources\Misc\Debug.cs" />
     <Compile Remove="Resources\Misc\Deterministic.cs" />
     <Compile Remove="Resources\Misc\Members.cs" />
+    <Compile Remove="Resources\Misc\SatelliteAssembly.resources.cs" />
     <Compile Remove="Resources\Misc\Signed.cs" />
     <Compile Remove="Resources\Namespace\NamespaceForwardedCS.cs" />
     <Compile Remove="Resources\Namespace\NamespaceTests.cs" />
@@ -22,14 +23,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\src\Microsoft.Extensions.FileProviders.Physical\System.Security.Cryptography\HashAlgorithmName.cs" Link="HashAlgorithmName.cs" />
+    <None Remove="Resources\Interop\OtherAccessors.dll" />
+    <None Remove="Resources\Misc\SatelliteAssembly.resources.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\..\src\Microsoft.Extensions.FileProviders.Physical\System.Security.Cryptography\IncrementalHash.net46.cs" Link="IncrementalHash.net46.cs" />
     <Compile Include="..\AssertExtensions.cs" Link="AssertExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Resources\Misc\SatelliteAssembly.resources.cs" />
     <None Include="Resources\Namespace\NamespaceForwardedCS.cs" />
     <None Include="Resources\Namespace\NamespaceTests.cs" />
+    <EmbeddedResource Include="Resources\Interop\OtherAccessors.dll" />
+    <EmbeddedResource Include="Resources\Misc\SatelliteAssembly.resources.dll" />
     <EmbeddedResource Include="Resources\Namespace\NamespaceForwardedCS.dll" />
     <EmbeddedResource Include="Resources\Namespace\NamespaceTests.dll" />
     <None Include="Resources\Interop\Interop.Mock01.cs" />
@@ -72,14 +80,24 @@
 
   <ItemGroup>
     <PackageReference Include="Moq" Version="$(MoqVersion)" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.1.0" />
-    <PackageReference Include="xunit" Version="2.1.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xUnitVersion)" />
+    <PackageReference Include="xunit" Version="$(xUnitVersion)" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\System.Reflection.Metadata\System.Reflection.Metadata.csproj" />
+    <PackageReference Include="System.Memory" Version="$(SystemMemoryPackageVersion)" />
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata">
+      <HintPath>..\..\src\System.Reflection.Metadata\bin\Debug\net40\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
   </ItemGroup>
+
 
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />

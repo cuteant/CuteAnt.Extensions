@@ -36,14 +36,14 @@ namespace System.Reflection.PortableExecutable.Tests
         }
 
         //[Fact]
-        ////[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
+        //[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
         //public void CodeView_Loaded()
         //{
         //    LoaderUtilities.LoadPEAndValidate(Misc.Debug, ValidateCodeView);
         //}
 
         //[Fact]
-        ////[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
+        //[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
         //public void CodeView_Loaded_FromStream()
         //{
         //    LoaderUtilities.LoadPEAndValidate(Misc.Debug, ValidateCodeView, useStream: true);
@@ -86,7 +86,7 @@ namespace System.Reflection.PortableExecutable.Tests
         }
 
         //[Fact]
-        ////[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
+        //[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
         //public void Deterministic_Loaded()
         //{
         //    LoaderUtilities.LoadPEAndValidate(Misc.Deterministic, ValidateDeterministic);
@@ -134,14 +134,14 @@ namespace System.Reflection.PortableExecutable.Tests
         }
 
         //[Fact]
-        ////[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
+        //[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
         //public void EmbeddedPortablePdb_Loaded()
         //{
         //    LoaderUtilities.LoadPEAndValidate(PortablePdbs.DocumentsEmbeddedDll, ValidateEmbeddedPortablePdb);
         //}
 
         //[Fact]
-        ////[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
+        //[PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get module handles
         //public void EmbeddedPortablePdb_Loaded_FromStream()
         //{
         //    LoaderUtilities.LoadPEAndValidate(PortablePdbs.DocumentsEmbeddedDll, ValidateEmbeddedPortablePdb, useStream: true);
@@ -362,6 +362,57 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var block = new ByteArrayMemoryProvider(bytes9).GetMemoryBlock(0, 1))
             {
                 Assert.Throws<BadImageFormatException>(() => PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData(block));
+            }
+        }
+
+        [Fact]
+        public void PdbChecksum()
+        {
+            var bytes = ImmutableArray.Create(new byte[]
+            {
+                (byte)'A', (byte)'L', (byte)'G', 0, // AlgorithmName
+                0x01, 0x02, 0x03, 0x04, 0x05 // checksum
+            });
+
+            using (var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length))
+            {
+                var data = PEReader.DecodePdbChecksumDebugDirectoryData(block);
+                Assert.Equal("ALG", data.AlgorithmName);
+                AssertEx.Equal(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }, data.Checksum);
+            }
+        }
+
+        [Theory]
+        [InlineData(new byte[]
+        {
+            0, // AlgorithmName
+            0x01, 0x02, 0x03, 0x04, 0x05 // checksum
+        })]
+        [InlineData(new byte[]
+        {
+            0x01,
+            0x01, 0x02, 0x03, 0x04, 0x05
+        })]
+        [InlineData(new byte[]
+        {
+            0x01, 0x00
+        })]
+        [InlineData(new byte[]
+        {
+            0x00
+        })]
+        [InlineData(new byte[]
+        {
+            0x01
+        })]
+        [InlineData(new byte[0])]
+        public void PdbChecksum_Errors(byte[] blob)
+        {
+            var bytes = ImmutableArray.Create(blob);
+
+            using (var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length))
+            {
+                Assert.Throws<BadImageFormatException>(() => PEReader.DecodePdbChecksumDebugDirectoryData(block));
             }
         }
     }
