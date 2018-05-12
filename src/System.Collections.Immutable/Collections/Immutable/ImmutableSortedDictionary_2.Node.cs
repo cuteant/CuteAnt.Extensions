@@ -1,4 +1,7 @@
-﻿#if NET40
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -27,11 +30,7 @@ namespace System.Collections.Immutable
             /// <summary>
             /// The value associated with this node.
             /// </summary>
-            /// <remarks>
-            /// Sadly this field could be readonly but doing so breaks serialization due to bug: 
-            /// http://connect.microsoft.com/VisualStudio/feedback/details/312970/weird-argumentexception-when-deserializing-field-in-typedreferences-cannot-be-static-or-init-only
-            /// </remarks>
-            private TValue _value;
+            private readonly TValue _value;
 
             /// <summary>
             /// A value indicating whether this node has been frozen (made immutable).
@@ -333,6 +332,27 @@ namespace System.Collections.Immutable
 
                 return this.RemoveRecursive(key, keyComparer, out mutated);
             }
+
+#if FEATURE_ITEMREFAPI
+            /// <summary>
+            /// Returns a read-only reference to the value associated with the provided key.
+            /// </summary>
+            /// <exception cref="KeyNotFoundException">If the key is not present.</exception>
+            [Pure]
+            internal ref readonly TValue ValueRef(TKey key, IComparer<TKey> keyComparer)
+            {
+                Requires.NotNullAllowStructs(key, nameof(key));
+                Requires.NotNull(keyComparer, nameof(keyComparer));
+
+                var match = this.Search(key, keyComparer);
+                if (match.IsEmpty)
+                {
+                    throw new KeyNotFoundException(string.Format(SR.Arg_KeyNotFoundWithKey, key.ToString()));
+                }
+
+                return ref match._value;
+            }
+#endif
 
             /// <summary>
             /// Tries to get the value.
@@ -855,4 +875,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

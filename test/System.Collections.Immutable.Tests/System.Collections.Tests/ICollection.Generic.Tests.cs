@@ -40,7 +40,7 @@ namespace System.Collections.Tests
         protected virtual bool IsReadOnly_ValidityValue => IsReadOnly;
         protected virtual bool AddRemoveClear_ThrowsNotSupported => false;
         protected virtual bool DefaultValueAllowed => true;
-        protected virtual IEnumerable<T> InvalidValues => Array.Empty<T>();
+        protected virtual IEnumerable<T> InvalidValues => new T[0]; //Array.Empty<T>();
 
         protected virtual void AddToCollection(ICollection<T> collection, int numberOfItemsToAdd)
         {

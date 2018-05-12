@@ -5,6 +5,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace System.Collections.Immutable.Tests
@@ -77,6 +79,7 @@ namespace System.Collections.Immutable.Tests
         }
 
         [Fact]
+        //[ActiveIssue("Sporadic failure, needs a port of https://github.com/dotnet/coreclr/pull/4340", TargetFrameworkMonikers.NetFramework)]
         public void EmptyTest()
         {
             this.EmptyTestHelper(Empty<int>(), 5, null);
@@ -185,6 +188,11 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(~5, set.IndexOf(55));
             Assert.Equal(~9, set.IndexOf(95));
             Assert.Equal(~10, set.IndexOf(105));
+
+            var nullableSet = ImmutableSortedSet<int?>.Empty;
+            Assert.Equal(~0, nullableSet.IndexOf(null));
+            nullableSet = nullableSet.Add(null).Add(0);
+            Assert.Equal(0, nullableSet.IndexOf(null));
         }
 
         [Fact]
@@ -305,6 +313,12 @@ namespace System.Collections.Immutable.Tests
             set = ImmutableSortedSet.CreateRange(comparer, (IEnumerable<string>)new[] { "a", "b" });
             Assert.Equal(2, set.Count);
             Assert.Same(comparer, set.KeyComparer);
+
+            set = ImmutableSortedSet.Create(default(string));
+            Assert.Equal(1, set.Count);
+
+            set = ImmutableSortedSet.CreateRange(new[] { null, "a", null, "b" });
+            Assert.Equal(3, set.Count);
         }
 
         [Fact]
@@ -362,10 +376,23 @@ namespace System.Collections.Immutable.Tests
         public void DebuggerAttributesValid()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSortedSet.Create<int>());
-            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(ImmutableSortedSet.Create<string>("1", "2", "3"));
+            ImmutableSortedSet<string> set = ImmutableSortedSet.Create("1", "2", "3");
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(set);
 
             object rootNode = DebuggerAttributes.GetFieldValue(ImmutableSortedSet.Create<object>(), "_root");
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
+            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            string[] items = itemProperty.GetValue(info.Instance) as string[];
+            Assert.Equal(set, items);
+        }
+
+        [Fact]
+        //[SkipOnTargetFramework(TargetFrameworkMonikers.UapAot, "Cannot do DebuggerAttribute testing on UapAot: requires internal Reflection on framework types.")]
+        public static void TestDebuggerAttributes_Null()
+        {
+            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSortedSet.Create("1", "2", "3"));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
@@ -379,6 +406,29 @@ namespace System.Collections.Immutable.Tests
 
             var actualSet = set.SymmetricExcept(otherCollection);
             CollectionAssertAreEquivalent(expectedSet.ToList(), actualSet.ToList());
+        }
+
+        [Fact]
+        public void ItemRef()
+        {
+            var array = new[] { 1, 2, 3 }.ToImmutableSortedSet();
+
+            ref readonly var safeRef = ref array.ItemRef(1);
+            ref var unsafeRef = ref Unsafe.AsRef(safeRef);
+
+            Assert.Equal(2, array.ItemRef(1));
+
+            unsafeRef = 4;
+
+            Assert.Equal(4, array.ItemRef(1));
+        }
+
+        [Fact]
+        public void ItemRef_OutOfBounds()
+        {
+            var array = new[] { 1, 2, 3 }.ToImmutableSortedSet();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => array.ItemRef(5));
         }
 
         protected override IImmutableSet<T> Empty<T>()

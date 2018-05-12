@@ -23,7 +23,7 @@ namespace System.Collections.Tests
         protected virtual bool DefaultValueWhenNotAllowed_Throws => true;
         protected virtual bool IsReadOnly => false;
         protected virtual bool DefaultValueAllowed => true;
-        protected virtual IEnumerable<T> InvalidValues => Array.Empty<T>();
+        protected virtual IEnumerable<T> InvalidValues => new T[0]; // Array.Empty<T>();
 
         /// <summary>
         /// Used for the IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowsArgumentException tests. Some

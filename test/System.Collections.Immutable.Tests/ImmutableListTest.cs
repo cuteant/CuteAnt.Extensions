@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace System.Collections.Immutable.Tests
@@ -775,10 +776,23 @@ namespace System.Collections.Immutable.Tests
         public void DebuggerAttributesValid()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableList.Create<int>());
-            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(ImmutableList.Create<double>(1, 2, 3));
+            ImmutableList<double> list = ImmutableList.Create<double>(1, 2, 3);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(list);
 
             object rootNode = DebuggerAttributes.GetFieldValue(ImmutableList.Create<string>("1", "2", "3"), "_root");
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
+            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            double[] items = itemProperty.GetValue(info.Instance) as double[];
+            Assert.Equal(list, items);
+        }
+
+        [Fact]
+        //[SkipOnTargetFramework(TargetFrameworkMonikers.UapAot, "Cannot do DebuggerAttribute testing on UapAot: requires internal Reflection on framework types.")]
+        public static void TestDebuggerAttributes_Null()
+        {
+            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableList.Create<double>());
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
 #if netcoreapp
@@ -801,6 +815,29 @@ namespace System.Collections.Immutable.Tests
             list.GetEnumerator(); // ensure this doesn't throw
         }
 #endif // netcoreapp
+
+        [Fact]
+        public void ItemRef()
+        {
+            var list = new[] { 1, 2, 3 }.ToImmutableList();
+
+            ref readonly var safeRef = ref list.ItemRef(1);
+            ref var unsafeRef = ref Unsafe.AsRef(safeRef);
+
+            Assert.Equal(2, list.ItemRef(1));
+
+            unsafeRef = 4;
+
+            Assert.Equal(4, list.ItemRef(1));
+        }
+
+        [Fact]
+        public void ItemRef_OutOfBounds()
+        {
+            var list = new[] { 1, 2, 3 }.ToImmutableList();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.ItemRef(5));
+        }
 
         protected override IEnumerable<T> GetEnumerableOf<T>(params T[] contents)
         {

@@ -5,6 +5,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace System.Collections.Immutable.Tests
@@ -240,7 +242,46 @@ namespace System.Collections.Immutable.Tests
         public void DebuggerAttributesValid()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableQueue.Create<int>());
-            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(ImmutableQueue.Create<string>());
+            ImmutableQueue<string> queue = ImmutableQueue.Create("One", "Two");
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(queue);
+            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            string[] items = itemProperty.GetValue(info.Instance) as string[];
+            Assert.Equal(queue, items);
+        }
+
+        [Fact]
+        //[SkipOnTargetFramework(TargetFrameworkMonikers.UapAot, "Cannot do DebuggerAttribute testing on UapAot: requires internal Reflection on framework types.")]
+        public static void TestDebuggerAttributes_Null()
+        {
+            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableQueue.Create<int>());
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Assert.IsType<ArgumentNullException>(tie.InnerException);
+        }
+
+        [Fact]
+        public void PeekRef()
+        {
+            var queue = ImmutableQueue<int>.Empty
+                .Enqueue(1)
+                .Enqueue(2)
+                .Enqueue(3);
+
+            ref readonly var safeRef = ref queue.PeekRef();
+            ref var unsafeRef = ref Unsafe.AsRef(safeRef);
+
+            Assert.Equal(1, queue.PeekRef());
+
+            unsafeRef = 4;
+
+            Assert.Equal(4, queue.PeekRef());
+        }
+
+        [Fact]
+        public void PeekRef_Empty()
+        {
+            var queue = ImmutableQueue<int>.Empty;
+
+            Assert.Throws<InvalidOperationException>(() => queue.PeekRef());
         }
 
         protected override IEnumerable<T> GetEnumerableOf<T>(params T[] contents)

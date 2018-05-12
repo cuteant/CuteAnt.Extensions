@@ -1,9 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFrameworks>net45</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\System.Collections.Immutable.Tests.rd.xml" />
+  </ItemGroup>
 
 
   <ItemGroup>
@@ -14,10 +18,14 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
+    <EmbeddedResource Include="Resources\System.Collections.Immutable.Tests.rd.xml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
     <PackageReference Include="Moq" Version="$(MoqVersion)" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="$(xUnitVersion)" />
-    <PackageReference Include="xunit" Version="$(xUnitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.1.0" />
+    <PackageReference Include="xunit" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,12 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Primitives">
-      <HintPath>..\..\src\System.Collections.Immutable\bin\Release\net40\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>..\..\src\System.Collections.Immutable\bin\Release\net40\System.Collections.Immutable.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\src\System.Collections.Immutable\System.Collections.Immutable.csproj" />
   </ItemGroup>
 
 </Project>

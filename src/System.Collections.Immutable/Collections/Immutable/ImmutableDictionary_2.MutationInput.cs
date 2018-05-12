@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-#if NET40
+
 using System.Collections.Generic;
 
 namespace System.Collections.Immutable
@@ -15,7 +15,7 @@ namespace System.Collections.Immutable
         /// Description of the current data structure as input into a
         /// mutating or query method.
         /// </summary>
-        private struct MutationInput
+        private readonly struct MutationInput
         {
             /// <summary>
             /// The root of the data structure for the collection.
@@ -109,4 +109,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

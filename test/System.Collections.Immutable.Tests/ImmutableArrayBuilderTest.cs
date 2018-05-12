@@ -5,6 +5,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace System.Collections.Immutable.Tests
@@ -288,13 +290,14 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(new[] { 1, 2, 3, 4 }, builder);
         }
 
+        static readonly int[] _emptyInts = new int[0];
         [Fact]
         public void Sort_Comparison()
         {
             var builder = new ImmutableArray<int>.Builder(4);
 
             builder.Sort((x, y) => y.CompareTo(x));
-            Assert.Equal(Array.Empty<int>(), builder);
+            Assert.Equal(_emptyInts, builder); // Array.Empty<int>()
 
             builder.AddRange(2, 4, 1, 3);
             builder.Sort((x, y) => y.CompareTo(x));
@@ -704,11 +707,54 @@ namespace System.Collections.Immutable.Tests
         }
 
         [Fact]
-        ////[SkipOnTargetFramework(TargetFrameworkMonikers.UapAot, "Cannot do DebuggerAttribute testing on UapAot: requires internal Reflection on framework types.")]
+        //[SkipOnTargetFramework(TargetFrameworkMonikers.UapAot, "Cannot do DebuggerAttribute testing on UapAot: requires internal Reflection on framework types.")]
         public void DebuggerAttributesValid()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableArray.CreateBuilder<int>());
-            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(ImmutableArray.CreateBuilder<string>(4));
+            ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(4);
+            builder.AddRange("One", "Two", "Three", "Four");
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
+            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            string[] items = itemProperty.GetValue(info.Instance) as string[];
+            Assert.Equal(builder, items);
+        }
+
+        [Fact]
+        //[SkipOnTargetFramework(TargetFrameworkMonikers.UapAot, "Cannot do DebuggerAttribute testing on UapAot: requires internal Reflection on framework types.")]
+        public static void TestDebuggerAttributes_Null()
+        {
+            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableArray.CreateBuilder<string>(4));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Assert.IsType<ArgumentNullException>(tie.InnerException);
+        }
+
+        [Fact]
+        public void ItemRef()
+        {
+            var builder = new ImmutableArray<int>.Builder();
+            builder.Add(1);
+            builder.Add(2);
+            builder.Add(3);
+
+            ref readonly var safeRef = ref builder.ItemRef(1);
+            ref var unsafeRef = ref Unsafe.AsRef(safeRef);
+
+            Assert.Equal(2, builder.ItemRef(1));
+
+            unsafeRef = 4;
+
+            Assert.Equal(4, builder.ItemRef(1));
+        }
+
+        [Fact]
+        public void ItemRef_OutOfBounds()
+        {
+            var builder = new ImmutableArray<int>.Builder();
+            builder.Add(1);
+            builder.Add(2);
+            builder.Add(3);
+
+            Assert.Throws<IndexOutOfRangeException>(() => builder.ItemRef(5));
         }
 
         private static ImmutableArray<T>.Builder CreateBuilderWithCount<T>(int count)

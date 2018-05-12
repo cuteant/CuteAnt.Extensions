@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFrameworks>net45</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\src\Microsoft.Extensions.FileProviders.Physical\System.Security.Cryptography\HashAlgorithmName.cs" Link="HashAlgorithmName.cs" />
     <Compile Include="..\..\src\Microsoft.Extensions.FileProviders.Physical\System.Security.Cryptography\IncrementalHash.net46.cs" Link="IncrementalHash.net46.cs" />
     <Compile Include="..\AssertExtensions.cs" Link="AssertExtensions.cs" />
   </ItemGroup>
@@ -70,25 +71,15 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
     <PackageReference Include="Moq" Version="$(MoqVersion)" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="$(xUnitVersion)" />
-    <PackageReference Include="xunit" Version="$(xUnitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.1.0" />
+    <PackageReference Include="xunit" Version="2.1.0" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Primitives">
-      <HintPath>..\..\src\System.Reflection.Metadata\bin\Release\net40\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>..\..\src\System.Reflection.Metadata\bin\Release\net40\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Metadata">
-      <HintPath>..\..\src\System.Reflection.Metadata\bin\Release\net40\System.Reflection.Metadata.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\src\System.Reflection.Metadata\System.Reflection.Metadata.csproj" />
   </ItemGroup>
-
 
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />

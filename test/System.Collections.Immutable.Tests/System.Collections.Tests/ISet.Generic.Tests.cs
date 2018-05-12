@@ -41,14 +41,16 @@ namespace System.Collections.Tests
             return collection;
         }
 
+        static readonly T[] _emptyArray = new T[0];
         protected override void AddToCollection(ICollection<T> collection, int numberOfItemsToAdd)
         {
+
             int seed = 9600;
             ISet<T> set = (ISet<T>)collection;
             while (set.Count < numberOfItemsToAdd)
             {
                 T toAdd = CreateT(seed++);
-                while (set.Contains(toAdd) || (InvalidValues != Array.Empty<T>() && InvalidValues.Contains(toAdd, GetIEqualityComparer())))
+                while (set.Contains(toAdd) || (InvalidValues != _emptyArray && InvalidValues.Contains(toAdd, GetIEqualityComparer()))) // Array.Empty<T>()
                     toAdd = CreateT(seed++);
                 set.Add(toAdd);
             }

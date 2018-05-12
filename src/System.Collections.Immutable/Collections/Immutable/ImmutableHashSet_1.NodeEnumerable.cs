@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-#if NET40
+
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -15,7 +15,7 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Enumerates over a sorted dictionary used for hash buckets.
         /// </summary>
-        private struct NodeEnumerable : IEnumerable<T>
+        private readonly struct NodeEnumerable : IEnumerable<T>
         {
             /// <summary>
             /// The root of the sorted dictionary to enumerate.
@@ -69,4 +69,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

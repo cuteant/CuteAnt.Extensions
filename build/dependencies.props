@@ -3,9 +3,9 @@
   <PropertyGroup Label="Package Versions">
     <!-- System packages -->
     <SystemRuntimeVersion>4.3.0</SystemRuntimeVersion>
-    <SystemMemoryPackageVersion>4.5.0-preview2-26406-04</SystemMemoryPackageVersion>
-    <SystemValueTupleVersion>4.5.0-preview2-26406-04</SystemValueTupleVersion>
-    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.0-preview2-26406-04</SystemRuntimeCompilerServicesUnsafeVersion>
+    <SystemMemoryPackageVersion>4.5.0-rc1</SystemMemoryPackageVersion>
+    <SystemValueTupleVersion>4.5.0-rc1</SystemValueTupleVersion>
+    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.0-rc1</SystemRuntimeCompilerServicesUnsafeVersion>
 
     <!-- Microsoft packages -->
     <MicrosoftBuildVersion>15.3.409</MicrosoftBuildVersion>

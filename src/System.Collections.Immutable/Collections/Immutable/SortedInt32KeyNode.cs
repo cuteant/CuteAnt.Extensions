@@ -1,5 +1,4 @@
-﻿#if NET40
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -36,11 +35,7 @@ namespace System.Collections.Immutable
         /// <summary>
         /// The value associated with this node.
         /// </summary>
-        /// <remarks>
-        /// Sadly, this field could be readonly but doing so breaks serialization due to bug: 
-        /// http://connect.microsoft.com/VisualStudio/feedback/details/312970/weird-argumentexception-when-deserializing-field-in-typedreferences-cannot-be-static-or-init-only
-        /// </remarks>
-        private TValue _value;
+        private readonly TValue _value;
 
         /// <summary>
         /// A value indicating whether this node has been frozen (made immutable).
@@ -574,4 +569,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

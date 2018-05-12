@@ -1,5 +1,4 @@
-﻿#if NET40
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -17,6 +16,23 @@ namespace System.Collections.Immutable
     /// </summary>
     internal static partial class ImmutableExtensions
     {
+        internal static bool IsValueType<T>()
+        {
+            if (default(T) != null)
+            {
+                return true;
+            }
+
+            Type t = typeof(T);
+            // ## 苦竹 修改 ##
+            //if (t.IsConstructedGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (t.IsGenericType && !t.IsGenericTypeDefinition && t.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                return true;
+            }
+
+            return false;
+        }
 
 #if EqualsStructurally
 
@@ -363,4 +379,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

@@ -43,7 +43,7 @@ namespace System.Collections.Immutable.Tests
         {
             var builder = this.GetBuilder<string, int>();
             builder.Add("five", 5);
-            Assert.Throws<ArgumentException>(null, () => builder.Add("five", 6));
+            AssertExtensions.Throws<ArgumentException>(null, () => builder.Add("five", 6));
         }
 
         [Fact]
@@ -120,21 +120,19 @@ namespace System.Collections.Immutable.Tests
             var map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
             var builder = this.GetBuilder(map);
             CollectionAssertAreEquivalent(new[] { "five", "six" }, builder.Keys);
-      //CollectionAssertAreEquivalent(new[] { "five", "six" }, ((IReadOnlyDictionary<string, int>)builder).Keys.ToArray());
-      CollectionAssertAreEquivalent(new[] { "five", "six" }, ((IEnumerable<KeyValuePair<string, int>>)builder).Select(_=>_.Key).ToArray());
-    }
+            //CollectionAssertAreEquivalent(new[] { "five", "six" }, ((IReadOnlyDictionary<string, int>)builder).Keys.ToArray());
+        }
 
-    [Fact]
+        [Fact]
         public void Values()
         {
             var map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
             var builder = this.GetBuilder(map);
             CollectionAssertAreEquivalent(new[] { 5, 6 }, builder.Values);
-      //CollectionAssertAreEquivalent(new[] { 5, 6 }, ((IReadOnlyDictionary<string, int>)builder).Values.ToArray());
-      CollectionAssertAreEquivalent(new[] { 5, 6 }, ((IEnumerable<KeyValuePair<string, int>>)builder).Select(_=>_.Value).ToArray());
-    }
+            //CollectionAssertAreEquivalent(new[] { 5, 6 }, ((IReadOnlyDictionary<string, int>)builder).Values.ToArray());
+        }
 
-    [Fact]
+        [Fact]
         public void TryGetValue()
         {
             var map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);

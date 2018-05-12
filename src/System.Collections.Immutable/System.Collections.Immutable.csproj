@@ -7,6 +7,7 @@
     <RootNamespace>System</RootNamespace>
     <AssemblyName>System.Collections.Immutable</AssemblyName>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);EqualsStructurally;FEATURE_ITEMREFAPI</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">

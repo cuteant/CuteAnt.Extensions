@@ -1,11 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-#if NET40
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using System.Linq;
 
 namespace System.Collections.Immutable
 {
@@ -832,7 +833,9 @@ namespace System.Collections.Immutable
         /// </returns>
         IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return this.IsEmpty ?
+                Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator() :
+                this.GetEnumerator();
         }
 
         #endregion
@@ -1107,4 +1110,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

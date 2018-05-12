@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-#if NET40
+
 namespace System.Collections.Immutable
 {
     /// <content>
@@ -28,7 +28,7 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Describes the result of a mutation on the immutable data structure.
         /// </summary>
-        private struct MutationResult
+        private readonly struct MutationResult
         {
             /// <summary>
             /// The root node of the data structure after the mutation.
@@ -106,4 +106,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

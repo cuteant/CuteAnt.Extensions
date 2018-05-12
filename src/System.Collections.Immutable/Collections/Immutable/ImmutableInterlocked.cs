@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-#if NET40
+
 using System.Collections.Generic;
 using System.Threading;
 
@@ -423,7 +423,7 @@ namespace System.Collections.Immutable
         #region ImmutableStack<T> members
 
         /// <summary>
-        /// Pushes a new element onto a stack.
+        /// Pops the top element off a stack and returns it to the caller, if the stack is not empty.
         /// </summary>
         /// <typeparam name="T">The type of elements stored in the stack.</typeparam>
         /// <param name="location">The variable or field to atomically update.</param>
@@ -530,4 +530,3 @@ namespace System.Collections.Immutable
         #endregion
     }
 }
-#endif

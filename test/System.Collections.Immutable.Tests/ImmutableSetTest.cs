@@ -38,7 +38,7 @@ namespace System.Collections.Immutable.Tests
         }
 
         [Fact]
-        public void RemoveNonExistingTest1()
+        public void RemoveNonExistingTest()
         {
             this.RemoveNonExistingTest(this.Empty<int>());
         }
@@ -219,6 +219,31 @@ namespace System.Collections.Immutable.Tests
             Assert.True(builder.IsSynchronized);
             Assert.NotNull(builder.SyncRoot);
             Assert.Same(builder.SyncRoot, builder.SyncRoot);
+        }
+
+        [Fact]
+        public void NullHandling()
+        {
+            var empty = this.Empty<string>();
+            var set = empty.Add(null);
+            Assert.True(set.Contains(null));
+            Assert.True(set.TryGetValue(null, out var @null));
+            Assert.Null(@null);
+            Assert.Equal(empty, set.Remove(null));
+
+            set = empty.Union(new[] { null, "a" });
+            Assert.True(set.IsSupersetOf(new[] { null, "a" }));
+            Assert.True(set.IsSubsetOf(new[] { null, "a" }));
+            Assert.True(set.IsProperSupersetOf(new[] { default(string) }));
+            Assert.True(set.IsProperSubsetOf(new[] { null, "a", "b" }));
+            Assert.True(set.Overlaps(new[] { null, "b" }));
+            Assert.True(set.SetEquals(new[] { null, null, "a", "a" }));
+
+            set = set.Intersect(new[] { default(string) });
+            Assert.Equal(1, set.Count);
+
+            set = set.Except(new[] { default(string) });
+            Assert.False(set.Contains(null));
         }
 
         protected abstract bool IncludesGetHashCodeDerivative { get; }

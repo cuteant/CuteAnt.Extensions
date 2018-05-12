@@ -1,5 +1,4 @@
-﻿#if NET40
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -16,12 +15,7 @@ namespace System.Collections.Immutable
         /// The collection to be enumerated.
         /// </summary>
         private readonly ImmutableSortedSet<T>.Builder _set;
-
-        /// <summary>
-        /// The simple view of the collection.
-        /// </summary>
-        private T[] _contents;
-
+        
         /// <summary>   
         /// Initializes a new instance of the <see cref="ImmutableSortedSetBuilderDebuggerProxy{T}"/> class.
         /// </summary>
@@ -40,14 +34,8 @@ namespace System.Collections.Immutable
         {
             get
             {
-                if (_contents == null)
-                {
-                    _contents = _set.ToArray(_set.Count);
-                }
-
-                return _contents;
+                return _set.ToArray(_set.Count); ;
             }
         }
     }
 }
-#endif

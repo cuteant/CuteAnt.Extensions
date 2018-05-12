@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-#if NET40
+
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -15,7 +15,7 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Contains all the key/values in the collection that hash to the same value.
         /// </summary>
-        internal struct HashBucket : IEnumerable<KeyValuePair<TKey, TValue>>, IEquatable<HashBucket>
+        internal readonly struct HashBucket : IEnumerable<KeyValuePair<TKey, TValue>>
         {
             /// <summary>
             /// One of the values in this bucket.
@@ -110,9 +110,18 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Throws an exception to catch any errors in comparing <see cref="HashBucket"/> instances.
             /// </summary>
-            bool IEquatable<HashBucket>.Equals(HashBucket other)
+            public override bool Equals(object obj)
             {
                 // This should never be called, as hash buckets don't know how to equate themselves.
+                throw new NotSupportedException();
+            }
+
+            /// <summary>
+            /// Throws an exception to catch any errors in comparing <see cref="HashBucket"/> instances.
+            /// </summary>
+            public override int GetHashCode()
+            {
+                // This should never be called, as hash buckets don't know how to hash themselves.
                 throw new NotSupportedException();
             }
 
@@ -177,7 +186,11 @@ namespace System.Collections.Immutable
                             result = OperationResult.NoChangeRequired;
                             return this;
                         case KeyCollisionBehavior.ThrowIfValueDifferent:
+#if FEATURE_ITEMREFAPI
+                            ref readonly var existingEntry = ref _additionalElements.ItemRef(keyCollisionIndex);
+#else
                             var existingEntry = _additionalElements[keyCollisionIndex];
+#endif
                             if (!valueComparer.Equals(existingEntry.Value, value))
                             {
                                 throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, SR.DuplicateKey, key));
@@ -268,7 +281,11 @@ namespace System.Collections.Immutable
                     return false;
                 }
 
+#if FEATURE_ITEMREFAPI
+                value = _additionalElements.ItemRef(index).Value;
+#else
                 value = _additionalElements[index].Value;
+#endif
                 return true;
             }
 
@@ -307,7 +324,11 @@ namespace System.Collections.Immutable
                     return false;
                 }
 
+#if FEATURE_ITEMREFAPI
+                actualKey = _additionalElements.ItemRef(index).Key;
+#else
                 actualKey = _additionalElements[index].Key;
+#endif
                 return true;
             }
 
@@ -468,4 +489,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif

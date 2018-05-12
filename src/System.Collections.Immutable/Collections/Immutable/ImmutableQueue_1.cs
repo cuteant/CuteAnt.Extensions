@@ -1,5 +1,4 @@
-﻿#if NET40
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using System.Linq;
 
 namespace System.Collections.Immutable
 {
@@ -141,6 +141,23 @@ namespace System.Collections.Immutable
             return _forwards.Peek();
         }
 
+#if FEATURE_ITEMREFAPI
+        /// <summary>
+        /// Gets a read-only reference to the element at the front of the queue.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when the queue is empty.</exception>
+        [Pure]
+        public ref readonly T PeekRef()
+        {
+            if (this.IsEmpty)
+            {
+                throw new InvalidOperationException(SR.InvalidEmptyOperation);
+            }
+
+            return ref _forwards.PeekRef();
+        }
+#endif
+
         /// <summary>
         /// Adds an element to the back of the queue.
         /// </summary>
@@ -250,7 +267,9 @@ namespace System.Collections.Immutable
         [Pure]
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return new EnumeratorObject(this);
+            return this.IsEmpty ?
+                Enumerable.Empty<T>().GetEnumerator() :
+                new EnumeratorObject(this);
         }
 
         /// <summary>
@@ -266,4 +285,3 @@ namespace System.Collections.Immutable
         }
     }
 }
-#endif
