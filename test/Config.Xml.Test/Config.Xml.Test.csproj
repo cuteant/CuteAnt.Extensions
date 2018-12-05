@@ -18,7 +18,7 @@
     <PackageReference Include="xunit" Version="$(XunitPackageVersion)" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net471' ">
     <Reference Include="System.Security" />
   </ItemGroup>
 

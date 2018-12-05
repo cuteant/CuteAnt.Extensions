@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net452</TargetFrameworks>
+    <TargetFrameworks>net471</TargetFrameworks>
     <AssemblyName>Microsoft.Extensions.DependencyInjection.Specification.Tests</AssemblyName>
     <RootNamespace>Microsoft.Extensions.DependencyInjection.Specification</RootNamespace>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>

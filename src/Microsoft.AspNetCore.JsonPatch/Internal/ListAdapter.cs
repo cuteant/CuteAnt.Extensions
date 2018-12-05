@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 {
     public class ListAdapter : IAdapter
     {
-        public bool TryAdd(
+        public virtual bool TryAdd(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -50,7 +50,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryGet(
+        public virtual bool TryGet(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -84,7 +84,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryRemove(
+        public virtual bool TryRemove(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -115,7 +115,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryReplace(
+        public virtual bool TryReplace(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -152,7 +152,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryTest(
+        public virtual bool TryTest(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -189,7 +189,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             }
         }
 
-        public bool TryTraverse(
+        public virtual bool TryTraverse(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -224,7 +224,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        private bool TryConvertValue(
+        protected virtual bool TryConvertValue(
             object originalValue,
             Type listTypeArgument,
             string segment,
@@ -244,7 +244,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        private bool TryGetListTypeArgument(IList list, out Type listTypeArgument, out string errorMessage)
+        protected virtual bool TryGetListTypeArgument(IList list, out Type listTypeArgument, out string errorMessage)
         {
             // Arrays are not supported as they have fixed size and operations like Add, Insert do not make sense
             var listType = list.GetType();
@@ -265,18 +265,14 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 }
                 else
                 {
-#if NET40
                     listTypeArgument = genericList.GetTypeGenericArguments()[0];
-#else
-                    listTypeArgument = genericList.GenericTypeArguments[0];
-#endif
                     errorMessage = null;
                     return true;
                 }
             }
         }
 
-        private bool TryGetPositionInfo(
+        protected virtual bool TryGetPositionInfo(
             IList list,
             string segment,
             OperationType operationType,
@@ -322,7 +318,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             }
         }
 
-        private struct PositionInfo
+        protected struct PositionInfo
         {
             public PositionInfo(PositionType type, int index)
             {
@@ -334,7 +330,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             public int Index { get; }
         }
 
-        private enum PositionType
+        protected enum PositionType
         {
             Index, // valid index
             EndOfList, // '-'
@@ -342,7 +338,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             OutOfBounds
         }
 
-        private enum OperationType
+        protected enum OperationType
         {
             Add,
             Remove,

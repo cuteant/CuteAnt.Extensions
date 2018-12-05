@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 {
     public class PocoAdapter : IAdapter
     {
-        public bool TryAdd(
+        public virtual bool TryAdd(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -43,7 +43,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryGet(
+        public virtual bool TryGet(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -69,7 +69,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryRemove(
+        public virtual bool TryRemove(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -106,7 +106,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryReplace(
+        public virtual bool TryReplace(
             object target,
             string segment,
             IContractResolver
@@ -138,7 +138,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryTest(
+        public virtual bool TryTest(
             object target,
             string segment,
             IContractResolver
@@ -175,7 +175,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return true;
         }
 
-        public bool TryTraverse(
+        public virtual bool TryTraverse(
             object target,
             string segment,
             IContractResolver contractResolver,
@@ -201,7 +201,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return false;
         }
 
-        private bool TryGetJsonProperty(
+        protected virtual bool TryGetJsonProperty(
             object target,
             IContractResolver contractResolver,
             string segment,
@@ -224,7 +224,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return false;
         }
 
-        private bool TryConvertValue(object value, Type propertyType, out object convertedValue)
+        protected virtual bool TryConvertValue(object value, Type propertyType, out object convertedValue)
         {
             var conversionResult = ConversionResultProvider.ConvertTo(value, propertyType);
             if (!conversionResult.CanBeConverted)

@@ -4,8 +4,8 @@
     <!-- System packages -->
     <SystemRuntimeVersion>4.3.0</SystemRuntimeVersion>
     <SystemMemoryPackageVersion>4.5.1</SystemMemoryPackageVersion>
-    <SystemValueTupleVersion>4.5.</SystemValueTupleVersion>
-    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.1</SystemRuntimeCompilerServicesUnsafeVersion>
+    <SystemValueTupleVersion>4.5.0</SystemValueTupleVersion>
+    <SystemRuntimeCompilerServicesUnsafeVersion>4.5.2</SystemRuntimeCompilerServicesUnsafeVersion>
 
     <!-- Microsoft packages -->
     <MicrosoftBuildVersion>15.3.409</MicrosoftBuildVersion>
@@ -15,16 +15,16 @@
     <MicrosoftBclBuildVersion>1.0.21</MicrosoftBclBuildVersion>
 
     <!-- 3rd party packages -->
-    <NewtonsoftJsonVersion>11.0.2</NewtonsoftJsonVersion>
+    <NewtonsoftJsonVersion>12.0.1</NewtonsoftJsonVersion>
 
     <!-- Test related packages -->
-    <TestSdkVersion>15.8.0</TestSdkVersion>
-    <xUnitVersion>2.3.1</xUnitVersion>
-    <xUnitPackageVersion>2.3.1</xUnitPackageVersion>
-    <xUnitAnalyzersPackageVersion>0.8.0</xUnitAnalyzersPackageVersion>
-    <XunitRunnerVisualstudioPackageVersion>2.4.0-beta.1.build3958</XunitRunnerVisualstudioPackageVersion>
-    <xUnitRunnerVsPackageVersion>2.4.0-beta.1.build3958</xUnitRunnerVsPackageVersion>
-    <MoqVersion>4.8.0</MoqVersion>
+    <TestSdkVersion>15.9.0</TestSdkVersion>
+    <xUnitVersion>2.4.1</xUnitVersion>
+    <xUnitPackageVersion>2.4.1</xUnitPackageVersion>
+    <xUnitAnalyzersPackageVersion>0.10.0</xUnitAnalyzersPackageVersion>
+    <XunitRunnerVisualstudioPackageVersion>2.4.1</XunitRunnerVisualstudioPackageVersion>
+    <xUnitRunnerVsPackageVersion>2.4.1</xUnitRunnerVsPackageVersion>
+    <MoqVersion>4.10.0</MoqVersion>
     <BenchmarkDotNetVersion>0.10.11</BenchmarkDotNetVersion>
 
     <!-- Tooling related packages -->

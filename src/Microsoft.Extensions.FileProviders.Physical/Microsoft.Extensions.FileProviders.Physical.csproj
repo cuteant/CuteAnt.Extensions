@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\version.aspnet.props" />
+  <Import Project="..\..\..\CuteAnt.Extensions.Common\src\Microsoft.Extensions.NonCapturingTimer.Sources\Microsoft.Extensions.NonCapturingTimer.Sources.projitems" Label="Shared" />
   <Import Project="..\nuget.aspnet.props" />
 
   <PropertyGroup>

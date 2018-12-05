@@ -53,6 +53,11 @@
         <FileVersion>2.1.0.3100</FileVersion>
       </PropertyGroup>
     </When>
+    <When Condition=" '$(TargetFramework)' == 'net472' ">
+      <PropertyGroup>
+        <FileVersion>2.1.0.3200</FileVersion>
+      </PropertyGroup>
+    </When>
     <When Condition=" '$(TargetFramework)' == 'netcoreapp2.0' or '$(TargetFramework)' == 'netstandard2.0' ">
       <PropertyGroup>
         <FileVersion>2.1.0.5000</FileVersion>
@@ -61,6 +66,11 @@
     <When Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
       <PropertyGroup>
         <FileVersion>2.1.0.5100</FileVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)' == 'netcoreapp2.2' ">
+      <PropertyGroup>
+        <FileVersion>2.1.0.5200</FileVersion>
       </PropertyGroup>
     </When>
     <Otherwise>

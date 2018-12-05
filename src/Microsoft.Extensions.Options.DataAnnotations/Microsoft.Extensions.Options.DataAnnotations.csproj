@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\version.aspnet.props" />
+  <Import Project="..\nuget.aspnet.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net451;net40</TargetFrameworks>
+    <AssemblyName>Microsoft.Extensions.Options.DataAnnotations</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.Options</RootNamespace>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <PackageId>NetFx.Extensions.Options.DataAnnotations</PackageId>
+    <Title>Ms.Extensions.Options.DataAnnotations-net40-net451-fork</Title>
+    <Description>Provides additional DataAnnotations specific functionality related to Options.</Description>
+    <PackageTags>aspnetcore;configuration;options</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.DependencyInjection.Abstractions\Microsoft.Extensions.DependencyInjection.Abstractions.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.Options\Microsoft.Extensions.Options.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+</Project>

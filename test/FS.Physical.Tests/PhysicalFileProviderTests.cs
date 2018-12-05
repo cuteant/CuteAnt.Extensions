@@ -6,8 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Testing;
-//using Microsoft.AspNetCore.Testing.xunit;
 using Microsoft.Extensions.FileProviders.Internal;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Primitives;
@@ -39,9 +37,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
+        [Theory]
         [InlineData("/")]
         [InlineData("///")]
         [InlineData("/\\/")]
@@ -51,14 +47,13 @@ namespace Microsoft.Extensions.FileProviders
             GetFileInfoReturnsPhysicalFileInfoForValidPathsWithLeadingSlashes(path);
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Windows, SkipReason = "Testing Unix specific behaviour on leading slashes.")]
-        //[InlineData("/")]
-        //[InlineData("///")]
-        //public void GetFileInfoReturnsPhysicalFileInfoForValidPathsWithLeadingSlashes_Unix(string path)
-        //{
-        //    GetFileInfoReturnsPhysicalFileInfoForValidPathsWithLeadingSlashes(path);
-        //}
+        [Theory]
+        [InlineData("/")]
+        [InlineData("///")]
+        public void GetFileInfoReturnsPhysicalFileInfoForValidPathsWithLeadingSlashes_Unix(string path)
+        {
+            GetFileInfoReturnsPhysicalFileInfoForValidPathsWithLeadingSlashes(path);
+        }
 
         private void GetFileInfoReturnsPhysicalFileInfoForValidPathsWithLeadingSlashes(string path)
         {
@@ -69,9 +64,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
+        [Theory]
         [InlineData("/C:\\Windows\\System32")]
         [InlineData("/\0/")]
         public void GetFileInfoReturnsNotFoundFileInfoForIllegalPathWithLeadingSlashes_Windows(string path)
@@ -79,13 +72,12 @@ namespace Microsoft.Extensions.FileProviders
             GetFileInfoReturnsNotFoundFileInfoForIllegalPathWithLeadingSlashes(path);
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Windows, SkipReason = "Testing Unix specific behaviour on leading slashes.")]
-        //[InlineData("/\0/")]
-        //public void GetFileInfoReturnsNotFoundFileInfoForIllegalPathWithLeadingSlashes_Unix(string path)
-        //{
-        //    GetFileInfoReturnsNotFoundFileInfoForIllegalPathWithLeadingSlashes(path);
-        //}
+        [Theory]
+        [InlineData("/\0/")]
+        public void GetFileInfoReturnsNotFoundFileInfoForIllegalPathWithLeadingSlashes_Unix(string path)
+        {
+            GetFileInfoReturnsNotFoundFileInfoForIllegalPathWithLeadingSlashes(path);
+        }
 
         private void GetFileInfoReturnsNotFoundFileInfoForIllegalPathWithLeadingSlashes(string path)
         {
@@ -122,9 +114,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalFact]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Paths starting with / are considered relative.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Paths starting with / are considered relative.")]
+        [Fact]
         public void GetFileInfoReturnsNotFoundFileInfoForAbsolutePath()
         {
             using (var provider = new PhysicalFileProvider(Path.GetTempPath()))
@@ -193,9 +183,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalFact]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Hidden and system files only make sense on Windows.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Hidden and system files only make sense on Windows.")]
+        [Fact]
         public void GetFileInfoReturnsNotFoundFileInfoForHiddenFile()
         {
             using (var root = new DisposableFileSystem())
@@ -215,9 +203,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalFact]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Hidden and system files only make sense on Windows.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Hidden and system files only make sense on Windows.")]
+        [Fact]
         public void GetFileInfoReturnsNotFoundFileInfoForSystemFile()
         {
             using (var root = new DisposableFileSystem())
@@ -305,7 +291,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var token = provider.Watch(fileName);
                             Assert.NotNull(token);
@@ -334,14 +320,14 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var token = provider.Watch(fileName);
                             Assert.NotNull(token);
                             Assert.False(token.HasChanged, "Token should not have changed yet");
                             Assert.True(token.ActiveChangeCallbacks, "Token should have active callbacks");
 
-                            bool callbackInvoked = false;
+                            var callbackInvoked = false;
                             token.RegisterChangeCallback(state =>
                             {
                                 callbackInvoked = true;
@@ -374,7 +360,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var token = provider.Watch(fileName);
                             File.WriteAllText(fileLocation, "some-content");
@@ -403,7 +389,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             root.CreateFile(fileName);
                             var token = provider.Watch(fileName);
@@ -429,7 +415,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var token = provider.Watch(fileName);
                             Assert.NotNull(token);
@@ -447,9 +433,7 @@ namespace Microsoft.Extensions.FileProviders
         }
 
         // On Unix the minimum invalid file path characters are / and \0
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Linux)]
-        //[OSSkipCondition(OperatingSystems.MacOSX)]
+        [Theory]
         [InlineData("/test:test")]
         [InlineData("/dir/name\"")]
         [InlineData("/dir>/name")]
@@ -458,15 +442,14 @@ namespace Microsoft.Extensions.FileProviders
             InvalidPath_DoesNotThrowGeneric_GetFileInfo(path);
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Windows)]
-        //[InlineData("/test:test\0")]
-        //[InlineData("/dir/\0name\"")]
-        //[InlineData("/dir>/name\0")]
-        //public void InvalidPath_DoesNotThrowUnix_GetFileInfo(string path)
-        //{
-        //    InvalidPath_DoesNotThrowGeneric_GetFileInfo(path);
-        //}
+        [Theory]
+        [InlineData("/test:test\0")]
+        [InlineData("/dir/\0name\"")]
+        [InlineData("/dir>/name\0")]
+        public void InvalidPath_DoesNotThrowUnix_GetFileInfo(string path)
+        {
+            InvalidPath_DoesNotThrowGeneric_GetFileInfo(path);
+        }
 
         private void InvalidPath_DoesNotThrowGeneric_GetFileInfo(string path)
         {
@@ -478,9 +461,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Linux)]
-        //[OSSkipCondition(OperatingSystems.MacOSX)]
+        [Theory]
         [InlineData("/test:test")]
         [InlineData("/dir/name\"")]
         [InlineData("/dir>/name")]
@@ -489,15 +470,14 @@ namespace Microsoft.Extensions.FileProviders
             InvalidPath_DoesNotThrowGeneric_GetDirectoryContents(path);
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Windows)]
-        //[InlineData("/test:test\0")]
-        //[InlineData("/dir/\0name\"")]
-        //[InlineData("/dir>/name\0")]
-        //public void InvalidPath_DoesNotThrowUnix_GetDirectoryContents(string path)
-        //{
-        //    InvalidPath_DoesNotThrowGeneric_GetDirectoryContents(path);
-        //}
+        [Theory]
+        [InlineData("/test:test\0")]
+        [InlineData("/dir/\0name\"")]
+        [InlineData("/dir>/name\0")]
+        public void InvalidPath_DoesNotThrowUnix_GetDirectoryContents(string path)
+        {
+            InvalidPath_DoesNotThrowGeneric_GetDirectoryContents(path);
+        }
 
         private void InvalidPath_DoesNotThrowGeneric_GetDirectoryContents(string path)
         {
@@ -519,9 +499,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
+        [Theory]
         [InlineData("/")]
         [InlineData("///")]
         [InlineData("/\\/")]
@@ -531,14 +509,13 @@ namespace Microsoft.Extensions.FileProviders
             GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(path);
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Windows, SkipReason = "Testing Unix specific behaviour on leading slashes.")]
-        //[InlineData("/")]
-        //[InlineData("///")]
-        //public void GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes_Unix(string path)
-        //{
-        //    GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(path);
-        //}
+        [Theory]
+        [InlineData("/")]
+        [InlineData("///")]
+        public void GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes_Unix(string path)
+        {
+            GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(path);
+        }
 
         private void GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(string path)
         {
@@ -549,9 +526,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
+        [Theory]
         [InlineData("/C:\\Windows\\System32")]
         [InlineData("/\0/")]
         [MemberData(nameof(InvalidPaths))]
@@ -559,17 +534,6 @@ namespace Microsoft.Extensions.FileProviders
         {
             GetDirectoryContentsReturnsNotFoundDirectoryContentsForInvalidPath(path);
         }
-
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Windows, SkipReason = "Testing Unix specific behaviour on leading slashes.")]
-        //[InlineData("/\0/")]
-        //[InlineData("/\\/")]
-        //[InlineData("\\/\\/")]
-        //[MemberData(nameof(InvalidPaths))]
-        //public void GetDirectoryContentsReturnsNotFoundDirectoryContentsForInvalidPath_Unix(string path)
-        //{
-        //    GetDirectoryContentsReturnsNotFoundDirectoryContentsForInvalidPath(path);
-        //}
 
         private void GetDirectoryContentsReturnsNotFoundDirectoryContentsForInvalidPath(string path)
         {
@@ -633,9 +597,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalFact]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Hidden and system files only make sense on Windows.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Hidden and system files only make sense on Windows.")]
+        [Fact]
         public void GetDirectoryContentsDoesNotReturnFileInfoForHiddenFile()
         {
             using (var root = new DisposableFileSystem())
@@ -658,9 +620,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalFact]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Hidden and system files only make sense on Windows.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Hidden and system files only make sense on Windows.")]
+        [Fact]
         public void GetDirectoryContentsDoesNotReturnFileInfoForSystemFile()
         {
             using (var root = new DisposableFileSystem())
@@ -736,7 +696,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var fileName = Guid.NewGuid().ToString();
                             var changeToken = provider.Watch(fileName);
@@ -782,7 +742,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var fileName1 = Guid.NewGuid().ToString();
                             var token1 = provider.Watch(fileName1);
@@ -814,7 +774,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var fileName = Guid.NewGuid().ToString();
                             var token = provider.Watch(fileName);
@@ -892,11 +852,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalFact]
-        //[OSSkipCondition(OperatingSystems.Linux,
-            //SkipReason = "We treat forward slash differently so rooted path can happen only on windows.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX,
-            //SkipReason = "We treat forward slash differently so rooted path can happen only on windows.")]
+        [Fact]
         public void NoopChangeTokenForAbsolutePathFilters()
         {
             using (var root = new DisposableFileSystem())
@@ -920,7 +876,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var name = Guid.NewGuid().ToString();
                             var token = provider.Watch(name);
@@ -944,7 +900,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var name = Guid.NewGuid().ToString();
                             var token = provider.Watch(name);
@@ -968,7 +924,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var directoryName = Guid.NewGuid().ToString();
                             root.CreateFolder(directoryName)
@@ -996,9 +952,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        ////[ConditionalTheory]
-        ////[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
-        ////[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
+        [Theory]
         [InlineData("/")]
         [InlineData("///")]
         [InlineData("/\\/")]
@@ -1008,14 +962,13 @@ namespace Microsoft.Extensions.FileProviders
             await TokenFiredForRelativePathStartingWithSlash(slashes);
         }
 
-        ////[ConditionalTheory]
-        ////[OSSkipCondition(OperatingSystems.Windows, SkipReason = "Testing Unix specific behaviour on leading slashes.")]
-        //[InlineData("/")]
-        //[InlineData("///")]
-        //public async Task TokenFiredForRelativePathStartingWithSlash_Unix(string slashes)
-        //{
-        //    await TokenFiredForRelativePathStartingWithSlash(slashes);
-        //}
+        [Theory]
+        [InlineData("/")]
+        [InlineData("///")]
+        public async Task TokenFiredForRelativePathStartingWithSlash_Unix(string slashes)
+        {
+            await TokenFiredForRelativePathStartingWithSlash(slashes);
+        }
 
         private async Task TokenFiredForRelativePathStartingWithSlash(string slashes)
         {
@@ -1025,7 +978,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var fileName = Guid.NewGuid().ToString();
                             var token = provider.Watch(slashes + fileName);
@@ -1040,9 +993,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Testing Windows specific behaviour on leading slashes.")]
+        [Theory]
         [InlineData("/C:\\Windows\\System32")]
         [InlineData("/\0/")]
         public async Task TokenNotFiredForInvalidPathStartingWithSlash_Windows(string slashes)
@@ -1050,13 +1001,12 @@ namespace Microsoft.Extensions.FileProviders
             await TokenNotFiredForInvalidPathStartingWithSlash(slashes);
         }
 
-        //[ConditionalTheory]
-        //[OSSkipCondition(OperatingSystems.Windows, SkipReason = "Testing Unix specific behaviour on leading slashes.")]
-        //[InlineData("/\0/")]
-        //public async Task TokenNotFiredForInvalidPathStartingWithSlash_Unix(string slashes)
-        //{
-        //    await TokenNotFiredForInvalidPathStartingWithSlash(slashes);
-        //}
+        [Theory]
+        [InlineData("/\0/")]
+        public async Task TokenNotFiredForInvalidPathStartingWithSlash_Unix(string slashes)
+        {
+            await TokenNotFiredForInvalidPathStartingWithSlash(slashes);
+        }
 
         private async Task TokenNotFiredForInvalidPathStartingWithSlash(string slashes)
         {
@@ -1066,7 +1016,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var fileName = Guid.NewGuid().ToString();
                             var token = provider.Watch(slashes + fileName);
@@ -1091,7 +1041,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var subDirectoryName = Guid.NewGuid().ToString();
                             var subSubDirectoryName = Guid.NewGuid().ToString();
@@ -1138,7 +1088,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var oldFileName = Guid.NewGuid().ToString();
                             var oldToken = provider.Watch(oldFileName);
@@ -1169,7 +1119,7 @@ namespace Microsoft.Extensions.FileProviders
             using (var root = new DisposableFileSystem())
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.RootPath))
             using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
-            using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+            using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
             {
                 var oldDirectoryName = Guid.NewGuid().ToString();
                 var oldSubDirectoryName = Guid.NewGuid().ToString();
@@ -1205,23 +1155,23 @@ namespace Microsoft.Extensions.FileProviders
                 var newFileTcs = new TaskCompletionSource<object>();
                 newFileToken.RegisterChangeCallback(_ => newFileTcs.TrySetResult(true), null);
 
-                Assert.False(oldDirectoryToken.HasChanged);
-                Assert.False(oldSubDirectoryToken.HasChanged);
-                Assert.False(oldFileToken.HasChanged);
-                Assert.False(newDirectoryToken.HasChanged);
-                Assert.False(newSubDirectoryToken.HasChanged);
-                Assert.False(newFileToken.HasChanged);
+                Assert.False(oldDirectoryToken.HasChanged, "Old directory token should not have changed");
+                Assert.False(oldSubDirectoryToken.HasChanged, "Old subdirectory token should not have changed");
+                Assert.False(oldFileToken.HasChanged, "Old file token should not have changed");
+                Assert.False(newDirectoryToken.HasChanged, "New directory token should not have changed");
+                Assert.False(newSubDirectoryToken.HasChanged, "New subdirectory token should not have changed");
+                Assert.False(newFileToken.HasChanged, "New file token should not have changed");
 
                 fileSystemWatcher.CallOnRenamed(new RenamedEventArgs(WatcherChangeTypes.Renamed, root.RootPath, newDirectoryName, oldDirectoryName));
 
                 await Task.WhenAll(oldDirectoryTcs.Task, newDirectoryTcs.Task, newSubDirectoryTcs.Task, newFileTcs.Task);//.TimeoutAfter(TimeSpan.FromSeconds(30));
 
-                Assert.False(oldSubDirectoryToken.HasChanged);
-                Assert.False(oldFileToken.HasChanged);
-                Assert.True(oldDirectoryToken.HasChanged);
-                Assert.True(newDirectoryToken.HasChanged);
-                Assert.True(newSubDirectoryToken.HasChanged);
-                Assert.True(newFileToken.HasChanged);
+                Assert.False(oldSubDirectoryToken.HasChanged, "Old subdirectory token should not have changed");
+                Assert.False(oldFileToken.HasChanged, "Old file token should not have changed");
+                Assert.True(oldDirectoryToken.HasChanged, "Old directory token should have changed");
+                Assert.True(newDirectoryToken.HasChanged, "New directory token should have changed");
+                Assert.True(newSubDirectoryToken.HasChanged, "New sub directory token should have changed");
+                Assert.True(newFileToken.HasChanged, "New file token should have changed");
             }
 
             // wait a little to ensure these tokens don't fire even after disposing the watcher
@@ -1238,7 +1188,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var fileName = "." + Guid.NewGuid().ToString();
                             var token = provider.Watch(Path.GetFileName(fileName));
@@ -1253,9 +1203,7 @@ namespace Microsoft.Extensions.FileProviders
             }
         }
 
-        //[ConditionalFact]
-        //[OSSkipCondition(OperatingSystems.Linux, SkipReason = "Hidden and system files only make sense on Windows.")]
-        //[OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Hidden and system files only make sense on Windows.")]
+        [Fact]
         public async Task TokensNotFiredForHiddenAndSystemFiles()
         {
             using (var root = new DisposableFileSystem())
@@ -1276,7 +1224,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var hiddenFiletoken = provider.Watch(Path.GetFileName(hiddenFileName));
                             var systemFiletoken = provider.Watch(Path.GetFileName(systemFileName));
@@ -1303,7 +1251,7 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
                     {
-                        using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+                        using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
                         {
                             var token1 = provider.Watch(Guid.NewGuid().ToString());
                             var token2 = provider.Watch(Guid.NewGuid().ToString());
@@ -1331,7 +1279,8 @@ namespace Microsoft.Extensions.FileProviders
                 root.RootPath + Path.DirectorySeparatorChar,
                 fileSystemWatcher,
                 pollForChanges: false))
-            using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+
+            using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
             {
                 var token = provider.Watch("**/*.txt");
                 var directory = Path.Combine(root.RootPath, "subdir1", "subdir2");
@@ -1355,7 +1304,8 @@ namespace Microsoft.Extensions.FileProviders
                 root.RootPath + Path.DirectorySeparatorChar,
                 fileSystemWatcher,
                 pollForChanges: true))
-            using (var provider = new PhysicalFileProvider(root.RootPath, physicalFilesWatcher))
+
+            using (var provider = new PhysicalFileProvider(root.RootPath) { FileWatcher = physicalFilesWatcher })
             {
                 var filePath = Path.Combine(root.RootPath, "subdir1", "subdir2", "file.txt");
                 Directory.CreateDirectory(Path.GetDirectoryName(filePath));
@@ -1373,6 +1323,25 @@ namespace Microsoft.Extensions.FileProviders
 
                 // Assert
                 Assert.True(token.HasChanged);
+            }
+        }
+
+        [Fact]
+        public void CreateFileWatcher_CreatesWatcherWithPollingAndActiveFlags()
+        {
+            // Arrange
+            using (var root = new DisposableFileSystem())
+            using (var provider = new PhysicalFileProvider(root.RootPath))
+            {
+                provider.UsePollingFileWatcher = true;
+                provider.UseActivePolling = true;
+
+                // Act
+                var fileWatcher = provider.CreateFileWatcher();
+
+                // Assert
+                Assert.True(fileWatcher.PollForChanges);
+                Assert.True(fileWatcher.UseActivePolling);
             }
         }
     }
